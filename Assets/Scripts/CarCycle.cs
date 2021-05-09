@@ -47,15 +47,15 @@ public class CarCycle : ItemCycle
 		{
 			MonoBehaviour.print("not unlcoked");
 			string str = "???";
-			if (base.selected <= 5)
+			if (base.selected <= 6)
 			{
 				str = "<size=60%>Complete " + MapManager.Instance.maps[base.selected - 1].name + " on normal difficulty";
 			}
-			else if (base.selected == 6)
+			else if (base.selected == 7)
 			{
 				str = "<size=60%>Complete all races on hard difficulty";
 			}
-			else if (base.selected == 7)
+			else if (base.selected == 8)
 			{
 				str = "<size=60%>Complete 3-star time on all maps";
 			}
