@@ -82,6 +82,7 @@ public class PlayerSave
 		this.daniTimes[2] = 76.41264f;
 		this.daniTimes[3] = 79.27263f;
 		this.daniTimes[4] = 114.1815f;
+		this.daniTimes[5] = 126.096527f;
 		this.mapsUnlocked[0] = true;
 		this.carsUnlocked[0] = true;
 		for (int j = 0; j < this.races.Length; j++)

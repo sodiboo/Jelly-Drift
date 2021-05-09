@@ -24285,6 +24285,14 @@ MonoBehaviour:
     - 145
     - 135
     - 120
+  - index: 5
+    name: Akina Uphill
+    image: {fileID: 21300000, guid: 296b18d4b48dc1547a5dadf090063f79, type: 3}
+    themeColor: {r: 1, g: 0.11818841, b: 0, a: 0.7490196}
+    times:
+    - 145
+    - 135
+    - 120
 --- !u!114 &1004
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,6 +37,7 @@ public class GhostCycle : ItemCycle
 		string str2 = "| ";
 		if (selected == GhostCycle.Ghost.Dani)
 		{
+			if (this.mapCycle.selected == 5) str = " (Terrain)";
 			str2 += Timer.GetFormattedTime(SaveManager.Instance.state.daniTimes[this.mapCycle.selected]);
 		}
 		else if (selected == GhostCycle.Ghost.PB)
