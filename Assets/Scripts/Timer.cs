@@ -39,9 +39,7 @@ public class Timer : MonoBehaviour
 		}
 		this.timer += Time.deltaTime;
 		AutoSplitterData.inGameTime = (double)this.timer;
-		this.text.text = "";
-		if (SaveState.Instance.chaos == 1) this.text.text = ChaosController.Instance.effects[ChaosController.Instance.currentEffect].name;
-		this.text.text =  $"{this.text.text}\n{Timer.GetFormattedTime(this.timer)}";
+		this.text.text = Timer.GetFormattedTime(this.timer);
 	}
 
 	// Token: 0x06000147 RID: 327 RVA: 0x00007798 File Offset: 0x00005998

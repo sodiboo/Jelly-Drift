@@ -23,7 +23,6 @@ public class GameController : MonoBehaviour
 	// Token: 0x06000091 RID: 145 RVA: 0x00005244 File Offset: 0x00003444
 	private void Awake()
 	{
-		gameObject.AddComponent<ChaosController>();
 		GameController.Instance = this;
 		Time.timeScale = 1f;
 		this.startPos = this.checkPoints.GetChild(0);

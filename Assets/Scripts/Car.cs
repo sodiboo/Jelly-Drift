@@ -215,7 +215,7 @@ public class Car : MonoBehaviour
 			if (!suspension.rearWheel)
 			{
 				suspension.steeringAngle = this.steering * (37f - Mathf.Clamp(this.speed * 0.35f - 2f, 0f, 17f));
-				this.steerAngle = suspension.steeringAngle;
+				this.steerAngle = suspension.steeringAngle * ChaosController.Instance?.size ?? 1;
 			}
 		}
 	}

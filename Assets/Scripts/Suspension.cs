@@ -60,6 +60,7 @@ public class Suspension : MonoBehaviour
 			Vector3 force = (this.springForce + this.damperForce) * base.transform.up;
 			this.bodyRb.AddForceAtPosition(force, raycastHit.point);
 			this.terrain = raycastHit.collider.gameObject.CompareTag("Terrain");
+			if (ChaosController.Instance?.invertTerrain == true) this.terrain = !this.terrain;
 			this.hitPos = raycastHit.point;
 			this.hitNormal = raycastHit.normal;
 			this.hitHeight = raycastHit.distance;

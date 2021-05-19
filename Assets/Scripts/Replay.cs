@@ -165,5 +165,5 @@ public class Replay : MonoBehaviour
 	private Vector3 nextPos;
 
 	// Token: 0x04000134 RID: 308
-	private Rigidbody rb;
+	public Rigidbody rb;
 }
