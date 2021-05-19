@@ -93,7 +93,7 @@ public class CheckpointUser : MonoBehaviour
 	}
 
 	// Token: 0x04000148 RID: 328
-	private bool[] checkedPoints;
+	public bool[] checkedPoints;
 
 	// Token: 0x04000149 RID: 329
 	public bool player = true;

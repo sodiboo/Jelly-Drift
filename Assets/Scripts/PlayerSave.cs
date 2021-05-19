@@ -49,6 +49,8 @@ public class PlayerSave
 	// (set) Token: 0x06000165 RID: 357 RVA: 0x00007A4B File Offset: 0x00005C4B
 	public int music { get; set; } = 4;
 
+	public int chaos { get; set; } = 0;
+
 	// Token: 0x06000166 RID: 358 RVA: 0x00007A54 File Offset: 0x00005C54
 	public PlayerSave()
 	{

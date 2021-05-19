@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
 	// Token: 0x06000091 RID: 145 RVA: 0x00005244 File Offset: 0x00003444
 	private void Awake()
 	{
+		gameObject.AddComponent<ChaosController>();
 		GameController.Instance = this;
 		Time.timeScale = 1f;
 		this.startPos = this.checkPoints.GetChild(0);
@@ -34,6 +35,11 @@ public class GameController : MonoBehaviour
 	// Token: 0x06000092 RID: 146 RVA: 0x000052D4 File Offset: 0x000034D4
 	private void Start()
 	{
+		AssignCar();
+	}
+
+	public void AssignCar()
+    {
 		CameraController.Instance.AssignTarget(this.currentCar.transform);
 		ShakeController.Instance.car = this.currentCar.GetComponent<Car>();
 		ReplayController.Instance.car = this.currentCar.GetComponent<Car>();
@@ -45,6 +51,7 @@ public class GameController : MonoBehaviour
 	{
 		this.playing = true;
 		Timer.Instance.StartTimer();
+		if (SaveState.Instance.chaos == 1) ChaosController.Instance.StartChaos();
 	}
 
 	// Token: 0x06000094 RID: 148 RVA: 0x0000533F File Offset: 0x0000353F
