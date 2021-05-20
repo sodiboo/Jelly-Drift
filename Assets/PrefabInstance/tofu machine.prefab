@@ -13818,7 +13818,6 @@ GameObject:
   - component: {fileID: 114658106052923986}
   - component: {fileID: 114764565418640044}
   - component: {fileID: 114622106840400821}
-  - component: {fileID: 114286966061565741}
   - component: {fileID: 114026924008581408}
   m_Layer: 10
   m_Name: tofu machine
@@ -13941,19 +13940,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crashAudio: {fileID: 114666731795648455}
---- !u!114 &114286966061565741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763291310010154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0481a2e3288f3347b9e1e8f24ea136e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  car: {fileID: 114390246524021733}
 --- !u!114 &114026924008581408
 MonoBehaviour:
   m_ObjectHideFlags: 0

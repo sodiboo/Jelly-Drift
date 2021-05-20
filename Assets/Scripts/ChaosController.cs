@@ -4,19 +4,51 @@ using UnityEngine;
 using Action = System.Action;
 using Valid = System.Func<bool>;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class ChaosController : MonoBehaviour
 {
     public static ChaosController Instance;
     public GameObject road;
     public Car car { get => ShakeController.Instance.car; }
+    InputActionAsset inputs;
     TextMeshProUGUI text;
+
+    void Throttle(InputAction.CallbackContext context)
+    {
+        car.throttle = context.ReadValue<float>();
+    }
+
+    void Steering(InputAction.CallbackContext context)
+    {
+        car.steering = context.ReadValue<float>();
+    }
+
+    void Break(InputAction.CallbackContext context)
+    {
+        car.breaking = context.ReadValueAsButton();
+    }
+
+    void AssignActionMap(InputActionMap action)
+    {
+        action.FindAction("Throttle").performed += Throttle;
+        action.FindAction("Steering").performed += Steering;
+        action.FindAction("Break").performed += Break;
+    }
+
+    public InputActionMap southpaw { get; set; }
+    public InputActionMap normal { get; set; }
 
     void Awake()
     {
         if (Instance != this && Instance != null) Destroy(this);
         Instance = this;
         text = GetComponent<TextMeshProUGUI>();
+        inputs = PrefabManager.Instance.inputs;
+        normal = inputs.FindActionMap("Car");
+        southpaw = inputs.FindActionMap("Southpaw");
+        AssignActionMap(normal);
+        AssignActionMap(southpaw);
     }
 
     private void Start()
@@ -30,16 +62,19 @@ public class ChaosController : MonoBehaviour
         Effect("Slowpoke", SlowSpeed, ResetSpeed);
         Effect("No Drifting", HighGrip, ResetGrip);
         Effect("Smooth Wheels", LowGrip, ResetGrip);
+        Effect("No Jumping", StrongGravity, ResetGravity);
+        Effect("You'll overshoot the jump", WeakGravity, ResetGravity);
         Effect("Where are you going?", RandomRotation);
         Effect("Wrong way lol", Flip);
-        Effect("Are you sure you got that checkpoint?", Pause.Instance.Recover);
+        Effect("Are you sure you got that checkpoint?", Pause.Instance.Recover); // Thanks to Dit0h for the name and idea
         Effect("Wow, he sure hates you", TeleportAI, valid: Race);
         Effect("I wonder where the AI is", TeleportToAI, valid: Either(Race, TimeTrial));
         Effect("Slippery Road", DriftOnRoad, DriftOffRoad);
         Effect("Oh, you don't know what Karlson is?", URL("steam://advertise/1228610"), valid: Weighted(0.03f)); // shh don't tell anyone this exists if you're actually reading the source code
         Effect("Multiplayer", AddCar, DeleteCar);
-        Effect("Nonexistent Road", DisableRoad, EnableRoad);
-        Effect("Go left! No, go right, go right!", InvertAngular);
+        Effect("Nonexistent Road", DisableRoad, EnableRoad); // Thanks to ProfessorEmu for the idea, i think
+        Effect("Go left! No, go right, go right!", InvertAngular); // Quote from Wheatley
+        Effect("Southpaw", (Action)southpaw.Enable + normal.Disable, (Action)southpaw.Disable + normal.Enable); // Thanks to Dit0h for the name and idea
     }
 
     private void OnDestroy()
@@ -131,18 +166,27 @@ public class ChaosController : MonoBehaviour
         car.driftThreshold *= grip;
     }
 
+    void Gravity(float gravity)
+    {
+        Physics.gravity *= gravity;
+    }
+
     public float speed { get; set; } = 1;
 
     public float size { get; set; } = 1;
 
     public float grip { get; set; } = 1;
 
+    public float gravity { get; set; } = 1;
+
     void BigSize() => Size(size = Random.Range(1.2f, 3f));
-    void SmallSize() => Size(size = Random.Range(0.2f, 0.8f));
+    void SmallSize() => Size(size = Random.Range(0.4f, 0.8f));
     void FastSpeed() => Speed(speed = Random.Range(1.2f, 5f));
     void SlowSpeed() => Speed(speed = Random.Range(0.5f, 0.8f));
     void HighGrip() => Grip(grip = Random.Range(1.2f, 10f));
     void LowGrip() => Grip(grip = Random.Range(0.2f, 0.8f));
+    void StrongGravity() => Gravity(gravity = Random.Range(1.5f, 3f));
+    void WeakGravity() => Gravity(gravity = Random.Range(0.1f, 0.8f));
 
     void ResetSize()
     {
@@ -159,6 +203,12 @@ public class ChaosController : MonoBehaviour
     {
         Grip(1 / grip);
         grip = 1;
+    }
+
+    void ResetGravity()
+    {
+        Gravity(1 / gravity);
+        gravity = 1;
     }
     
 

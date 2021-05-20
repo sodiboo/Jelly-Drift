@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 // Token: 0x0200001A RID: 26
 public class GameController : MonoBehaviour
@@ -29,6 +30,8 @@ public class GameController : MonoBehaviour
 		base.Invoke("StartRace", this.startTime);
 		this.currentCar = UnityEngine.Object.Instantiate<GameObject>(PrefabManager.Instance.cars[GameState.Instance.car], this.startPos.position, this.startPos.rotation);
 		this.currentCar.GetComponent<CarSkin>().SetSkin(GameState.Instance.skin);
+		var action = PrefabManager.Instance.inputs.FindActionMap("Menu").FindAction("Cancel");
+		action.performed += Paused;
 	}
 
 	// Token: 0x06000092 RID: 146 RVA: 0x000052D4 File Offset: 0x000034D4
@@ -50,14 +53,24 @@ public class GameController : MonoBehaviour
 	{
 		this.playing = true;
 		Timer.Instance.StartTimer();
+		ChaosController.Instance.normal.Enable();
 		if (SaveState.Instance.chaos == 1) ChaosController.Instance.StartChaos();
 	}
 
-	// Token: 0x06000094 RID: 148 RVA: 0x0000533F File Offset: 0x0000353F
-	private void Update()
-	{
-		this.PlayerInput();
-	}
+	void Paused(InputAction.CallbackContext context)
+    {
+		var pressed = context.ReadValueAsButton();
+		if (IsInvoking("ShowFinishScreen"))
+        {
+			if (pressed)
+			{
+				CancelInvoke("ShowFinishScreen");
+				ShowFinishScreen();
+			}
+			return;
+        }
+		if (pressed && !Pause.Instance.paused) Pause.Instance.TogglePause();
+    }
 
 	// Token: 0x06000095 RID: 149 RVA: 0x00005348 File Offset: 0x00003548
 	private void PlayerInput()
@@ -77,8 +90,8 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	// Token: 0x06000096 RID: 150 RVA: 0x000053A4 File Offset: 0x000035A4
-	public void RestartGame()
+    // Token: 0x06000096 RID: 150 RVA: 0x000053A4 File Offset: 0x000035A4
+    public void RestartGame()
 	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}

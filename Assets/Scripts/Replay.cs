@@ -64,7 +64,6 @@ public class Replay : MonoBehaviour
 		this.rb = gameObject.GetComponent<Rigidbody>();
 		this.rb.isKinematic = true;
 		UnityEngine.Object.Destroy(gameObject.GetComponentInChildren<Collider>());
-		UnityEngine.Object.Destroy(gameObject.GetComponent<PlayerInput>());
 		ParticleSystem[] componentsInChildren = gameObject.GetComponentsInChildren<ParticleSystem>();
 		for (int i = 0; i < componentsInChildren.Length; i++)
 		{
@@ -115,7 +114,6 @@ public class Replay : MonoBehaviour
 		this.rb = gameObject.GetComponent<Rigidbody>();
 		this.rb.isKinematic = true;
 		UnityEngine.Object.Destroy(gameObject.GetComponentInChildren<Collider>());
-		UnityEngine.Object.Destroy(gameObject.GetComponent<PlayerInput>());
 		ParticleSystem[] componentsInChildren = gameObject.GetComponentsInChildren<ParticleSystem>();
 		for (int j = 0; j < componentsInChildren.Length; j++)
 		{

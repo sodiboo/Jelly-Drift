@@ -10988,7 +10988,6 @@ GameObject:
   - component: {fileID: 114347675302273853}
   - component: {fileID: 114952173558082136}
   - component: {fileID: 114215462530921511}
-  - component: {fileID: 114331884406552092}
   - component: {fileID: 114302021540615017}
   m_Layer: 10
   m_Name: TZ9
@@ -11111,19 +11110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crashAudio: {fileID: 114215827562792862}
---- !u!114 &114331884406552092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570011116653300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0481a2e3288f3347b9e1e8f24ea136e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  car: {fileID: 114784347968087072}
 --- !u!114 &114302021540615017
 MonoBehaviour:
   m_ObjectHideFlags: 0

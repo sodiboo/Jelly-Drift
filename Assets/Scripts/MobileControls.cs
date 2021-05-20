@@ -7,12 +7,7 @@ public class MobileControls : MonoBehaviour
 	// Token: 0x060000E2 RID: 226 RVA: 0x000061FC File Offset: 0x000043FC
 	private void Start()
 	{
-		if (SystemInfo.deviceType == DeviceType.Handheld)
-		{
-			this.car = GameController.Instance.currentCar.GetComponent<Car>();
-			UnityEngine.Object.Destroy(this.car.GetComponent<PlayerInput>());
-			return;
-		}
+		if (SystemInfo.deviceType != DeviceType.Handheld) 
 		UnityEngine.Object.Destroy(base.gameObject);
 	}
 
@@ -58,5 +53,5 @@ public class MobileControls : MonoBehaviour
 	public MyButton breakPedal;
 
 	// Token: 0x0400010A RID: 266
-	private Car car;
+	private Car car { get => ChaosController.Instance.car; }
 }

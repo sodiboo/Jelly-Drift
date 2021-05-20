@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // Token: 0x02000032 RID: 50
 public class PrefabManager : MonoBehaviour
@@ -29,4 +30,8 @@ public class PrefabManager : MonoBehaviour
 
 	// Token: 0x0400011D RID: 285
 	public Material ghostMat;
+
+	public InputActionAsset inputs;
+
+	public GameObject[] Ais;
 }

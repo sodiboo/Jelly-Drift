@@ -51,7 +51,6 @@ public class CarDisplay : MonoBehaviour
 		this.currentCar = UnityEngine.Object.Instantiate<GameObject>(PrefabManager.Instance.cars[n], base.transform.position, base.transform.rotation);
 		this.currentCar.name = PrefabManager.Instance.cars[n].name;
 		this.skin = this.currentCar.GetComponent<CarSkin>();
-		UnityEngine.Object.Destroy(this.currentCar.GetComponent<PlayerInput>());
 		UnityEngine.Object.Destroy(this.currentCar.GetComponent<CheckpointUser>());
 		if (!SaveManager.Instance.state.carsUnlocked[n])
 		{
