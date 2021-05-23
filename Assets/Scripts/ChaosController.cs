@@ -54,15 +54,17 @@ public class ChaosController : MonoBehaviour
         Effect("Potato", () => Application.targetFrameRate = 5, () => Application.targetFrameRate = -1); // Thanks to WoodComet for the idea
         Effect("Bigger", BiggerSize, ResetSize); // Thanks to WoodComet for the name and idea
         Effect("Fly me to the Moon", Up); // Thanks to WoodComet for the idea
-        Effect("Where did everything go?", Disable(road) + Disable(terrain), Enable(road) + Enable(terrain)); // Thanks to WoodComet for the idea, thanks to pongo1231 for the name
+        Effect("Where did everything go?", Disable(road) + Disable(terrain), Enable(road) + Enable(terrain)); // Thanks to WoodComet for the idea, thanks to ChaosModV for the name
         Effect("Dark Mode", Disable(sun), Enable(sun)); // Thanks to WoodComet for the idea
         Effect("Bad Collision", OffsetCollider, ResetCollider);
         Effect("Ghost", GhostMode, UnGhost);
-        Effect("Lag", SetLag, StopLag); // Thanks to pongo1231 for the name and idea
+        Effect("Lag", SetLag, StopLag); // Thanks to ChaosModV for the name and idea
         Effect("Checkpoint Magnet", EnableMagnet, DisableMagnet); // Thanks to Akuma73 for the idea
         Effect("Black Hole", EnableBlackhole, DisableBlackhole, valid: Race); // Thanks to Akuma73 for the idea
         Effect("Autopilot", AddAI, DeleteAI, valid: Race);
         Effect("Rainbow", EnableRainbow, DisableRainbow, valid: HasManySkins); // Thanks to Akuma73 for the idea
+        Effect("Superhot", Superhot, Supercold);
+        Effect($"POV: You're a bird watching an intense race on {MapManager.Instance.maps[GameState.Instance.map].name}", IsoOn, IsoOff);
     }
 
     private void OnDestroy()
@@ -505,6 +507,10 @@ public class ChaosController : MonoBehaviour
             H %= 1;
             rainbowMat.color = Color.HSVToRGB(H, S, V);
         }
+        if (hot && GameController.Instance.playing && !Pause.Instance.paused)
+        {
+            Time.timeScale = Mathf.Clamp(Mathf.Abs(car.speed)  / 100f, 0.1f, 1f);
+        }
     }
 
     private void FixedUpdate()
@@ -539,5 +545,37 @@ public class ChaosController : MonoBehaviour
     {
         Destroy(car.GetComponent<CarAI>());
         InputManager.Instance.layout = InputManager.Layout.Car;
+    }
+
+    bool hot;
+
+    void Superhot()
+    {
+        hot = true;
+    }
+
+    void Supercold()
+    {
+        hot = false;
+        Time.timeScale = 1;
+    }
+
+    float camHeight;
+    float camDist;
+
+    void IsoOn()
+    {
+        camHeight = CameraController.Instance.camHeight;
+        camDist = CameraController.Instance.distFromTarget;
+        CameraController.Instance.camHeight = 20f;
+        CameraController.Instance.distFromTarget = 0.1f;
+        CameraController.Instance.GetComponentInChildren<Camera>().orthographic = true;
+    }
+
+    void IsoOff()
+    {
+        CameraController.Instance.camHeight = camHeight;
+        CameraController.Instance.distFromTarget = camDist;
+        CameraController.Instance.GetComponentInChildren<Camera>().orthographic = false;
     }
 }
