@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
 		this.currentCar.GetComponent<CarSkin>().SetSkin(GameState.Instance.skin);
 		var action = PrefabManager.Instance.inputs.FindActionMap("Menu").FindAction("Cancel");
 		action.performed += Paused;
+		InputManager.Instance.layout = InputManager.Layout.None;
 	}
 
 	// Token: 0x06000092 RID: 146 RVA: 0x000052D4 File Offset: 0x000034D4

@@ -16,10 +16,11 @@ public class InputManager : MonoBehaviour
         Instance = this;
         global = inputs.FindActionMap("Global");
         global.Enable();
-        global.FindAction("Pause").performed += _ => pause();
-        global.FindAction("Debug").performed += _ => debug();
-        global.FindAction("Unlock").performed += _ =>
+        Assign(global.FindAction("Pause"), ctx => { if (ctx.ReadValueAsButton()) pause(); });
+        Assign(global.FindAction("Debug"), ctx => { if (ctx.ReadValueAsButton()) debug(); });
+        Assign(global.FindAction("Unlock"), ctx =>
         {
+            if (!ctx.ReadValueAsButton()) return;
             for (var i = 0; i < PrefabManager.Instance.cars.Length; i++)
             {
                 SaveManager.Instance.state.carsUnlocked[i] = true;
@@ -32,7 +33,7 @@ public class InputManager : MonoBehaviour
             {
                 SaveManager.Instance.state.mapsUnlocked[i] = true;
             }
-        };
+        });
         foreach (Layout layout in Enum.GetValues(typeof(Layout)))
         {
             actionMaps[layout] = inputs.FindActionMap(Enum.GetName(typeof(Layout), layout));

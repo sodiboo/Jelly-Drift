@@ -31,7 +31,7 @@ public class ChaosController : MonoBehaviour
         Effect("Wait, where did it go?", DisableRenderers, EnableRenderers);
         Effect("Big", BigSize, ResetSize);
         Effect("Tiny", SmallSize, ResetSize);
-        Effect("Sanik", FastSpeed, ResetSpeed);
+        Effect("Sanik", (Action)FastSpeed + HighGrip, (Action)ResetSpeed + ResetGrip);
         Effect("Slowpoke", SlowSpeed, ResetSpeed);
         Effect("No Drifting", HighGrip, ResetGrip);
         Effect("Smooth Wheels", LowGrip, ResetGrip);
@@ -56,10 +56,13 @@ public class ChaosController : MonoBehaviour
         Effect("Fly me to the Moon", Up); // Thanks to WoodComet for the idea
         Effect("Where did everything go?", Disable(road) + Disable(terrain), Enable(road) + Enable(terrain)); // Thanks to WoodComet for the idea, thanks to pongo1231 for the name
         Effect("Dark Mode", Disable(sun), Enable(sun)); // Thanks to WoodComet for the idea
-        // TODO: invert colors
         Effect("Bad Collision", OffsetCollider, ResetCollider);
         Effect("Ghost", GhostMode, UnGhost);
         Effect("Lag", SetLag, StopLag); // Thanks to pongo1231 for the name and idea
+        Effect("Checkpoint Magnet", EnableMagnet, DisableMagnet); // Thanks to Akuma73 for the idea
+        Effect("Black Hole", EnableBlackhole, DisableBlackhole, valid: Race); // Thanks to Akuma73 for the idea
+        Effect("Autopilot", AddAI, DeleteAI, valid: Race);
+        Effect("Rainbow", EnableRainbow, DisableRainbow, valid: HasManySkins); // Thanks to Akuma73 for the idea
     }
 
     private void OnDestroy()
@@ -151,7 +154,7 @@ public class ChaosController : MonoBehaviour
 
     void Collider(Vector3 offset)
     {
-        car.collider.transform.position += offset;
+        car.collider.transform.localPosition += offset;
     }
 
     public float speed { get; set; } = 1;
@@ -169,7 +172,7 @@ public class ChaosController : MonoBehaviour
     void FastSpeed() => Speed(speed = Random.Range(1.2f, 5f));
     void SlowSpeed() => Speed(speed = Random.Range(0.5f, 0.8f));
     void HighGrip() => Grip(grip = 10f);
-    void LowGrip() => Grip(grip = 0f);
+    void LowGrip() => Grip(grip = 0.1f);
     void StrongGravity() => Gravity(gravity = 3f);
     void WeakGravity() => Gravity(gravity = 0.166f);
     void OffsetCollider() => Collider(collider = Random.insideUnitSphere);
@@ -257,7 +260,9 @@ public class ChaosController : MonoBehaviour
 
     void TeleportAI()
     {
-        GameController.Instance.GetComponent<Race>().enemyCar.transform.SetPositionAndRotation(car.transform.position - car.transform.forward * 3, car.transform.rotation);
+        var enemy = GameController.Instance.GetComponent<Race>().enemyCar.GetComponent<CarAI>();
+        enemy.transform.SetPositionAndRotation(car.transform.position - car.transform.forward * 3, car.transform.rotation);
+        enemy.currentNode = enemy.FindClosestNode(enemy.path.childCount, enemy.transform);
     }
 
     void TeleportToAI()
@@ -427,5 +432,112 @@ public class ChaosController : MonoBehaviour
     {
         CancelInvoke("SetLag");
         CancelInvoke("LoadLag");
+    }
+
+    bool magnet;
+    CheckpointUser magnetUser;
+
+    void EnableMagnet()
+    {
+        magnet = true;
+        car.rb.useGravity = false;
+        magnetUser = car.GetComponent<CheckpointUser>();
+    }
+
+    void DisableMagnet()
+    {
+        magnet = false;
+        car.rb.useGravity = true;
+    }
+
+    bool blackhole;
+    Car blackholeEnemy;
+
+    void EnableBlackhole()
+    {
+        blackhole = true;
+        blackholeEnemy = GameController.Instance.GetComponent<Race>().enemyCar.GetComponent<Car>();
+        blackholeEnemy.rb.useGravity = false;
+    }
+
+    void DisableBlackhole()
+    {
+        blackhole = false;
+        blackholeEnemy.rb.useGravity = true;
+    }
+
+    bool rainbow;
+    Material rainbowMat;
+    
+    bool HasManySkins() => car.GetComponent<CarSkin>().skinsToChange.Length > 2;
+
+    void EnableRainbow()
+    {
+        var skin = car.GetComponent<CarSkin>();
+        rainbow = true;
+        rainbowMat = new Material(skin.materials[GameState.Instance.skin]);
+        for (var i = 0; i < skin.skinsToChange[0].myArray.Length; i++)
+        {
+            var renderer = skin.renderers[skin.skinsToChange[0].myArray[i++]];
+            var newMats = new Material[renderer.materials.Length];
+            renderer.materials.CopyTo(newMats, 0);
+            newMats[skin.skinsToChange[0].myArray[i++]] = rainbowMat;
+            renderer.materials = newMats;
+        }
+            
+    }
+
+    void DisableRainbow()
+    {
+        rainbow = false;
+    }
+
+
+
+    private void Update()
+    {
+        if (rainbow)
+        {
+            Color.RGBToHSV(rainbowMat.color, out var H, out var S, out var V);
+            if (S < 0.5f) S = 0.5f;
+            if (V < 0.5f) V = 0.5f;
+            H += Time.deltaTime;
+            H %= 1;
+            rainbowMat.color = Color.HSVToRGB(H, S, V);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (magnet)
+        {
+            var dir = GameController.Instance.checkPoints.GetChild((magnetUser.GetCurrentCheckpoint(GameController.Instance.finalCheckpoint == 0) + 1) % GameController.Instance.checkPoints.childCount).transform.position - car.transform.position;
+            car.rb.AddForce(-Physics.gravity * car.rb.mass);
+            car.rb.AddForce(dir.normalized * Physics.gravity.magnitude * car.rb.mass * 5f);
+        }
+        if (blackhole)
+        {
+            var dir = car.transform.position - blackholeEnemy.transform.position;
+            blackholeEnemy.rb.AddForce(dir * blackholeEnemy.rb.mass * 10f);
+        }
+    }
+
+    void AddAI()
+    {
+        var engine = (int)car.engineForce;
+        var ai = car.gameObject.AddComponent<CarAI>();
+        ai.difficultyConfig = new int[] { engine, engine, engine };
+        var enemy = GameController.Instance.GetComponent<Race>().enemyCar.GetComponent<CarAI>();
+        car.engineForce = engine;
+        ai.respawnHeight = enemy.respawnHeight;
+        ai.SetPath(enemy.path);
+        ai.currentNode = ai.FindClosestNode(ai.path.childCount, ai.transform);
+        InputManager.Instance.layout = InputManager.Layout.None;
+    }
+
+    void DeleteAI()
+    {
+        Destroy(car.GetComponent<CarAI>());
+        InputManager.Instance.layout = InputManager.Layout.Car;
     }
 }

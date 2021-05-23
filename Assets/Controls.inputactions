@@ -510,7 +510,7 @@
                 },
                 {
                     "name": "",
-                    "id": "0de8bd37-2834-4163-9329-c335746495de",
+                    "id": "820bb7aa-b091-43fa-bd42-52bdc307fb1c",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -521,7 +521,7 @@
                 },
                 {
                     "name": "",
-                    "id": "820bb7aa-b091-43fa-bd42-52bdc307fb1c",
+                    "id": "a0ba327f-d76e-4e59-85af-8003b0290a87",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",

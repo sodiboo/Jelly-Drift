@@ -171,7 +171,7 @@ public class CarAI : MonoBehaviour
 	}
 
 	// Token: 0x0600004A RID: 74 RVA: 0x00003CA4 File Offset: 0x00001EA4
-	private int FindClosestNode(int maxLook, Transform target)
+	public int FindClosestNode(int maxLook, Transform target)
 	{
 		float num = float.PositiveInfinity;
 		int result = 0;
@@ -262,5 +262,5 @@ public class CarAI : MonoBehaviour
 	private float slowdownM = 5f;
 
 	// Token: 0x04000081 RID: 129
-	private int currentNode;
+	public int currentNode;
 }
