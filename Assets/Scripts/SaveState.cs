@@ -45,6 +45,7 @@ public class SaveState : MonoBehaviour
 	public int music { get; set; }
 
 	public int chaos { get; set; }
+	public int steam { get; set; }
 
 	// Token: 0x06000136 RID: 310 RVA: 0x0000740A File Offset: 0x0000560A
 	private void Awake()

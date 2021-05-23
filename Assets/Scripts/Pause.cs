@@ -16,8 +16,17 @@ public class Pause : MonoBehaviour
 		Pause.Instance = this;
 	}
 
-	// Token: 0x060000FA RID: 250 RVA: 0x000064F9 File Offset: 0x000046F9
-	public void PauseGame()
+    private void OnEnable()
+    {
+		InputManager.Instance.pause += TogglePause;
+    }
+
+    private void OnDisable()
+    {
+		InputManager.Instance.pause -= TogglePause;
+    }
+    // Token: 0x060000FA RID: 250 RVA: 0x000064F9 File Offset: 0x000046F9
+    public void PauseGame()
 	{
 		if (this.paused)
 		{
@@ -26,6 +35,7 @@ public class Pause : MonoBehaviour
 		Time.timeScale = 0f;
 		this.pauseMenu.SetActive(true);
 		this.paused = true;
+		InputManager.Instance.layout = InputManager.Layout.Menu;
 	}
 
 	// Token: 0x060000FB RID: 251 RVA: 0x00006521 File Offset: 0x00004721
@@ -35,6 +45,7 @@ public class Pause : MonoBehaviour
 		this.pauseMenu.SetActive(false);
 		this.paused = false;
 		MonoBehaviour.print("resuiming game");
+		InputManager.Instance.layout = ChaosController.Instance.carLayout;
 	}
 
 	// Token: 0x060000FC RID: 252 RVA: 0x0000654A File Offset: 0x0000474A
@@ -52,11 +63,6 @@ public class Pause : MonoBehaviour
 		this.pauseMenu.SetActive(false);
 		this.paused = false;
 		GameController.Instance.RestartGame();
-	}
-
-	// Token: 0x060000FE RID: 254 RVA: 0x000020AB File Offset: 0x000002AB
-	public void Options()
-	{
 	}
 
 	// Token: 0x060000FF RID: 255 RVA: 0x0000658F File Offset: 0x0000478F
@@ -77,6 +83,7 @@ public class Pause : MonoBehaviour
 	// Token: 0x06000100 RID: 256 RVA: 0x000065B3 File Offset: 0x000047B3
 	public void Quit()
 	{
+		ChaosController.Instance.StopChaos();
 		Time.timeScale = 1f;
 		SceneManager.LoadScene("Menu");
 		this.paused = false;

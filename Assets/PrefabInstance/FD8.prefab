@@ -13576,7 +13576,6 @@ GameObject:
   - component: {fileID: 114173817257521450}
   - component: {fileID: 114162840552963263}
   - component: {fileID: 114448601950950962}
-  - component: {fileID: 114481649572187539}
   - component: {fileID: 114875185206706377}
   m_Layer: 10
   m_Name: FD8
@@ -13603,6 +13602,7 @@ Transform:
   - {fileID: 4464809225450570}
   - {fileID: 4976007316482983}
   - {fileID: 4670366167252398}
+  - {fileID: 5263585172283091571}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -13626,6 +13626,7 @@ MonoBehaviour:
   - {fileID: 114356265160381641}
   wheel: {fileID: 1711393349114561, guid: 3815ac3b2c8ef7c439f0db379a8b064c, type: 3}
   text: {fileID: 0}
+  collider: {fileID: 6305198864653892709}
   autoValues: 0
   suspensionLength: 0.35
   restHeight: 0.17
@@ -13699,19 +13700,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crashAudio: {fileID: 114040348854277141}
---- !u!114 &114481649572187539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907469187489348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0481a2e3288f3347b9e1e8f24ea136e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  car: {fileID: 114232687541453981}
 --- !u!114 &114875185206706377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13749,7 +13737,6 @@ GameObject:
   - component: {fileID: 4634807656623994}
   - component: {fileID: 33032598578533398}
   - component: {fileID: 23132678824814512}
-  - component: {fileID: 64671754806509398}
   m_Layer: 10
   m_Name: honda integra
   m_TagString: Untagged
@@ -13830,20 +13817,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &64671754806509398
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917071946448944}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 121180257adfca545b708ff606dc08ff, type: 2}
 --- !u!1 &1928898598257538
 GameObject:
   m_ObjectHideFlags: 0
@@ -16907,3 +16880,48 @@ MonoBehaviour:
   springTravel: 0.2
   springStiffness: 45000
   damperStiffness: 1500
+--- !u!1 &6305198864653892709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5263585172283091571}
+  - component: {fileID: 4982775021245383854}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5263585172283091571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305198864653892709}
+  m_LocalRotation: {x: -0.7071068, y: -0.0000001192093, z: -0.0000001192093, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.311, z: -0.203}
+  m_LocalScale: {x: 1.63449, y: 1.63449, z: 1.63449}
+  m_Children: []
+  m_Father: {fileID: 4141370405870464}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -90, y: 0.00001931869, z: 0}
+--- !u!64 &4982775021245383854
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305198864653892709}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 121180257adfca545b708ff606dc08ff, type: 2}

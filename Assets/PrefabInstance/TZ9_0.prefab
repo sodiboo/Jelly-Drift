@@ -13591,6 +13591,7 @@ Transform:
   - {fileID: 4584923067857634}
   - {fileID: 4651926616781253}
   - {fileID: 4949069037092581}
+  - {fileID: 5443244867802077223}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -89.99813, z: 0}
@@ -13614,6 +13615,7 @@ MonoBehaviour:
   - {fileID: 114070447220029527}
   wheel: {fileID: 1711393349114561, guid: 3815ac3b2c8ef7c439f0db379a8b064c, type: 3}
   text: {fileID: 0}
+  collider: {fileID: 2998065640128208125}
   autoValues: 0
   suspensionLength: 0.37
   restHeight: 0.17
@@ -16761,7 +16763,6 @@ GameObject:
   - component: {fileID: 4701251747900272}
   - component: {fileID: 33132211284850919}
   - component: {fileID: 23201218117421715}
-  - component: {fileID: 64797583849417920}
   m_Layer: 10
   m_Name: RX7
   m_TagString: Untagged
@@ -16841,13 +16842,44 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &64797583849417920
+--- !u!1 &2998065640128208125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5443244867802077223}
+  - component: {fileID: 6285293067633674203}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5443244867802077223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2998065640128208125}
+  m_LocalRotation: {x: -0.4611514, y: 0.00001403689, z: 0.000007286667, w: 0.8873215}
+  m_LocalPosition: {x: 0, y: 0.214, z: -0.203}
+  m_LocalScale: {x: 0.06398511, y: 0.0639851, z: 0.06398511}
+  m_Children: []
+  m_Father: {fileID: 4063619719014827}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -54.92286, y: -0.001812322, z: 0.0000008612535}
+--- !u!64 &6285293067633674203
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954858768508703}
+  m_GameObject: {fileID: 2998065640128208125}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

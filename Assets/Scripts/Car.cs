@@ -48,7 +48,7 @@ public class Car : MonoBehaviour
 		AntiRoll[] componentsInChildren = base.gameObject.GetComponentsInChildren<AntiRoll>();
 		for (int i = 0; i < componentsInChildren.Length; i++)
 		{
-			componentsInChildren[i].antiRoll = this.antiRoll;
+			componentsInChildren[i].antiRoll = -this.antiRoll;
 		}
 		if (this.centerOfMass)
 		{
@@ -286,6 +286,7 @@ public class Car : MonoBehaviour
 
 	// Token: 0x0400003D RID: 61
 	public TextMeshProUGUI text;
+	public new GameObject collider;
 
 	// Token: 0x0400003E RID: 62
 	private Collider c;

@@ -4743,7 +4743,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bbca3aae48a0b4cb38e9d148a08324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputs: {fileID: -944628639613478452, guid: 3108faa92d0001141a150f6dadd84783, type: 3}
   correspondingText: []
   startSelect: 0
   backBtn: 0
@@ -4868,7 +4867,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 40
     m_Top: 0
-    m_Bottom: 12
+    m_Bottom: 50
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1

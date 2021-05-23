@@ -32978,7 +32978,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 468.86484, y: -77.474014}
+  m_AnchoredPosition: {x: 468.86475, y: -77.47412}
   m_SizeDelta: {x: 857.7297, y: 74.94803}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1800
@@ -39621,7 +39621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bbca3aae48a0b4cb38e9d148a08324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputs: {fileID: 0}
   correspondingText: []
   startSelect: 0
   backBtn: 0
@@ -39637,7 +39636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bbca3aae48a0b4cb38e9d148a08324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputs: {fileID: 0}
   correspondingText: []
   startSelect: 0
   backBtn: 0
@@ -39653,7 +39651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bbca3aae48a0b4cb38e9d148a08324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputs: {fileID: 0}
   correspondingText: []
   startSelect: 0
   backBtn: 0
@@ -39867,6 +39864,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   road: {fileID: 211}
+  terrain: {fileID: 1087}
+  sun: {fileID: 64}
+  FuckyWuckyControlsUwU: 0
+  carLayout: 2
 --- !u!114 &1615682073
 MonoBehaviour:
   m_ObjectHideFlags: 0

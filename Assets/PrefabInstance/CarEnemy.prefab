@@ -8608,6 +8608,7 @@ Transform:
   - {fileID: 4870733408008166}
   - {fileID: 4781827669204018}
   - {fileID: 4223536077370119}
+  - {fileID: 900696732414153775}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 84.63721, z: 0}
@@ -8631,6 +8632,7 @@ MonoBehaviour:
   - {fileID: 114090349050128755}
   wheel: {fileID: 1711393349114561, guid: 3815ac3b2c8ef7c439f0db379a8b064c, type: 3}
   text: {fileID: 0}
+  collider: {fileID: 660792179188191486}
   autoValues: 0
   suspensionLength: 0.35
   restHeight: 0.2
@@ -11595,7 +11597,6 @@ GameObject:
   - component: {fileID: 4968896256829750}
   - component: {fileID: 33221540132701631}
   - component: {fileID: 23629757028798109}
-  - component: {fileID: 64914004076713020}
   m_Layer: 10
   m_Name: AE86
   m_TagString: Untagged
@@ -11673,20 +11674,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &64914004076713020
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894764310262544}
-  m_Material: {fileID: 13400000, guid: 854ecb1e7c7b85a42a5b697ab31d22cc, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 12c4ac22694438e48bdf9f1221a84d3f, type: 2}
 --- !u!1 &1899174055843322
 GameObject:
   m_ObjectHideFlags: 0
@@ -17044,3 +17031,48 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &660792179188191486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900696732414153775}
+  - component: {fileID: 6533774341799367491}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &900696732414153775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660792179188191486}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1285573, y: 0.1285572, z: 0.1521384}
+  m_Children: []
+  m_Father: {fileID: 4424785152572195}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!64 &6533774341799367491
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660792179188191486}
+  m_Material: {fileID: 13400000, guid: 854ecb1e7c7b85a42a5b697ab31d22cc, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 12c4ac22694438e48bdf9f1221a84d3f, type: 2}

@@ -8413,7 +8413,6 @@ GameObject:
   - component: {fileID: 4545900646193783}
   - component: {fileID: 33045932622563557}
   - component: {fileID: 23219184185417078}
-  - component: {fileID: 64576251508728896}
   m_Layer: 10
   m_Name: S14
   m_TagString: Untagged
@@ -8494,20 +8493,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &64576251508728896
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1272136131892284}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: a535124d719852e4ea7d59002c61a509, type: 2}
 --- !u!1 &1344317778868039
 GameObject:
   m_ObjectHideFlags: 0
@@ -16931,6 +16916,7 @@ Transform:
   - {fileID: 4540249846173825}
   - {fileID: 4605796753747176}
   - {fileID: 4656661838921012}
+  - {fileID: 5240269446334945845}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -16954,6 +16940,7 @@ MonoBehaviour:
   - {fileID: 114374994910815186}
   wheel: {fileID: 1711393349114561, guid: 3815ac3b2c8ef7c439f0db379a8b064c, type: 3}
   text: {fileID: 0}
+  collider: {fileID: 1390260343049281874}
   autoValues: 0
   suspensionLength: 0.35
   restHeight: 0.17
@@ -17047,3 +17034,48 @@ MonoBehaviour:
   speedSteerMultiplier: 1
   steerMultiplier: 1.35
   maxTurnSpeed: 55
+--- !u!1 &1390260343049281874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5240269446334945845}
+  - component: {fileID: 1419498896996961266}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5240269446334945845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390260343049281874}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0.00000008940696, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.219, z: -0.184}
+  m_LocalScale: {x: 1.623755, y: 1.623755, z: 1.623755}
+  m_Children: []
+  m_Father: {fileID: 4593040722666923}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -90, y: -0.000007244509, z: -0.00000724451}
+--- !u!64 &1419498896996961266
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390260343049281874}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: a535124d719852e4ea7d59002c61a509, type: 2}

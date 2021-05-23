@@ -53,7 +53,8 @@ public class GameController : MonoBehaviour
 	{
 		this.playing = true;
 		Timer.Instance.StartTimer();
-		ChaosController.Instance.normal.Enable();
+		currentCar.AddComponent<InputListener>().car = currentCar.GetComponent<Car>();
+		InputManager.Instance.layout = InputManager.Layout.Car;
 		if (SaveState.Instance.chaos == 1) ChaosController.Instance.StartChaos();
 	}
 

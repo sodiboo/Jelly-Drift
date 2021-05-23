@@ -11249,7 +11249,6 @@ GameObject:
   - component: {fileID: 114618327237765075}
   - component: {fileID: 114608611490270840}
   - component: {fileID: 114005434367221484}
-  - component: {fileID: 114888239822979373}
   - component: {fileID: 114728764221283415}
   m_Layer: 10
   m_Name: Banana
@@ -11276,6 +11275,7 @@ Transform:
   - {fileID: 4064847637514962}
   - {fileID: 4394677180446232}
   - {fileID: 4665255389624755}
+  - {fileID: 2209838367902637930}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 89.99998, z: 0}
@@ -11299,6 +11299,7 @@ MonoBehaviour:
   - {fileID: 114075284659547514}
   wheel: {fileID: 1711393349114561, guid: 3815ac3b2c8ef7c439f0db379a8b064c, type: 3}
   text: {fileID: 0}
+  collider: {fileID: 8556336340233315646}
   autoValues: 0
   suspensionLength: 0.55
   restHeight: 0.17
@@ -11372,19 +11373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crashAudio: {fileID: 114954659221823047}
---- !u!114 &114888239822979373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635713960553598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0481a2e3288f3347b9e1e8f24ea136e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  car: {fileID: 114084551776329832}
 --- !u!114 &114728764221283415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16609,7 +16597,6 @@ GameObject:
   - component: {fileID: 4230655321442723}
   - component: {fileID: 33843779694973103}
   - component: {fileID: 23932356149267898}
-  - component: {fileID: 64930441220827634}
   m_Layer: 10
   m_Name: Banana
   m_TagString: Untagged
@@ -16679,13 +16666,44 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &64930441220827634
+--- !u!1 &8556336340233315646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2209838367902637930}
+  - component: {fileID: 1607848282576902175}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2209838367902637930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8556336340233315646}
+  m_LocalRotation: {x: -0.7071045, y: 0.0000009834765, z: 0.0000009238719, w: 0.7071092}
+  m_LocalPosition: {x: 0, y: 0.04999924, z: 0.061}
+  m_LocalScale: {x: 0.05390585, y: 0.05870682, z: 0.05390585}
+  m_Children: []
+  m_Father: {fileID: 4384127450254471}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -89.99963, y: -0.0001545495, z: 0.000004829165}
+--- !u!64 &1607848282576902175
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926041962031034}
+  m_GameObject: {fileID: 8556336340233315646}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

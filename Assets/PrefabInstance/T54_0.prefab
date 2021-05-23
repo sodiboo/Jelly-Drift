@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 4363523571853631}
   - component: {fileID: 33815663723678115}
   - component: {fileID: 23216051470818708}
-  - component: {fileID: 64456537366447242}
   m_Layer: 10
   m_Name: Nissan Skyline R32 GTR
   m_TagString: Untagged
@@ -123,20 +122,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &64456537366447242
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138373792075564}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 06c7866dd4d7638448b1894d44269103, type: 2}
 --- !u!1 &1179971495560015
 GameObject:
   m_ObjectHideFlags: 0
@@ -3467,6 +3452,7 @@ Transform:
   - {fileID: 4280923272815553}
   - {fileID: 4993084583743921}
   - {fileID: 4272990379644999}
+  - {fileID: 4378227857765178943}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -3490,6 +3476,7 @@ MonoBehaviour:
   - {fileID: 114750069871628601}
   wheel: {fileID: 1711393349114561, guid: 3815ac3b2c8ef7c439f0db379a8b064c, type: 3}
   text: {fileID: 0}
+  collider: {fileID: 3345955659973108813}
   autoValues: 0
   suspensionLength: 0.35
   restHeight: 0.17
@@ -16887,3 +16874,48 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &3345955659973108813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4378227857765178943}
+  - component: {fileID: 3515882659775013434}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4378227857765178943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3345955659973108813}
+  m_LocalRotation: {x: -0.7071068, y: -0.0000003576278, z: -0.0000002384186, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.204, z: 0.91}
+  m_LocalScale: {x: 0.7910843, y: 0.7910843, z: 0.7910843}
+  m_Children: []
+  m_Father: {fileID: 4198220670548408}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0.00004829673, z: -0.000009659349}
+--- !u!64 &3515882659775013434
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3345955659973108813}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 06c7866dd4d7638448b1894d44269103, type: 2}

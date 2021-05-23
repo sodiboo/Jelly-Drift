@@ -16,6 +16,7 @@ public class FinishController : MonoBehaviour
 	// Token: 0x06000082 RID: 130 RVA: 0x00004AFC File Offset: 0x00002CFC
 	public void Open(bool victory)
 	{
+		InputManager.Instance.layout = InputManager.Layout.Menu;
 		if (GameState.Instance.gamemode == Gamemode.TimeTrial)
 		{
 			this.timePanel.SetActive(true);

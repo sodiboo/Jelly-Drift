@@ -2894,7 +2894,6 @@ GameObject:
   - component: {fileID: 4885049311614222}
   - component: {fileID: 33309817240080800}
   - component: {fileID: 23938616307321692}
-  - component: {fileID: 64011023820141521}
   m_Layer: 10
   m_Name: Nissan Skyline R32 GTR
   m_TagString: Untagged
@@ -2976,20 +2975,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &64011023820141521
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209311982498836}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 06c7866dd4d7638448b1894d44269103, type: 2}
 --- !u!1 &1227915998661875
 GameObject:
   m_ObjectHideFlags: 0
@@ -16745,7 +16730,6 @@ GameObject:
   - component: {fileID: 114088766046691332}
   - component: {fileID: 114820744784534126}
   - component: {fileID: 114322306901850299}
-  - component: {fileID: 114750141992747056}
   - component: {fileID: 114983334881431016}
   m_Layer: 10
   m_Name: T54
@@ -16772,6 +16756,8 @@ Transform:
   - {fileID: 4319782111780370}
   - {fileID: 4612138273936030}
   - {fileID: 4348832100138159}
+  - {fileID: 3070221654800032346}
+  - {fileID: 69958338703272778}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -16795,6 +16781,7 @@ MonoBehaviour:
   - {fileID: 114868755127402374}
   wheel: {fileID: 1711393349114561, guid: 3815ac3b2c8ef7c439f0db379a8b064c, type: 3}
   text: {fileID: 0}
+  collider: {fileID: 6335930042600112907}
   autoValues: 0
   suspensionLength: 0.35
   restHeight: 0.17
@@ -16868,19 +16855,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crashAudio: {fileID: 114572426061996093}
---- !u!114 &114750141992747056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1884561730929258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0481a2e3288f3347b9e1e8f24ea136e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  car: {fileID: 114629462396487284}
 --- !u!114 &114983334881431016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16907,3 +16881,78 @@ MonoBehaviour:
   - myArray: 000000000000000002000000
   - myArray: 000000000000000003000000
   - myArray: 000000000000000004000000
+--- !u!1 &6335930042600112907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 69958338703272778}
+  - component: {fileID: 4457972911863141781}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &69958338703272778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6335930042600112907}
+  m_LocalRotation: {x: -0.7071068, y: -0.0000003576278, z: -0.0000002384186, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.204, z: 0.91}
+  m_LocalScale: {x: 0.7910843, y: 0.7910843, z: 0.7910843}
+  m_Children: []
+  m_Father: {fileID: 4080906668413776}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0.00004829673, z: -0.000009659349}
+--- !u!64 &4457972911863141781
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6335930042600112907}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 06c7866dd4d7638448b1894d44269103, type: 2}
+--- !u!1 &6859126197214311543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3070221654800032346}
+  m_Layer: 10
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3070221654800032346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6859126197214311543}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4080906668413776}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

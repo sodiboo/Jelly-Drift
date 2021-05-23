@@ -4,51 +4,24 @@ using UnityEngine;
 using Action = System.Action;
 using Valid = System.Func<bool>;
 using TMPro;
-using UnityEngine.InputSystem;
 
 public class ChaosController : MonoBehaviour
 {
     public static ChaosController Instance;
     public GameObject road;
+    public Renderer terrain;
+    public GameObject sun;
     public Car car { get => ShakeController.Instance.car; }
-    InputActionAsset inputs;
+    public bool FuckyWuckyControlsUwU = false;
     TextMeshProUGUI text;
 
-    void Throttle(InputAction.CallbackContext context)
-    {
-        car.throttle = context.ReadValue<float>();
-    }
-
-    void Steering(InputAction.CallbackContext context)
-    {
-        car.steering = context.ReadValue<float>();
-    }
-
-    void Break(InputAction.CallbackContext context)
-    {
-        car.breaking = context.ReadValueAsButton();
-    }
-
-    void AssignActionMap(InputActionMap action)
-    {
-        action.FindAction("Throttle").performed += Throttle;
-        action.FindAction("Steering").performed += Steering;
-        action.FindAction("Break").performed += Break;
-    }
-
-    public InputActionMap southpaw { get; set; }
-    public InputActionMap normal { get; set; }
+    public InputManager.Layout carLayout = InputManager.Layout.Car;
 
     void Awake()
     {
         if (Instance != this && Instance != null) Destroy(this);
         Instance = this;
         text = GetComponent<TextMeshProUGUI>();
-        inputs = PrefabManager.Instance.inputs;
-        normal = inputs.FindActionMap("Car");
-        southpaw = inputs.FindActionMap("Southpaw");
-        AssignActionMap(normal);
-        AssignActionMap(southpaw);
     }
 
     private void Start()
@@ -62,19 +35,29 @@ public class ChaosController : MonoBehaviour
         Effect("Slowpoke", SlowSpeed, ResetSpeed);
         Effect("No Drifting", HighGrip, ResetGrip);
         Effect("Smooth Wheels", LowGrip, ResetGrip);
-        Effect("No Jumping", StrongGravity, ResetGravity);
-        Effect("You'll overshoot the jump", WeakGravity, ResetGravity);
+        Effect("Downforce", StrongGravity, ResetGravity);
+        Effect("Moon Gravity", WeakGravity, ResetGravity);
         Effect("Where are you going?", RandomRotation);
         Effect("Wrong way lol", Flip);
         Effect("Are you sure you got that checkpoint?", Pause.Instance.Recover); // Thanks to Dit0h for the name and idea
-        Effect("Wow, he sure hates you", TeleportAI, valid: Race);
-        Effect("I wonder where the AI is", TeleportToAI, valid: Either(Race, TimeTrial));
+        Effect("(teleports behind you)", TeleportAI, valid: Race); // Thanks to Reclaimer64 for the name
+        Effect("I wonder where the AI is", TeleportToAI, valid: Race);
+        Effect("Cheater", TeleportToAI, valid: TimeTrial);
         Effect("Slippery Road", DriftOnRoad, DriftOffRoad);
         Effect("Oh, you don't know what Karlson is?", URL("steam://advertise/1228610"), valid: Weighted(0.03f)); // shh don't tell anyone this exists if you're actually reading the source code
         Effect("Multiplayer", AddCar, DeleteCar);
-        Effect("Nonexistent Road", DisableRoad, EnableRoad); // Thanks to ProfessorEmu for the idea, i think
+        Effect("Nonexistent Road", Disable(road), Enable(road)); // Thanks to ProfessorEmu for the idea, i think
         Effect("Go left! No, go right, go right!", InvertAngular); // Quote from Wheatley
-        Effect("Southpaw", (Action)southpaw.Enable + normal.Disable, (Action)southpaw.Disable + normal.Enable); // Thanks to Dit0h for the name and idea
+        Effect("Cursed Controls", () => FuckyWuckyControlsUwU = true, () => FuckyWuckyControlsUwU = false);
+        Effect("Southpaw", ControlScheme(InputManager.Layout.Southpaw), ControlScheme(InputManager.Layout.Car)); // Thanks to Dit0h for the name and idea
+        Effect("Kickflip", Kickflip);
+        Effect("Potato", () => Application.targetFrameRate = 5, () => Application.targetFrameRate = -1); // Thanks to WoodComet for the idea
+        Effect("Bigger", BiggerSize, ResetSize); // Thanks to WoodComet for the name and idea
+        Effect("Fly me to the Moon", Up); // Thanks to WoodComet for the idea
+        Effect("Where did everything go?", Disable(road) + Disable(terrain), Enable(road) + Enable(terrain)); // Thanks to WoodComet for the idea, thanks to pongo1231 for the name
+        Effect("Dark Mode", Disable(sun), Enable(sun)); // Thanks to WoodComet for the idea
+        // TODO: invert colors
+        Effect("Bad Collision", OffsetCollider, ResetCollider);
     }
 
     private void OnDestroy()
@@ -87,14 +70,6 @@ public class ChaosController : MonoBehaviour
     bool Race() => GameState.Instance.gamemode == Gamemode.Race;
     bool TimeTrial() => GameState.Instance.gamemode == Gamemode.TimeTrial;
     Valid Weighted(float threshold) => () => Random.value < threshold;
-    Valid Either(params Valid[] predicates) => () =>
-    {
-        foreach (var valid in predicates)
-        {
-            if (valid()) return true;
-        }
-        return false;
-    };
 
     void Effect(string name, Action effect, Action cleanup = null, Valid valid = null)
     {
@@ -122,11 +97,12 @@ public class ChaosController : MonoBehaviour
 
     public void StartChaos()
     {
-        InvokeRepeating("Chaos", 0, 5);
+        if (!IsInvoking("Chaos")) InvokeRepeating("Chaos", 0, 5);
     }
 
     public void StopChaos()
     {
+        if (!IsInvoking("Chaos")) return;
         CancelInvoke("Chaos");
         effects[currentEffect].cleanup();
         currentEffect = -1;
@@ -171,6 +147,11 @@ public class ChaosController : MonoBehaviour
         Physics.gravity *= gravity;
     }
 
+    void Collider(Vector3 offset)
+    {
+        car.collider.transform.position += offset;
+    }
+
     public float speed { get; set; } = 1;
 
     public float size { get; set; } = 1;
@@ -178,15 +159,18 @@ public class ChaosController : MonoBehaviour
     public float grip { get; set; } = 1;
 
     public float gravity { get; set; } = 1;
+    public new Vector3 collider { get; set; } = Vector3.zero;
 
+    void BiggerSize() => Size(size = 10f);
     void BigSize() => Size(size = Random.Range(1.2f, 3f));
     void SmallSize() => Size(size = Random.Range(0.4f, 0.8f));
     void FastSpeed() => Speed(speed = Random.Range(1.2f, 5f));
     void SlowSpeed() => Speed(speed = Random.Range(0.5f, 0.8f));
-    void HighGrip() => Grip(grip = Random.Range(1.2f, 10f));
-    void LowGrip() => Grip(grip = Random.Range(0.2f, 0.8f));
-    void StrongGravity() => Gravity(gravity = Random.Range(1.5f, 3f));
-    void WeakGravity() => Gravity(gravity = Random.Range(0.1f, 0.8f));
+    void HighGrip() => Grip(grip = 10f);
+    void LowGrip() => Grip(grip = 0f);
+    void StrongGravity() => Gravity(gravity = 3f);
+    void WeakGravity() => Gravity(gravity = 0.166f);
+    void OffsetCollider() => Collider(collider = Random.insideUnitSphere);
 
     void ResetSize()
     {
@@ -211,6 +195,11 @@ public class ChaosController : MonoBehaviour
         gravity = 1;
     }
     
+    void ResetCollider()
+    {
+        Collider(-collider);
+        collider = Vector3.zero;
+    }
 
     void SetCar(GameObject obj)
     {
@@ -246,20 +235,27 @@ public class ChaosController : MonoBehaviour
         var rot = car.transform.rotation;
         var vel = car.rb.velocity;
         var ang = car.rb.angularVelocity;
+        var throttle = car.throttle;
+        var steering = car.steering;
+        var breaking = car.breaking;
         Destroy(car.gameObject);
         var newCar = Random.Range(0, PrefabManager.Instance.cars.Length - 1);
         if (GameState.Instance.car >= newCar) newCar++;
         GameState.Instance.car = newCar;
         SetCar(Instantiate(PrefabManager.Instance.cars[newCar], pos, rot));
         car.GetComponent<CheckpointUser>().checkedPoints = data;
+        car.gameObject.AddComponent<InputListener>().car = car;
         car.rb.velocity = vel;
         car.rb.angularVelocity = ang;
+        car.throttle = throttle;
+        car.steering = steering;
+        car.breaking = breaking;
         RandomSkin(false);
     }
 
     void TeleportAI()
     {
-        GameController.Instance.GetComponent<Race>().enemyCar.transform.SetPositionAndRotation(car.transform.position, car.transform.rotation);
+        GameController.Instance.GetComponent<Race>().enemyCar.transform.SetPositionAndRotation(car.transform.position - car.transform.forward * 3, car.transform.rotation);
     }
 
     void TeleportToAI()
@@ -328,25 +324,58 @@ public class ChaosController : MonoBehaviour
     {
         otherCar = Instantiate(PrefabManager.Instance.cars[Random.Range(0, PrefabManager.Instance.cars.Length)], car.transform.position + car.transform.forward * 5, car.transform.rotation);
         otherCar.AddComponent<FakeCheckpointUser>();
+        otherCar.AddComponent<InputListener>().car = otherCar.GetComponent<Car>();
     }
 
     void DeleteCar()
     {
-        Destroy(otherCar);
+        if (Random.value > 0.5)
+        {
+            Destroy(otherCar);
+            return;
+        }
+        var chekedPoints = car.GetComponent<CheckpointUser>().checkedPoints;
+        Destroy(otherCar.GetComponent<FakeCheckpointUser>());
+        var user = otherCar.AddComponent<CheckpointUser>();
+        user.checkedPoints = chekedPoints;
+        Destroy(car.gameObject);
+        SetCar(otherCar);
     }
 
-    void EnableRoad()
-    {
-        road.SetActive(true);
-    }
+    Action Enable(GameObject obj) => () => obj.SetActive(true);
 
-    void DisableRoad()
-    {
-        road.SetActive(false);
-    }
+    Action Disable(GameObject obj) => () => obj.SetActive(false);
+
+    Action Enable(Behaviour behaviour) => () => behaviour.enabled = true;
+
+    Action Disable(Behaviour behaviour) => () => behaviour.enabled = false;
+
+    Action Enable(Renderer renderer) => () => renderer.enabled = true;
+
+    Action Disable(Renderer renderer) => () => renderer.enabled = false;
 
     void InvertAngular()
     {
         car.rb.angularVelocity *= -5;
+    }
+
+    Action ControlScheme(InputManager.Layout layout) => () =>
+    {
+        carLayout = layout;
+        if (InputManager.Instance.layout != InputManager.Layout.Menu) InputManager.Instance.layout = carLayout;
+    };
+
+    void Kickflip()
+    {
+        car.rb.AddForceAtPosition(car.transform.up * 10, car.transform.right, ForceMode.VelocityChange);
+        //car.rb.AddForceAtPosition(car.transform.up * car.rb.mass * 10, car.wheelPositions[0].transform.position);
+        //car.rb.AddForceAtPosition(car.transform.up * car.rb.mass, car.wheelPositions[1].transform.position);
+        //car.rb.AddForceAtPosition(car.transform.up * car.rb.mass * 10, car.wheelPositions[2].transform.position);
+        //car.rb.AddForceAtPosition(car.transform.up * car.rb.mass, car.wheelPositions[3].transform.position);
+    }
+
+    private void Up()
+    {
+        car.rb.AddForce(Vector3.up * 30, ForceMode.VelocityChange);
     }
 }

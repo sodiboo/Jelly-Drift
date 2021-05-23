@@ -2768,7 +2768,6 @@ GameObject:
   - component: {fileID: 114411304417418548}
   - component: {fileID: 114403215638582024}
   - component: {fileID: 114399965171811544}
-  - component: {fileID: 114961722518610238}
   - component: {fileID: 114681081331340077}
   m_Layer: 10
   m_Name: CyberTruck
@@ -2795,6 +2794,7 @@ Transform:
   - {fileID: 4565833923592244}
   - {fileID: 4688589656079418}
   - {fileID: 4243737032712257}
+  - {fileID: 599342982910212540}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -2818,6 +2818,7 @@ MonoBehaviour:
   - {fileID: 114634257312300032}
   wheel: {fileID: 1711393349114561, guid: 3815ac3b2c8ef7c439f0db379a8b064c, type: 3}
   text: {fileID: 0}
+  collider: {fileID: 952649866842106147}
   autoValues: 0
   suspensionLength: 0.43
   restHeight: 0.17
@@ -2891,19 +2892,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crashAudio: {fileID: 114331278770487193}
---- !u!114 &114961722518610238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1204102606129460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0481a2e3288f3347b9e1e8f24ea136e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  car: {fileID: 114318999273880896}
 --- !u!114 &114681081331340077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11090,7 +11078,6 @@ GameObject:
   - component: {fileID: 4680750692773065}
   - component: {fileID: 33041551350087128}
   - component: {fileID: 23422986655502309}
-  - component: {fileID: 64932266352446220}
   m_Layer: 10
   m_Name: cybertruck
   m_TagString: Untagged
@@ -11164,20 +11151,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &64932266352446220
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565512807694124}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 7adc65a2b3f4d384a90934cb33337499, type: 2}
 --- !u!1 &1609130949198520
 GameObject:
   m_ObjectHideFlags: 0
@@ -16697,3 +16670,48 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &952649866842106147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 599342982910212540}
+  - component: {fileID: 8215560664750528160}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &599342982910212540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952649866842106147}
+  m_LocalRotation: {x: -0.7071068, y: 0.00001269579, z: 0.00001269579, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.44, z: -0.15}
+  m_LocalScale: {x: 0.7253587, y: 0.7253586, z: 0.7253587}
+  m_Children: []
+  m_Father: {fileID: 4785048176226896}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -90, y: -0.002057441, z: 0}
+--- !u!64 &8215560664750528160
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952649866842106147}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 7adc65a2b3f4d384a90934cb33337499, type: 2}

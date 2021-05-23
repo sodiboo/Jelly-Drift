@@ -5444,6 +5444,7 @@ Transform:
   - {fileID: 4506907939272418}
   - {fileID: 4319344625017484}
   - {fileID: 4533389628320984}
+  - {fileID: 6769617822384734619}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 89.99998, z: 0}
@@ -5467,6 +5468,7 @@ MonoBehaviour:
   - {fileID: 114216545190592559}
   wheel: {fileID: 1711393349114561, guid: 3815ac3b2c8ef7c439f0db379a8b064c, type: 3}
   text: {fileID: 0}
+  collider: {fileID: 7212947607919235081}
   autoValues: 0
   suspensionLength: 0.45
   restHeight: 0.17
@@ -5786,7 +5788,6 @@ GameObject:
   - component: {fileID: 4021477138386501}
   - component: {fileID: 33048658006664023}
   - component: {fileID: 23675992177730096}
-  - component: {fileID: 64260715495770264}
   m_Layer: 10
   m_Name: Truck
   m_TagString: Untagged
@@ -5864,20 +5865,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &64260715495770264
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570353926788338}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: aa51e85c8eecdcb4c98d66766bbf4c59, type: 2}
 --- !u!1 &1601586042077565
 GameObject:
   m_ObjectHideFlags: 0
@@ -16691,3 +16678,48 @@ MonoBehaviour:
   springTravel: 0.2
   springStiffness: 40000
   damperStiffness: 1700
+--- !u!1 &7212947607919235081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6769617822384734619}
+  - component: {fileID: 4796323222707566598}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6769617822384734619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7212947607919235081}
+  m_LocalRotation: {x: -0.7071068, y: 0.00001165271, z: 0.00001165271, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.448, z: -0.006542683}
+  m_LocalScale: {x: 1.48478, y: 1.48478, z: 1.48478}
+  m_Children: []
+  m_Father: {fileID: 4198293663842168}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: -90, y: -0.001888402, z: 0}
+--- !u!64 &4796323222707566598
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7212947607919235081}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: aa51e85c8eecdcb4c98d66766bbf4c59, type: 2}
