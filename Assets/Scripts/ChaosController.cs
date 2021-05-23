@@ -24,7 +24,7 @@ public class ChaosController : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
     }
 
-    private void Start()
+    public void RegisterChaos()
     {
         Effect("Random Car", RandomCar);
         Effect("Random Skin", RandomSkin, valid: HasSkins);
@@ -58,6 +58,8 @@ public class ChaosController : MonoBehaviour
         Effect("Dark Mode", Disable(sun), Enable(sun)); // Thanks to WoodComet for the idea
         // TODO: invert colors
         Effect("Bad Collision", OffsetCollider, ResetCollider);
+        Effect("Ghost", GhostMode, UnGhost);
+        Effect("Lag", SetLag, StopLag); // Thanks to pongo1231 for the name and idea
     }
 
     private void OnDestroy()
@@ -324,7 +326,11 @@ public class ChaosController : MonoBehaviour
     {
         otherCar = Instantiate(PrefabManager.Instance.cars[Random.Range(0, PrefabManager.Instance.cars.Length)], car.transform.position + car.transform.forward * 5, car.transform.rotation);
         otherCar.AddComponent<FakeCheckpointUser>();
-        otherCar.AddComponent<InputListener>().car = otherCar.GetComponent<Car>();
+        var otherCarCar = otherCar.GetComponent<Car>();
+        otherCar.AddComponent<InputListener>().car = otherCarCar;
+        otherCarCar.throttle = car.throttle;
+        otherCarCar.steering = car.steering;
+        otherCarCar.breaking = car.breaking;
     }
 
     void DeleteCar()
@@ -368,14 +374,58 @@ public class ChaosController : MonoBehaviour
     void Kickflip()
     {
         car.rb.AddForceAtPosition(car.transform.up * 10, car.transform.right, ForceMode.VelocityChange);
-        //car.rb.AddForceAtPosition(car.transform.up * car.rb.mass * 10, car.wheelPositions[0].transform.position);
-        //car.rb.AddForceAtPosition(car.transform.up * car.rb.mass, car.wheelPositions[1].transform.position);
-        //car.rb.AddForceAtPosition(car.transform.up * car.rb.mass * 10, car.wheelPositions[2].transform.position);
-        //car.rb.AddForceAtPosition(car.transform.up * car.rb.mass, car.wheelPositions[3].transform.position);
     }
 
     private void Up()
     {
         car.rb.AddForce(Vector3.up * 30, ForceMode.VelocityChange);
+    }
+
+    private void GhostMode()
+    {
+        car.collider.SetActive(false);
+        if (car.TryGetComponent<Ghost>(out var ghost))
+        {
+            ghost.enabled = true;
+        }
+        else
+        {
+            car.gameObject.AddComponent<Ghost>();
+        }
+    }
+
+    private void UnGhost()
+    {
+        car.collider.SetActive(true);
+        car.GetComponent<Ghost>().enabled = false;
+    }
+
+    Vector3 lagPos;
+    Quaternion lagRot;
+    Vector3 lagVel;
+    Vector3 lagAng;
+
+    void SetLag()
+    {
+        lagPos = car.transform.position;
+        lagRot = car.transform.rotation;
+        lagVel = car.rb.velocity;
+        lagAng = car.rb.angularVelocity;
+        Invoke("LoadLag", 0.5f);
+    }
+
+    void LoadLag()
+    {
+        car.transform.position = lagPos;
+        car.transform.rotation = lagRot;
+        car.rb.velocity = lagVel;
+        car.rb.angularVelocity = lagAng;
+        Invoke("SetLag", 0.5f);
+    }
+
+    void StopLag()
+    {
+        CancelInvoke("SetLag");
+        CancelInvoke("LoadLag");
     }
 }

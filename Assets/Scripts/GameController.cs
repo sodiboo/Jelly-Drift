@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour
 	private void Start()
 	{
 		AssignCar();
+		ChaosController.Instance.RegisterChaos();
 	}
 
 	public void AssignCar()

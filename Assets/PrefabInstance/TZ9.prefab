@@ -11023,7 +11023,7 @@ MonoBehaviour:
   - {fileID: 114040157093474845}
   wheel: {fileID: 1711393349114561, guid: 3815ac3b2c8ef7c439f0db379a8b064c, type: 3}
   text: {fileID: 0}
-  collider: {fileID: 0}
+  collider: {fileID: 4902151131415205615}
   autoValues: 0
   suspensionLength: 0.37
   restHeight: 0.17

@@ -48,7 +48,7 @@ public class Car : MonoBehaviour
 		AntiRoll[] componentsInChildren = base.gameObject.GetComponentsInChildren<AntiRoll>();
 		for (int i = 0; i < componentsInChildren.Length; i++)
 		{
-			componentsInChildren[i].antiRoll = -this.antiRoll;
+			componentsInChildren[i].antiRoll = this.antiRoll;
 		}
 		if (this.centerOfMass)
 		{
