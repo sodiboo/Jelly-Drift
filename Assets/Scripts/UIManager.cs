@@ -10,8 +10,8 @@ public class UIManager : MonoBehaviour
 		UIManager.Instance = this;
 	}
 
-	// Token: 0x040001F0 RID: 496
-	public Transform splitPos;
+    // Token: 0x040001F0 RID: 496
+    public Transform splitPos;
 
 	// Token: 0x040001F1 RID: 497
 	public static UIManager Instance;

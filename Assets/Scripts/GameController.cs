@@ -118,6 +118,7 @@ public class GameController : MonoBehaviour
 	// Token: 0x06000098 RID: 152 RVA: 0x0000547C File Offset: 0x0000367C
 	public void FinishRace(bool win, Transform car)
 	{
+		ChaosController.Instance.StopChaos();
 		if (!this.playing)
 		{
 			return;

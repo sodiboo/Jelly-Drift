@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Action = System.Action;
 using Valid = System.Func<bool>;
 using TMPro;
@@ -8,20 +9,27 @@ using TMPro;
 public class ChaosController : MonoBehaviour
 {
     public static ChaosController Instance;
+    public GameObject blackholeObjects;
     public GameObject road;
     public Renderer terrain;
     public GameObject sun;
     public Car car { get => ShakeController.Instance.car; }
     public bool FuckyWuckyControlsUwU = false;
     TextMeshProUGUI text;
-
-    public InputManager.Layout carLayout = InputManager.Layout.Car;
+    Camera clearCam;
 
     void Awake()
     {
         if (Instance != this && Instance != null) Destroy(this);
         Instance = this;
         text = GetComponent<TextMeshProUGUI>();
+#if !MOBILE
+        clearCam = gameObject.AddComponent<Camera>();
+        clearCam.clearFlags = CameraClearFlags.SolidColor;
+        clearCam.backgroundColor = Color.black;
+        clearCam.cullingMask = 0;
+        clearCam.depth = -2;
+#endif
     }
 
     public void RegisterChaos()
@@ -65,39 +73,60 @@ public class ChaosController : MonoBehaviour
         Effect("Rainbow", EnableRainbow, DisableRainbow, valid: HasManySkins); // Thanks to Akuma73 for the idea
         Effect("Superhot", Superhot, Supercold);
         Effect($"POV: You're a bird watching an intense race on {MapManager.Instance.maps[GameState.Instance.map].name}", IsoOn, IsoOff);
+        Effect("Dani Says", Simon, UnSimon);
+        simonPunishment = Effect("Punishment", Nothing, UnSimon, valid: Never);
+#if MOBILE
+        Effect("Portrait Mode", Vertical, ResetScreen, valid: IsHorizontal);
+#else
+        Effect("Mobile", Vertical, ResetScreen, valid: IsHorizontal);
+#endif
     }
 
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+        StopChaos();
     }
 
     private static void Nothing() { }
     private static bool Always() => true;
+    private static bool Never() => false;
     bool Race() => GameState.Instance.gamemode == Gamemode.Race;
     bool TimeTrial() => GameState.Instance.gamemode == Gamemode.TimeTrial;
     Valid Weighted(float threshold) => () => Random.value < threshold;
+    Action Rig(int effect) => () => riggedEffect = effect;
 
-    void Effect(string name, Action effect, Action cleanup = null, Valid valid = null)
+    int Effect(string name, Action effect, Action cleanup = null, Valid valid = null)
     {
+        var count = effects.Count;
         effects.Add((name, effect, cleanup ?? Nothing, valid ?? Always));
+        return count;
     }
 
     public int currentEffect { get; set; } = -1;
+    private int riggedEffect { get; set; } = -1;
 
     private void Chaos()
     {
-        var valid = new List<int>();
         if (currentEffect != -1)
         {
             effects[currentEffect].cleanup();
         }
-        for (var i = 0; i < effects.Count; i++)
+        if (riggedEffect == -1)
         {
-            if (currentEffect == i) continue;
-            if (effects[i].valid()) valid.Add(i);
+            var valid = new List<int>();
+            for (var i = 0; i < effects.Count; i++)
+            {
+                if (currentEffect == i) continue;
+                if (effects[i].valid()) valid.Add(i);
+            }
+            currentEffect = valid[Random.Range(0, valid.Count)];
         }
-        currentEffect = valid[Random.Range(0, valid.Count)];
+        else
+        {
+            currentEffect = riggedEffect;
+            riggedEffect = -1;
+        }
         effects[currentEffect].run();
         text.text = effects[currentEffect].name;
     }
@@ -374,8 +403,7 @@ public class ChaosController : MonoBehaviour
 
     Action ControlScheme(InputManager.Layout layout) => () =>
     {
-        carLayout = layout;
-        if (InputManager.Instance.layout != InputManager.Layout.Menu) InputManager.Instance.layout = carLayout;
+        InputManager.Instance.layout = layout;
     };
 
     void Kickflip()
@@ -453,19 +481,37 @@ public class ChaosController : MonoBehaviour
     }
 
     bool blackhole;
-    Car blackholeEnemy;
+    Rigidbody[] blackholeRBs;
 
     void EnableBlackhole()
     {
         blackhole = true;
-        blackholeEnemy = GameController.Instance.GetComponent<Race>().enemyCar.GetComponent<Car>();
-        blackholeEnemy.rb.useGravity = false;
+        if (blackholeObjects != null)
+        {
+            blackholeRBs = new Rigidbody[blackholeObjects.transform.childCount + 1];
+            for (var i = 0; i < blackholeObjects.transform.childCount; i++)
+            {
+                blackholeRBs[i] = blackholeObjects.transform.GetChild(i).GetComponent<Rigidbody>();
+            }
+            blackholeRBs[blackholeObjects.transform.childCount] = GameController.Instance.GetComponent<Race>().enemyCar.GetComponent<Rigidbody>();
+        }
+        else
+        {
+            blackholeRBs = new Rigidbody[] { GameController.Instance.GetComponent<Race>().enemyCar.GetComponent<Rigidbody>() };
+        }
+        for (var i = 0; i < blackholeRBs.Length; i++)
+        {
+            blackholeRBs[i].useGravity = false;
+        }
     }
 
     void DisableBlackhole()
     {
         blackhole = false;
-        blackholeEnemy.rb.useGravity = true;
+        for (var i = 0; i < blackholeRBs.Length; i++)
+        {
+            blackholeRBs[i].useGravity = true;
+        }
     }
 
     bool rainbow;
@@ -511,6 +557,7 @@ public class ChaosController : MonoBehaviour
         {
             Time.timeScale = Mathf.Clamp(Mathf.Abs(car.speed)  / 100f, 0.1f, 1f);
         }
+        if (enforceSimon) TickSimon();
     }
 
     private void FixedUpdate()
@@ -523,8 +570,11 @@ public class ChaosController : MonoBehaviour
         }
         if (blackhole)
         {
-            var dir = car.transform.position - blackholeEnemy.transform.position;
-            blackholeEnemy.rb.AddForce(dir * blackholeEnemy.rb.mass * 10f);
+            for (var i = 0; i < blackholeRBs.Length; i++)
+            {
+                var dir = car.transform.position - blackholeRBs[i].transform.position;
+                blackholeRBs[i].AddForce(dir * blackholeRBs[i].mass * 10f);
+            }
         }
     }
 
@@ -577,5 +627,142 @@ public class ChaosController : MonoBehaviour
         CameraController.Instance.camHeight = camHeight;
         CameraController.Instance.distFromTarget = camDist;
         CameraController.Instance.GetComponentInChildren<Camera>().orthographic = false;
+    }
+
+    bool invertSimon;
+    SimonAction simon;
+    bool enforceSimon;
+
+    enum SimonAction
+    {
+        Accelerate,
+        Decelerate,
+#if !MOBILE
+        Break,
+#endif
+        Left,
+        Right,
+    }
+
+    Vector3? simonVel;
+    Vector3? simonAng;
+
+    void Simon() => StartCoroutine(RunSimon());
+    
+
+    IEnumerator RunSimon()
+    {
+        simon = (SimonAction)Random.Range(0, System.Enum.GetValues(typeof(SimonAction)).Length);
+        invertSimon = Random.value > 0.5f;
+        Time.timeScale = 0.2f;
+        var split = Instantiate(PrefabManager.Instance.splitUi).GetComponent<SplitUi>();
+        split.transform.SetParent(UIManager.Instance.splitPos);
+        split.transform.localPosition = Vector3.zero;
+        string name = "";
+        switch (simon)
+        {
+            case SimonAction.Accelerate: name = "forwards"; break;
+            case SimonAction.Decelerate: name = "backwards"; break;
+#if !MOBILE
+            case SimonAction.Break: name = "break"; break;
+#endif
+            case SimonAction.Right: name = "right"; break;
+            case SimonAction.Left: name = "left"; break;
+        }
+        split.SetSplit(invertSimon ? $"Dani says don't press {name}" : $"Dani says press {name}");
+        yield return new WaitForSeconds(1f);
+
+        enforceSimon = true;
+        Time.timeScale = 1f;
+    }
+
+    void TickSimon()
+    {
+        if (invertSimon == FollowsSimon())
+        {
+            simonVel = car.rb.velocity;
+            simonAng = car.rb.angularVelocity;
+            car.rb.constraints = RigidbodyConstraints.FreezeAll;
+            enforceSimon = false;
+            riggedEffect = simonPunishment;
+        }
+    }
+
+    bool FollowsSimon()
+    {
+        switch (simon)
+        {
+            case SimonAction.Accelerate: return car.throttle > 0f;
+            case SimonAction.Decelerate: return car.throttle < 0f;
+#if !MOBILE
+            case SimonAction.Break: return car.breaking;
+#endif
+            case SimonAction.Right: return car.steering > 0f;
+            case SimonAction.Left: return car.steering < 0f;
+            default: return false;
+        }
+    }
+
+    private int simonPunishment;
+
+    void UnSimon()
+    {
+        if (riggedEffect != -1) return;
+        CancelInvoke("EnforceSimon");
+        enforceSimon = false;
+        car.rb.constraints = RigidbodyConstraints.None;
+        Time.timeScale = 1f;
+        if (simonVel.HasValue) car.rb.velocity = simonVel.Value;
+        if (simonAng.HasValue) car.rb.angularVelocity = simonAng.Value;
+        simonVel = simonAng = null;
+    }
+
+    bool IsHorizontal() => Screen.height < Screen.width;
+
+    void ResetScreen()
+    {
+#if MOBILE
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
+        StartCoroutine(Wait3Seconds());
+#else
+        var cam = CameraController.Instance.GetComponentInChildren<Camera>();
+        cam.ResetProjectionMatrix();
+        cam.rect = new Rect(0, 0, 1, 1);
+#endif
+    }
+
+    void Vertical()
+    {
+#if MOBILE
+        Screen.autorotateToPortrait = true;
+        Screen.autorotateToPortraitUpsideDown = true;
+        Screen.autorotateToLandscapeLeft = false;
+        Screen.autorotateToLandscapeRight = false;
+        StartCoroutine(Wait3Seconds());
+#else
+        var cam = CameraController.Instance.GetComponentInChildren<Camera>();
+        cam.projectionMatrix = Matrix4x4.Perspective(cam.fieldOfView, 9f/16f, cam.nearClipPlane, cam.farClipPlane);
+        var wRatio = 9f / 16f / (Screen.width / Screen.height);
+        cam.rect = new Rect((1 - wRatio) / 2, 0, wRatio, 1);
+#endif
+    }
+
+    IEnumerator Wait3Seconds()
+    {
+        var pause = InputManager.Instance.inputs.FindActionMap("Global").FindAction("Pause");
+        pause.Disable();
+#if MOBILE
+        MobileControls.Instance.pause.SetActive(false);
+#endif
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(3f);
+        Time.timeScale = 1f;
+        pause.Enable();
+#if MOBILE
+        MobileControls.Instance.pause.SetActive(true);
+#endif
     }
 }

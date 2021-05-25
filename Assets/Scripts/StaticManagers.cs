@@ -14,6 +14,13 @@ public class StaticManagers : MonoBehaviour
 		}
 		StaticManagers.Instance = this;
 		UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
+#if MOBILE
+		Screen.autorotateToLandscapeLeft = true;
+		Screen.autorotateToLandscapeRight = true;
+		Screen.autorotateToPortrait = false;
+		Screen.autorotateToPortraitUpsideDown = false;
+		Screen.orientation = ScreenOrientation.AutoRotation;
+#endif
 	}
 
 	// Token: 0x040001C7 RID: 455

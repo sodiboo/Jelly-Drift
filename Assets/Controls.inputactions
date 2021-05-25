@@ -28,22 +28,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "Point",
-                    "type": "PassThrough",
-                    "id": "1aac2ebe-1024-4119-8c47-fd93b0def51e",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Click",
-                    "type": "Button",
-                    "id": "d3b3c33c-caf3-44f3-86ec-dde3fd607907",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -310,28 +294,6 @@
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "99488807-2a09-433d-9679-9781d9db5928",
-                    "path": "<Pointer>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Point",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "757d0634-ad92-454b-ae5e-e209716d536a",
-                    "path": "<Pointer>/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -511,7 +473,7 @@
                 {
                     "name": "",
                     "id": "820bb7aa-b091-43fa-bd42-52bdc307fb1c",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -756,6 +718,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Point",
+                    "type": "PassThrough",
+                    "id": "08539f42-4e8f-44d9-9a0a-23b515318f06",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "456145af-1e5c-4e80-b312-fae8ff6339c4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -890,6 +868,28 @@
                     "action": "Unlock",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "64d80915-b5b6-4c46-82f8-9993f585c646",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "167554d4-b286-48dd-aaa9-4901d3a5c92c",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

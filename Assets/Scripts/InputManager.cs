@@ -38,9 +38,9 @@ public class InputManager : MonoBehaviour
         {
             actionMaps[layout] = inputs.FindActionMap(Enum.GetName(typeof(Layout), layout));
         }
-        Assign(actionMaps[Layout.Menu].FindAction("Move"), ctx => menu(ctx.ReadValue<Vector2>()));
-        Assign(actionMaps[Layout.Menu].FindAction("Submit"), ctx => submit(ctx.ReadValueAsButton()));
-        Assign(actionMaps[Layout.Menu].FindAction("Cancel"), ctx => cancel(ctx.ReadValueAsButton()));
+        Assign(actionMaps[Layout.Menu].FindAction("Move"), ctx => menu?.Invoke(ctx.ReadValue<Vector2>()));
+        Assign(actionMaps[Layout.Menu].FindAction("Submit"), ctx => submit?.Invoke(ctx.ReadValueAsButton()));
+        Assign(actionMaps[Layout.Menu].FindAction("Cancel"), ctx => cancel?.Invoke(ctx.ReadValueAsButton()));
         Car(Layout.Car);
         Car(Layout.Southpaw);
     }
@@ -97,7 +97,10 @@ public class InputManager : MonoBehaviour
 
     void ChangeLayout(Layout disable, Layout enable)
     {
-        actionMaps[disable]?.Disable();
-        actionMaps[enable]?.Enable();
+        actionMaps?[disable]?.Disable();
+        actionMaps?[enable]?.Enable();
+#if MOBILE
+        MobileControls.Instance?.ChangeLayout(disable, enable);
+#endif
     }
 }

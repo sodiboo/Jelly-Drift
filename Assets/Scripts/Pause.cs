@@ -18,14 +18,16 @@ public class Pause : MonoBehaviour
 
     private void OnEnable()
     {
-		InputManager.Instance.pause += TogglePause;
+		InputManager.Instance.pause += PauseGame;
     }
 
     private void OnDisable()
     {
-		InputManager.Instance.pause -= TogglePause;
+		InputManager.Instance.pause -= PauseGame;
     }
-    // Token: 0x060000FA RID: 250 RVA: 0x000064F9 File Offset: 0x000046F9
+
+	InputManager.Layout unpausedLayout;
+
     public void PauseGame()
 	{
 		if (this.paused)
@@ -35,7 +37,11 @@ public class Pause : MonoBehaviour
 		Time.timeScale = 0f;
 		this.pauseMenu.SetActive(true);
 		this.paused = true;
+		unpausedLayout = InputManager.Instance.layout;
 		InputManager.Instance.layout = InputManager.Layout.Menu;
+#if MOBILE
+		MobileControls.Instance.pause.SetActive(false);
+#endif
 	}
 
 	// Token: 0x060000FB RID: 251 RVA: 0x00006521 File Offset: 0x00004721
@@ -45,7 +51,10 @@ public class Pause : MonoBehaviour
 		this.pauseMenu.SetActive(false);
 		this.paused = false;
 		MonoBehaviour.print("resuiming game");
-		InputManager.Instance.layout = ChaosController.Instance.carLayout;
+		InputManager.Instance.layout = unpausedLayout;
+#if MOBILE
+		MobileControls.Instance.pause.SetActive(true);
+#endif
 	}
 
 	// Token: 0x060000FC RID: 252 RVA: 0x0000654A File Offset: 0x0000474A

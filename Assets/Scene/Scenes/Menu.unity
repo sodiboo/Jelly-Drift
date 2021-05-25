@@ -1126,12 +1126,15 @@ MonoBehaviour:
   m_MoveRepeatRate: 0.1
   m_ActionsAsset: {fileID: -944628639613478452, guid: 3108faa92d0001141a150f6dadd84783,
     type: 3}
-  m_PointAction: {fileID: 362046337061089766, guid: 3108faa92d0001141a150f6dadd84783,
+  m_PointAction: {fileID: 861730279375105849, guid: 3108faa92d0001141a150f6dadd84783,
     type: 3}
-  m_MoveAction: {fileID: 0}
-  m_SubmitAction: {fileID: 0}
-  m_CancelAction: {fileID: 0}
-  m_LeftClickAction: {fileID: -5733368127619718474, guid: 3108faa92d0001141a150f6dadd84783,
+  m_MoveAction: {fileID: 2920318138941873428, guid: 3108faa92d0001141a150f6dadd84783,
+    type: 3}
+  m_SubmitAction: {fileID: 4390947075015263893, guid: 3108faa92d0001141a150f6dadd84783,
+    type: 3}
+  m_CancelAction: {fileID: 8454169979489837433, guid: 3108faa92d0001141a150f6dadd84783,
+    type: 3}
+  m_LeftClickAction: {fileID: 884426423105932879, guid: 3108faa92d0001141a150f6dadd84783,
     type: 3}
   m_MiddleClickAction: {fileID: 0}
   m_RightClickAction: {fileID: 0}
@@ -1139,7 +1142,7 @@ MonoBehaviour:
   m_TrackedDevicePositionAction: {fileID: 0}
   m_TrackedDeviceOrientationAction: {fileID: 0}
   m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
+  m_PointerBehavior: 1
 --- !u!1 &80
 GameObject:
   m_ObjectHideFlags: 0
