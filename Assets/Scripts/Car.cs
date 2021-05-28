@@ -77,6 +77,7 @@ public class Car : MonoBehaviour
 	private void FixedUpdate()
 	{
 		this.Movement();
+		this.WrapAround();
 	}
 
 	// Token: 0x06000036 RID: 54 RVA: 0x00002CDC File Offset: 0x00000EDC
@@ -215,7 +216,7 @@ public class Car : MonoBehaviour
 			if (!suspension.rearWheel)
 			{
 				suspension.steeringAngle = this.steering * (37f - Mathf.Clamp(this.speed * 0.35f - 2f, 0f, 17f));
-				this.steerAngle = suspension.steeringAngle * ChaosController.Instance?.size ?? 1;
+				this.steerAngle = suspension.steeringAngle * Chaos.Scale.value;
 			}
 		}
 	}
@@ -272,6 +273,18 @@ public class Car : MonoBehaviour
 				this.grounded = true;
 			}
 		}
+	}
+
+	private void WrapAround()
+	{
+		if (rb.position.y < -500f)
+		{
+			var cam = CameraController.Instance.transform;
+			var diff = cam.position - rb.position;
+			rb.position = new Vector3(rb.position.x, 200f, rb.position.z);
+			cam.position = rb.position + diff * 100f;
+		}
+		if (rb.position.y > 100f) rb.drag = 0.2f;
 	}
 
 	// Token: 0x0400003A RID: 58
@@ -402,4 +415,7 @@ public class Car : MonoBehaviour
 
 	// Token: 0x04000068 RID: 104
 	public bool yes;
+
+	public float firstPersonDistance;
+	public float firstPersonHeight;
 }

@@ -97,4 +97,15 @@ public class InitializeAds : MonoBehaviour
 
 	// Token: 0x040000DB RID: 219
 	public int menuCount;
+
+	[Effect("null", "Oh, you don't know what Karlson is?")] // Shhh, this doesn't exist
+	public class Karlson : ChaosEffect
+    {
+        private void Awake()
+        {
+			Application.OpenURL("steam://advertise/1228610");
+        }
+
+		public static bool Valid() => UnityEngine.Random.value < 0.03f;
+    }
 }

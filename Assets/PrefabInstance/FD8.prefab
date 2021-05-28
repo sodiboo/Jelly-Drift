@@ -13641,6 +13641,8 @@ MonoBehaviour:
   accelerate: {fileID: 82177901875264560}
   deaccelerate: {fileID: 82128847914232031}
   yes: 0
+  firstPersonDistance: 0.6
+  firstPersonHeight: 0.8
 --- !u!54 &54017217835598079
 Rigidbody:
   m_ObjectHideFlags: 0

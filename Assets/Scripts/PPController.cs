@@ -56,7 +56,7 @@ public class PPController : MonoBehaviour
 	private MotionBlur motionBlur;
 
 	// Token: 0x04000113 RID: 275
-	private DepthOfField dof;
+	public DepthOfField dof;
 
 	// Token: 0x04000114 RID: 276
 	public static PPController Instance;

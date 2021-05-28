@@ -31,6 +31,8 @@ public class CameraController : MonoBehaviour
 		{
 			return;
 		}
+		if (Chaos.FirstPerson.value) return;
+
 		Vector3 normalized = new Vector3(this.target.forward.x, 0f, this.target.forward.z).normalized;
 		Vector3 a = new Vector3(this.targetRb.velocity.x, 0f, this.targetRb.velocity.z).normalized;
 		if ((this.targetCar.speed < 5f && this.targetCar.speed > -15f) || SaveState.Instance.cameraMode == 1)
@@ -56,8 +58,8 @@ public class CameraController : MonoBehaviour
 		}
 	}
 
-	// Token: 0x06000021 RID: 33 RVA: 0x00002982 File Offset: 0x00000B82
-	public void OffsetCamera(Vector3 offset)
+    // Token: 0x06000021 RID: 33 RVA: 0x00002982 File Offset: 0x00000B82
+    public void OffsetCamera(Vector3 offset)
 	{
 		if (!this.readyToOffset)
 		{

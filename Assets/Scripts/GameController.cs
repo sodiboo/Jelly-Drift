@@ -75,24 +75,6 @@ public class GameController : MonoBehaviour
 		if (pressed && !Pause.Instance.paused) Pause.Instance.TogglePause();
     }
 
-	// Token: 0x06000095 RID: 149 RVA: 0x00005348 File Offset: 0x00003548
-	private void PlayerInput()
-	{
-		if (base.IsInvoking("ShowFinishScreen"))
-		{
-			if (Input.GetButtonDown("Cancel"))
-			{
-				base.CancelInvoke("ShowFinishScreen");
-				this.ShowFinishScreen();
-			}
-			return;
-		}
-		if (Input.GetButtonDown("Cancel") && !Pause.Instance.paused)
-		{
-			Pause.Instance.TogglePause();
-		}
-	}
-
     // Token: 0x06000096 RID: 150 RVA: 0x000053A4 File Offset: 0x000035A4
     public void RestartGame()
 	{

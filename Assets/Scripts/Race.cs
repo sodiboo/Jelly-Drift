@@ -14,13 +14,17 @@ public class Race : MonoBehaviour
 	{
 		if (GameState.Instance.gamemode != Gamemode.Race)
 		{
+			ChaosEffect.HasEnemy = false;
+			ChaosEffect.enemy = null;
 			UnityEngine.Object.Destroy(this);
 			return;
 		}
 		this.gameController = base.gameObject.GetComponent<GameController>();
 		Transform startPos = this.gameController.startPos;
 		this.enemyCar = UnityEngine.Object.Instantiate<GameObject>(this.enemyCarPrefab, startPos.position + startPos.forward * 10f, startPos.rotation);
-		this.enemyCar.GetComponent<CarAI>().SetPath(this.gameController.path);
+		ChaosEffect.HasEnemy = true;
+		ChaosEffect.enemy = this.enemyCar.GetComponent<CarAI>();
+		ChaosEffect.enemy.SetPath(this.gameController.path);
 	}
 
 	// Token: 0x0600014F RID: 335 RVA: 0x000078FE File Offset: 0x00005AFE

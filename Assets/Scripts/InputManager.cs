@@ -16,8 +16,8 @@ public class InputManager : MonoBehaviour
         Instance = this;
         global = inputs.FindActionMap("Global");
         global.Enable();
-        Assign(global.FindAction("Pause"), ctx => { if (ctx.ReadValueAsButton()) pause(); });
-        Assign(global.FindAction("Debug"), ctx => { if (ctx.ReadValueAsButton()) debug(); });
+        Assign(global.FindAction("Pause"), ctx => { if (ctx.ReadValueAsButton()) pause?.Invoke(); });
+        Assign(global.FindAction("Debug"), ctx => { if (ctx.ReadValueAsButton()) debug?.Invoke(); });
         Assign(global.FindAction("Unlock"), ctx =>
         {
             if (!ctx.ReadValueAsButton()) return;
@@ -74,18 +74,18 @@ public class InputManager : MonoBehaviour
     {
         Assign(actionMaps[layout].FindAction("Throttle"), ctx => {
             var value = ctx.ReadValue<float>();
-            if (ChaosController.Instance.FuckyWuckyControlsUwU && value == 0f) return;
-            throttle(value);
+            if (Chaos.FuckyWuckyControlsUwU.Instance != null && value == 0f) return;
+            throttle?.Invoke(value);
         });
         Assign(actionMaps[layout].FindAction("Steering"), ctx => {
             var value = ctx.ReadValue<float>();
-            if (ChaosController.Instance.FuckyWuckyControlsUwU && value == 0f) return;
-            steering(value);
+            if (Chaos.FuckyWuckyControlsUwU.Instance != null && value == 0f) return;
+            steering?.Invoke(value);
         });
         Assign(actionMaps[layout].FindAction("Break"), ctx => {
             var value = ctx.ReadValueAsButton();
-            if (ChaosController.Instance.FuckyWuckyControlsUwU && !value) return;
-            breaking(value);
+            if (Chaos.FuckyWuckyControlsUwU.Instance != null && !value) return;
+            breaking?.Invoke(value);
         });
     }
 

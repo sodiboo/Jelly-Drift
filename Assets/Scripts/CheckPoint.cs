@@ -18,7 +18,7 @@ public class CheckPoint : MonoBehaviour
 	// Token: 0x06000069 RID: 105 RVA: 0x00004448 File Offset: 0x00002648
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.layer == LayerMask.NameToLayer("Car"))
+		if ((other.gameObject.layer & (LayerMask.NameToLayer("Car") | LayerMask.NameToLayer("Ghost"))) == other.gameObject.layer)
 		{
 			CheckpointUser component = other.gameObject.transform.root.GetComponent<CheckpointUser>();
 			if (component)

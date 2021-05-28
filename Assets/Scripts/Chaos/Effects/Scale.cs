@@ -1,0 +1,64 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Chaos
+{
+    [ConflictsWith(typeof(Scale))]
+    public abstract class Scale : ChaosEffect
+    {
+        public static float value = 1f; // Car.Steering also scales in method body according to this value
+        protected abstract float multiplier { get; }
+        private void OnEnable()
+        {
+            car.transform.localScale *= multiplier;
+            car.suspensionLength *= multiplier;
+            car.rb.mass *= multiplier;
+            car.engineForce *= multiplier;
+            car.restHeight *= multiplier;
+            foreach (var suspension in car.wheelPositions)
+            {
+                suspension.restLength *= multiplier;
+                suspension.springTravel *= multiplier;
+            }
+            value = multiplier;
+        }
+
+        private void OnDisable()
+        {
+            car.transform.localScale /= multiplier;
+            car.suspensionLength /= multiplier;
+            car.rb.mass /= multiplier;
+            car.engineForce /= multiplier;
+            car.restHeight /= multiplier;
+            foreach (var suspension in car.wheelPositions)
+            {
+                suspension.restLength /= multiplier;
+                suspension.springTravel /= multiplier;
+            }
+            value = 1f;
+        }
+
+        //[Effect("chaos.scale.huge", "Bigger")] // Thanks to WoodComet for the name and idea
+        //public class Bigger : Scale
+        //{
+        //    protected override float multiplier => 10f;
+        //}
+
+        [Effect("chaos.scale.big", "Big")]
+        public class Big : Scale
+        {
+            float _multiplier;
+            private void Awake() => _multiplier = Random.Range(1.2f, 3f);
+            protected override float multiplier => _multiplier;
+        }
+
+        [Effect("chaos.scale.small", "Tiny")]
+        public class Tiny : Scale
+        {
+            float _multiplier;
+            private void Awake() => _multiplier = Random.Range(0.4f, 0.8f);
+            protected override float multiplier => _multiplier;
+        }
+    }
+}
