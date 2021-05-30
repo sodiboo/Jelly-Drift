@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 namespace Chaos
 {
 #if MOBILE
-    [Effect("Portrait Mode")]
+    [Effect("chaos.view.portrait", "Portrait Mode")]
 #endif
     class VerticalMobile : ChaosEffect
     {
