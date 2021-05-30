@@ -98,7 +98,7 @@ public class InitializeAds : MonoBehaviour
 	// Token: 0x040000DB RID: 219
 	public int menuCount;
 
-	[Effect("null", "Oh, you don't know what Karlson is?")] // Shhh, this doesn't exist
+	[Effect("null", "Oh, you don't know what Karlson is?"), Impulse, HideInCheatGUI] // Shhh, this doesn't exist
 	public class Karlson : ChaosEffect
     {
         private void Awake()

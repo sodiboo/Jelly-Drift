@@ -24,6 +24,10 @@ namespace Chaos
         {
             Destroy(car.GetComponent<CarAI>());
             InputManager.Instance.layout = InputManager.Layout.Car;
+            var map = InputManager.Instance.actionMaps[InputManager.Layout.Car];
+            InputManager.Instance.throttle?.Invoke(map.FindAction("Throttle").ReadValue<float>());
+            InputManager.Instance.steering?.Invoke(map.FindAction("Steering").ReadValue<float>());
+            InputManager.Instance.breaking?.Invoke(map.FindAction("Break").triggered);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.forces.kickflip", "Kickflip")]
+    [Effect("chaos.forces.kickflip", "Kickflip"), Impulse]
     public class Kickflip : ChaosEffect
     {
         private void Start()

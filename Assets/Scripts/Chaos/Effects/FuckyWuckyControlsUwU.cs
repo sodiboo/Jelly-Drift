@@ -16,6 +16,11 @@ namespace Chaos
         private void OnDestroy()
         {
             Instance = null;
+            // also refresh input values so it doesn't stay cursed
+            var map = InputManager.Instance.actionMaps[InputManager.Layout.Car];
+            InputManager.Instance.throttle?.Invoke(map.FindAction("Throttle").ReadValue<float>());
+            InputManager.Instance.steering?.Invoke(map.FindAction("Steering").ReadValue<float>());
+            InputManager.Instance.breaking?.Invoke(map.FindAction("Break").triggered);
         }
     }
 }

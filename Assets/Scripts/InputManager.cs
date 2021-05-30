@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    Dictionary<Layout, InputActionMap> actionMaps = new Dictionary<Layout, InputActionMap>();
+    public Dictionary<Layout, InputActionMap> actionMaps = new Dictionary<Layout, InputActionMap>();
     public static InputManager Instance;
     public InputActionAsset inputs;
     InputActionMap global;

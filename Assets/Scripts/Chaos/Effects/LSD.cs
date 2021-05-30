@@ -25,8 +25,8 @@ namespace Chaos
 
         private void Update()
         {
-            hue.value += Time.deltaTime * 72f; // returns to 0 after 5 seconds, making the disabling seamless
-            if (hue.value > 180f) hue.value -= 360f;
+            hue.value -= Time.deltaTime * 72f; // returns to 0 after 5 seconds, making the disabling seamless
+            if (hue.value < -180f) hue.value += 360f;
         }
     }
 }

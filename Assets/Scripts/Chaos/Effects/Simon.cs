@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.simon", "Dani Says"), ConflictsWith(typeof(Punishment))]
+    [Effect("chaos.simon", "Dani Says"), ConflictsWith(typeof(Punishment)), HideInCheatGUI]
     public class Simon : ChaosEffect
     {
         private void OnEnable()
@@ -69,7 +69,7 @@ namespace Chaos
             }
         }
 
-        [Effect("chaos.simon.punishment", "Punishment")]
+        [Effect("chaos.simon.punishment", "Punishment"), HideInCheatGUI]
         public class Punishment : ChaosEffect
         {
             public static bool Valid() => false;

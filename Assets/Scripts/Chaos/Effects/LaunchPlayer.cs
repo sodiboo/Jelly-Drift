@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.forces.up", "Boing!")]
+    [Effect("chaos.forces.up", "Boing!"), Impulse]
     class LaunchPlayer : ChaosEffect
     {
         private void Start()

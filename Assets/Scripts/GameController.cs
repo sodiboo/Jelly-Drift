@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
 	// (set) Token: 0x06000090 RID: 144 RVA: 0x0000523A File Offset: 0x0000343A
 	public bool playing { get; set; }
 
+	InputAction action;
+
 	// Token: 0x06000091 RID: 145 RVA: 0x00005244 File Offset: 0x00003444
 	private void Awake()
 	{
@@ -30,13 +32,18 @@ public class GameController : MonoBehaviour
 		base.Invoke("StartRace", this.startTime);
 		this.currentCar = UnityEngine.Object.Instantiate<GameObject>(PrefabManager.Instance.cars[GameState.Instance.car], this.startPos.position, this.startPos.rotation);
 		this.currentCar.GetComponent<CarSkin>().SetSkin(GameState.Instance.skin);
-		var action = PrefabManager.Instance.inputs.FindActionMap("Menu").FindAction("Cancel");
+		action = PrefabManager.Instance.inputs.FindActionMap("Menu").FindAction("Cancel");
 		action.performed += Paused;
 		InputManager.Instance.layout = InputManager.Layout.None;
 	}
 
-	// Token: 0x06000092 RID: 146 RVA: 0x000052D4 File Offset: 0x000034D4
-	private void Start()
+    private void OnDestroy()
+    {
+		action.performed -= Paused;
+    }
+
+    // Token: 0x06000092 RID: 146 RVA: 0x000052D4 File Offset: 0x000034D4
+    private void Start()
 	{
 		AssignCar();
 		ChaosController.Instance.RegisterChaos();

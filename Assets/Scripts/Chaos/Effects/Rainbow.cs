@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Chaos
 {
@@ -8,6 +10,8 @@ namespace Chaos
     public class Rainbow : ChaosEffect
     {
         Material rainbowMat;
+        Material road;
+        Material ogRoad;
 
         private void OnEnable()
         {
@@ -31,6 +35,14 @@ namespace Chaos
             {
                 arcs.GetChild(i).GetComponent<Renderer>().materials = new Material[] { rainbowMat };
             }
+            var rend = WorldObjects.Instance.road.GetComponent<MeshRenderer>();
+            ogRoad = rend.material;
+            road = new Material(rend.material);
+            rend.material = road;
+            Color.RGBToHSV(road.color, out H, out S, out V);
+            if (S < 0.5f) S = 0.5f;
+            if (V < 0.5f) V = 0.5f;
+            road.color = Color.HSVToRGB(H, S, V);
         }
 
         public static bool Valid() => car.GetComponent<CarSkin>().skinsToChange.Length > 2;
@@ -41,6 +53,19 @@ namespace Chaos
             H += Time.deltaTime;
             H %= 1;
             rainbowMat.color = Color.HSVToRGB(H, S, V);
+            if (road != null)
+            {
+                Color.RGBToHSV(road.color, out H, out S, out V);
+                H -= Time.deltaTime;
+                H += 1;
+                H %= 1;
+                road.color = Color.HSVToRGB(H, S, V);
+            }
+        }
+
+        private void OnDisable()
+        {
+            WorldObjects.Instance.road.GetComponent<MeshRenderer>().material = ogRoad;
         }
     }
 }

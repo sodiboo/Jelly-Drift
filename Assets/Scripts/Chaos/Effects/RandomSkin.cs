@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.random.skin", "Random Skin")]
+    [Effect("chaos.random.skin", "Random Skin"), Impulse]
     public class RandomSkin : ChaosEffect
     {
         private void Awake()

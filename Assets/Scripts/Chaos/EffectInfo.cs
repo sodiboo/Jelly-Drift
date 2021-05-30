@@ -12,6 +12,8 @@ public class EffectInfo
     public readonly Type type;
     public EffectInfo[] conflicts => _computedConflicts = _computedConflicts ?? ComputeConflicts().ToArray();
     public bool valid => (bool) (_valid?.Invoke(null, null) ?? true);
+    public bool impulse;
+    public bool noCheat;
     public EffectInfo(EffectAttribute attribute, Type type)
     {
         id = attribute.Id;
@@ -23,6 +25,8 @@ public class EffectInfo
         _valid = type.GetMethod("Valid", BindingFlags.Static | BindingFlags.Public, null, Type.EmptyTypes, null);
         var conflicts = type.GetCustomAttribute<ConflictsWithAttribute>();
         if (conflicts != null) _conflicts = conflicts.Conflicts;
+        impulse = type.GetCustomAttribute<ImpulseAttribute>() != null;
+        noCheat = type.GetCustomAttribute<HideInCheatGUIAttribute>() != null;
     }
 
     private readonly MethodInfo _valid;

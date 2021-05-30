@@ -287,8 +287,8 @@ public class Car : MonoBehaviour
 		if (rb.position.y > 100f) rb.drag = 0.2f;
 	}
 
-	// Token: 0x0400003A RID: 58
-	[Header("Misc")]
+    // Token: 0x0400003A RID: 58
+    [Header("Misc")]
 	public Transform centerOfMass;
 
 	// Token: 0x0400003B RID: 59

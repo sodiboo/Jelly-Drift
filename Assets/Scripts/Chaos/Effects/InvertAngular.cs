@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.forces.invert_angular", "Go left! No, go right, go right!")] // Quote from Wheatley
+    [Effect("chaos.forces.invert_angular", "Go left! No, go right, go right!"), Impulse] // Quote from Wheatley
     class InvertAngular : ChaosEffect
     {
         private void OnEnable()

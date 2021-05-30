@@ -7,7 +7,7 @@ namespace Chaos
     // fuck you these don't share an implementation but they're basically the same thing so group in one file
     public sealed class Teleport
     {
-        [Effect("chaos.teleportai", "(teleports behind you)")] // Thanks to Reclaimer64 for the name
+        [Effect("chaos.teleportai", "(teleports behind you)"), Impulse] // Thanks to Reclaimer64 for the name
         public class TeleportAI : ChaosEffect
         {
             public static bool Valid() => HasEnemy;
@@ -18,7 +18,7 @@ namespace Chaos
             }
         }
 
-        [Effect("chaos.teleportplayer", "I wonder where the AI is")]
+        [Effect("chaos.teleportplayer", "I wonder where the AI is"), Impulse]
         public class TeleportToAI : ChaosEffect
         {
             public static bool Valid() => HasEnemy;
