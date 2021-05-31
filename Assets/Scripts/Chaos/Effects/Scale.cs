@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [ConflictsWith(typeof(Scale))]
+    [EffectGroup("chaos.scale", "Scale")]
     public abstract class Scale : ChaosEffect
     {
         public static float value = 1f; // Car.Steering also scales in method body according to this value
@@ -38,12 +38,6 @@ namespace Chaos
             }
             value = 1f;
         }
-
-        //[Effect("chaos.scale.huge", "Bigger")] // Thanks to WoodComet for the name and idea
-        //public class Bigger : Scale
-        //{
-        //    protected override float multiplier => 10f;
-        //}
 
         [Effect("chaos.scale.big", "Big")]
         public class Big : Scale

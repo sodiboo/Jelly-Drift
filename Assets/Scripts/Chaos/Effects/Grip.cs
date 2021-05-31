@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
+    [EffectGroup("chaos.grip", "Grip")]
     public abstract class Grip : ChaosEffect
     {
         protected abstract float multiplier { get; }
@@ -19,13 +20,13 @@ namespace Chaos
             car.driftThreshold = og;
         }
 
-        [Effect("chaos.grip.high", "No drifting"), ConflictsWith(typeof(Grip))]
+        [Effect("chaos.grip.high", "No drifting")]
         public class High : Grip
         {
             protected override float multiplier => 10f;
         }
 
-        [Effect("chaos.grip.low", "Smooth Wheels"), ConflictsWith(typeof(Grip))]
+        [Effect("chaos.grip.low", "Smooth Wheels")]
         public class Low : Grip
         {
             protected override float multiplier => 0f;

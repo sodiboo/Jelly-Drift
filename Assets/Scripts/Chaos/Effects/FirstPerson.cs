@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.firstperson", "First Person"), ConflictsWith(typeof(IsoView), typeof(Multiplayer))]
+    [Effect("chaos.firstperson", "First Person"), ConflictsWith(typeof(IsoView))]
     public class FirstPerson : ChaosEffect
     {
         public static bool value; // checked in CameraController.Update to prevent regular camera motion

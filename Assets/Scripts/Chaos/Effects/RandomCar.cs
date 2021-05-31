@@ -6,6 +6,9 @@ using UnityEngine;
 namespace Chaos
 {
     [Effect("chaos.random.car", "Random Car"), Impulse]
+    [Reload.OnEnable(typeof(FirstPerson), typeof(Speed), typeof(Scale), typeof(Grip),
+        typeof(FuckyWuckyCollisionUwU), typeof(FuckyWuckyRenderUwU), typeof(DisableShit.Car),
+        typeof(CustomGravity), typeof(Autopilot), typeof(RearSteer), typeof(Rainbow.Car), typeof(Ghost))]
     public class RandomCar : ChaosEffect
     {
         private void Awake()
@@ -25,12 +28,7 @@ namespace Chaos
             newCar.throttle = car.throttle;
             newCar.steering = car.steering;
             newCar.breaking = car.breaking;
-            if (CameraController.Instance.transform.parent == car.transform) // don't destroy camera
-            {
-                CameraController.Instance.transform.parent = null;
-                Destroy(car.gameObject);
-                CameraController.Instance.transform.parent = newCar.transform;
-            } else Destroy(car.gameObject);
+            Destroy(car.gameObject);
 
             GameController.Instance.currentCar = newCar.gameObject;
             GameController.Instance.AssignCar();

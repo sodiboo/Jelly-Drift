@@ -6,7 +6,7 @@ using UnityEngine.Rendering.PostProcessing;
 namespace Chaos
 {
     [Effect("chaos.lsd", "LSD")]
-    class LSD : ChaosEffect
+    public class LSD : ChaosEffect
     {
         FloatParameter hue;
         private void Awake()

@@ -122,7 +122,6 @@ public class MapCycle : ItemCycle
 	public void SaveMap()
 	{
 		GameState.Instance.map = base.selected;
-		GameState.Instance.gamemode = this.gamemode;
 	}
 
 	// Token: 0x040000E5 RID: 229

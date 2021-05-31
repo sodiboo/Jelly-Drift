@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [ConflictsWith(typeof(Speed))]
+    [EffectGroup("chaos.speed", "Speed")]
     public abstract class Speed : ChaosEffect
     {
         protected abstract float multiplier { get; }
@@ -18,7 +18,7 @@ namespace Chaos
             car.engineForce /= multiplier;
         }
 
-        [Effect("chaos.speed.fast", "Sanik")]
+        [Effect("chaos.speed.fast", "Sanik"), ConflictsWith(typeof(Grip))]
         public class Fast : Speed
         {
             float _multiplier;

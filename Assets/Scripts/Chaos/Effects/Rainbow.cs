@@ -2,70 +2,107 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Chaos
 {
-    [Effect("chaos.gay", "Rainbow")] // Thanks to Akuma73 for the idea
-    public class Rainbow : ChaosEffect
+    // Thanks to Akuma73 for the idea
+    [EffectGroup("chaos.gay", "Rainbow")]
+    public abstract class Rainbow : ChaosEffect
     {
-        Material rainbowMat;
-        Material road;
-        Material ogRoad;
+        protected Material rainbowMat;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
-            var skin = car.GetComponent<CarSkin>();
-            rainbowMat = new Material(skin.materials[GameState.Instance.skin]);
-            for (var i = 0; i < skin.skinsToChange[0].myArray.Length; i++)
-            {
-                var renderer = skin.renderers[skin.skinsToChange[0].myArray[i++]];
-                var newMats = new Material[renderer.materials.Length];
-                renderer.materials.CopyTo(newMats, 0);
-                newMats[skin.skinsToChange[0].myArray[i++]] = rainbowMat;
-                renderer.materials = newMats;
-            }
-
             Color.RGBToHSV(rainbowMat.color, out var H, out var S, out var V);
             if (S < 0.5f) S = 0.5f;
             if (V < 0.5f) V = 0.5f;
             rainbowMat.color = Color.HSVToRGB(H, S, V);
-            var arcs = GameObject.Find("/CheckpointArcs").transform;
-            for (var i = 0; i < arcs.childCount; i++)
-            {
-                arcs.GetChild(i).GetComponent<Renderer>().materials = new Material[] { rainbowMat };
-            }
-            var rend = WorldObjects.Instance.road.GetComponent<MeshRenderer>();
-            ogRoad = rend.material;
-            road = new Material(rend.material);
-            rend.material = road;
-            Color.RGBToHSV(road.color, out H, out S, out V);
-            if (S < 0.5f) S = 0.5f;
-            if (V < 0.5f) V = 0.5f;
-            road.color = Color.HSVToRGB(H, S, V);
         }
 
-        public static bool Valid() => car.GetComponent<CarSkin>().skinsToChange.Length > 2;
 
-        private void Update()
+        protected virtual void Update()
         {
             Color.RGBToHSV(rainbowMat.color, out var H, out var S, out var V);
             H += Time.deltaTime;
             H %= 1;
             rainbowMat.color = Color.HSVToRGB(H, S, V);
-            if (road != null)
+        }
+
+        [ChildEffect("chaos.gay.car", "Star Power")]
+        public class Car : Rainbow
+        {
+            protected override void OnEnable()
             {
-                Color.RGBToHSV(road.color, out H, out S, out V);
-                H -= Time.deltaTime;
-                H += 1;
-                H %= 1;
-                road.color = Color.HSVToRGB(H, S, V);
+                var skin = car.GetComponent<CarSkin>();
+                rainbowMat = new Material(skin.materials[GameState.Instance.skin]);
+                for (var i = 0; i < skin.skinsToChange[0].myArray.Length; i++)
+                {
+                    var renderer = skin.renderers[skin.skinsToChange[0].myArray[i++]];
+                    var newMats = new Material[renderer.materials.Length];
+                    renderer.materials.CopyTo(newMats, 0);
+                    newMats[skin.skinsToChange[0].myArray[i++]] = rainbowMat;
+                    renderer.materials = newMats;
+                }
+                base.OnEnable();
+            }
+            public static bool Valid() => car.GetComponent<CarSkin>().skinsToChange.Length > 2;
+        }
+
+        [ChildEffect("chaos.gay.checkpoint", "Actual Rainbows")]
+        public class Checkpoints : Rainbow
+        {
+            protected override void OnEnable()
+            {
+                var arcs = GameObject.Find("/CheckpointArcs").transform;
+                rainbowMat = new Material(arcs.GetChild(0).GetComponent<Renderer>().material);
+                for (var i = 0; i < arcs.childCount; i++)
+                {
+                    arcs.GetChild(i).GetComponent<Renderer>().material = rainbowMat;
+                }
+                base.OnEnable();
             }
         }
 
-        private void OnDisable()
+        [ChildEffect("chaos.gay.road", "Rainbow Road")]
+        public class Road : Rainbow {
+            Renderer rend;
+            Material ogMat;
+            protected override void OnEnable()
+            {
+                rend = WorldObjects.Instance.road.GetComponent<Renderer>();
+                ogMat = rend.material;
+                rainbowMat = new Material(ogMat);
+                rend.material = rainbowMat;
+                base.OnEnable();
+            }
+
+            private void OnDisable()
+            {
+                rend.material = ogMat;
+            }
+        }
+
+        [ChildEffect("chaos.gay.sun", "Disco Party"), ConflictsWith(typeof(DisableShit.Sun))]
+        public class Sun : Rainbow
         {
-            WorldObjects.Instance.road.GetComponent<MeshRenderer>().material = ogRoad;
+            Color ogColor;
+            protected override void OnEnable()
+            {
+                ogColor = WorldObjects.Instance.sun.color;
+            }
+
+            protected override void Update()
+            {
+                Color.RGBToHSV(WorldObjects.Instance.sun.color, out var H, out var S, out var V);
+                H += Time.deltaTime * 0.2f;
+                H %= 1;
+                WorldObjects.Instance.sun.color = Color.HSVToRGB(H, S, V);
+            }
+
+            private void OnDisable()
+            {
+                WorldObjects.Instance.sun.color = ogColor;
+            }
         }
     }
 }

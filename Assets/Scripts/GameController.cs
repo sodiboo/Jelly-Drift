@@ -64,7 +64,7 @@ public class GameController : MonoBehaviour
 		Timer.Instance.StartTimer();
 		currentCar.AddComponent<InputListener>().car = currentCar.GetComponent<Car>();
 		InputManager.Instance.layout = InputManager.Layout.Car;
-		if (SaveState.Instance.chaos == 1) ChaosController.Instance.StartChaos();
+		if (GameState.Instance.gamemode == Gamemode.Chaos) ChaosController.Instance.StartChaos();
 	}
 
 	void Paused(InputAction.CallbackContext context)

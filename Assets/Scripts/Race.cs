@@ -12,7 +12,7 @@ public class Race : MonoBehaviour
 	// Token: 0x0600014E RID: 334 RVA: 0x00007874 File Offset: 0x00005A74
 	private void Awake()
 	{
-		if (GameState.Instance.gamemode != Gamemode.Race)
+		if (GameState.Instance.gamemode == Gamemode.TimeTrial)
 		{
 			ChaosEffect.HasEnemy = false;
 			ChaosEffect.enemy = null;

@@ -6,6 +6,7 @@ using System.Reflection;
 using UnityEngine;
 using TMPro;
 using Random = UnityEngine.Random;
+using RapidGUI;
 
 public class ChaosController : MonoBehaviour
 {
@@ -30,8 +31,27 @@ public class ChaosController : MonoBehaviour
         {
             if (type.IsClass && typeof(ChaosEffect).IsAssignableFrom(type))
             {
-                var attribute = type.GetCustomAttribute<EffectAttribute>();
-                if (attribute != null) yield return effectMap[type] = new EffectInfo(attribute, type);
+                var effect = type.GetCustomAttribute<EffectAttribute>();
+                if (effect != null)
+                {
+                    yield return effectMap[type] = new EffectInfo(effect, type);
+                    continue;
+                }
+
+                var group = type.GetCustomAttribute<EffectGroupAttribute>();
+                if (group != null)
+                {
+                    yield return effectMap[type] = new EffectInfo(group, type);
+                    continue;
+                }
+
+                var child = type.GetCustomAttribute<ChildEffectAttribute>();
+                if (child != null)
+                {
+                    var info = new EffectInfo(child, type);
+                    yield return effectMap[type] = info;
+                    continue;
+                }
             }
         }
     }
@@ -59,6 +79,10 @@ public class ChaosController : MonoBehaviour
             LoadEffectsFrom(Assembly.GetExecutingAssembly());
         }
         catch (InvalidOperationException) { }
+        foreach (var effect in effects)
+        {
+            effect.Setup();
+        }
     }
 
     private void OnDestroy()
@@ -82,6 +106,7 @@ public class ChaosController : MonoBehaviour
     #region Chaos
 
     public EffectInfo currentEffect { get; private set; }
+    List<ChaosEffect> activeChildren;
     ChaosEffect activeEffect;
     public EffectInfo riggedEffect { get; set; }
     public bool runNextCycle;
@@ -95,8 +120,20 @@ public class ChaosController : MonoBehaviour
                 var valid = new List<EffectInfo>();
                 foreach (var effect in effects)
                 {
+                    if (effect.isChild) continue;
                     if (effect == currentEffect) continue;
-                    if (effect.valid) valid.Add(effect);
+                    if (effect.valid)
+                    {
+                        if (effect.effectType != EffectInfo.EffectType.ExclusiveGroup)
+                        {
+                            valid.Add(effect);
+                            continue;
+                        }
+                        else
+                        {
+                            foreach (var child in effect.children) valid.Add(child);
+                        }
+                    }
                 }
                 currentEffect = valid[Random.Range(0, valid.Count)];
             }
@@ -107,7 +144,19 @@ public class ChaosController : MonoBehaviour
             }
 
             text.text = currentEffect.name;
-            activeEffect = (ChaosEffect)gameObject.AddComponent(currentEffect.type);
+            if (currentEffect.effectType == EffectInfo.EffectType.MultiGroup)
+            {
+                activeChildren = new List<ChaosEffect>();
+                foreach (var child in currentEffect.children)
+                {
+                    if (child.valid) activeChildren.Add((ChaosEffect)gameObject.AddComponent(child.type));
+                }
+            }
+            else
+            {
+                if (currentEffect.isChild || currentEffect.isGroup) Debug.LogWarning($"{currentEffect.id} is not independent but should be");
+                activeEffect = (ChaosEffect)gameObject.AddComponent(currentEffect.type);
+            }
 
             yield return new WaitForSeconds(5f);
 
@@ -115,8 +164,13 @@ public class ChaosController : MonoBehaviour
             {
                 Destroy(activeEffect);
                 activeEffect = null;
-                text.text = "";
             }
+            if (activeChildren != null)
+            {
+                foreach (var child in activeChildren) Destroy(child);
+                activeChildren = null;
+            }
+            text.text = "";
         }
 
         chaosCoroutine = null;
@@ -146,20 +200,7 @@ public class ChaosController : MonoBehaviour
 
     void EnableCheats()
     {
-        if (!cheatMode)
-        {
-            foreach (var effect in effects) if (!effect.noCheat) cheatEffectsList.Add(effect);
-            cheatEffectsList.Sort((a, b) =>
-            {
-                if (a.impulse != b.impulse)
-                {
-                    return a.impulse ? -1 : 1;
-                }
-                return StringComparer.OrdinalIgnoreCase.Compare(a.name, b.name);
-            });
-            CalculateSpacing();
-            text.alpha = 0f;
-        }
+        if (!cheatMode) InitCheats();
         if (chaosCoroutine != null)
         {
             StopChaos();
@@ -174,77 +215,206 @@ public class ChaosController : MonoBehaviour
 
     bool cheatMode;
     bool useCheats;
-    Vector2 scrollPosition;
 
     Dictionary<EffectInfo, ChaosEffect> cheatEffects = new Dictionary<EffectInfo, ChaosEffect>();
     List<EffectInfo> cheatEffectsList = new List<EffectInfo>();
-    float width;
-    float height;
-    float totalHeight;
 
-    private void CalculateSpacing()
+    Dictionary<EffectInfo, ChaosEffect> activeCheats;
+
+    private void RemoveEffect(EffectInfo info)
     {
-        var maxSize = Vector2.zero;
+        if (!activeCheats.TryGetValue(info, out var effect)) return;
+
+        foreach (var toReload in info.reloadOnDisable)
+        {
+            if (activeCheats.TryGetValue(toReload, out var reload)) reload.enabled = false;
+        }
+
+        Destroy(effect);
+        activeCheats.Remove(info);
+
+        foreach (var toReload in info.reloadOnDisable)
+        {
+            if (activeCheats.TryGetValue(toReload, out var reload)) reload.enabled = true;
+        }
+    }
+
+    private void AddEffect(EffectInfo info)
+    {
+        if (activeCheats.ContainsKey(info)) return;
+        foreach (var toReload in info.reloadOnEnable)
+        {
+            if (activeCheats.TryGetValue(toReload, out var reload)) reload.enabled = false;
+        }
+
+        activeCheats[info] = (ChaosEffect)gameObject.AddComponent(info.type);
+
+        foreach (var toReload in info.reloadOnEnable)
+        {
+            if (activeCheats.TryGetValue(toReload, out var reload)) reload.enabled = true;
+        }
+    }
+
+    float maxWidth = 0f;
+    float indent = 32f;
+
+    private void InitCheats()
+    {
+        windowRect = new Rect(20, 20, 300, Screen.height - 40);
+        activeCheats = new Dictionary<EffectInfo, ChaosEffect>();
         foreach (var effect in effects)
         {
-            maxSize = Vector2.Max(maxSize, GUIStyle.none.CalcSize(new GUIContent(effect.name)));
+            if (!effect.noCheat && !effect.isChild)
+            {
+                if (effect.splitCheats)
+                {
+                    foreach (var child in effect.children) if (!child.noCheat) cheatEffectsList.Add(child);
+                }
+                else cheatEffectsList.Add(effect);
+            }
         }
-        totalHeight = (maxSize.y + cheatSpacing + cheatPadding) * cheatEffectsList.Count - cheatSpacing;
-        height = maxSize.y + cheatPadding;
-        width = maxSize.x + height; // checkbox makes it slightly wider
+
+        cheatEffectsList.Sort((a, b) =>
+            {
+                if (a.impulse != b.impulse)
+                {
+                    return a.impulse ? -1 : 1;
+                }
+                if (a.isGroup != b.isGroup)
+                {
+                    return a.isGroup ? -1 : 1;
+                }
+                return StringComparer.OrdinalIgnoreCase.Compare(a.name, b.name);
+            });
+        text.alpha = 0f;
     }
+
+    Rect windowRect;
+    Vector2 scrollPos;
 
     private void OnGUI()
     {
-        if (useCheats && !Pause.Instance.paused)
+        if (!useCheats) return;
+        if (maxWidth == 0f)
         {
-#if UNITY_EDITOR
-            CalculateSpacing(); // update spacing in realtime in editor, no need in release for performance reasons
-#endif
-            scrollPosition = GUI.BeginScrollView(new Rect(10, 10, Mathf.Min(width, Screen.width - 40) + 20, Mathf.Min(totalHeight, Screen.height - 40) + 20), scrollPosition, new Rect(0, 0, width, totalHeight));
-
-            for (var i = 0; i < cheatEffectsList.Count; i++)
+            foreach (var effect in cheatEffectsList)
             {
-                var effect = cheatEffectsList[i];
-                if (effect.conflicts.Any(cheatEffects.ContainsKey)) continue;
-                var y = (height + cheatSpacing) * i;
-                if (effect.impulse)
+                if (!effect.isGroup)
                 {
-                    if (GUI.Button(new Rect(0, y, width, height), effect.name))
+                    maxWidth = Mathf.Max(GUI.skin.toggle.CalcSize(new GUIContent(effect.name)).x + GUI.skin.toggle.fontSize, maxWidth);
+                }
+                else if (effect.effectType == EffectInfo.EffectType.MultiGroup)
+                {
+                    maxWidth = Mathf.Max(GUI.skin.toggle.CalcSize(new GUIContent(effect.name)).x + GUI.skin.toggle.fontSize, maxWidth);
+                    foreach (var child in effect.children)
                     {
-                        Destroy(gameObject.AddComponent(effect.type), 0.5f);
+                        maxWidth = Mathf.Max(GUI.skin.toggle.CalcSize(new GUIContent(effect.name)).x + GUI.skin.toggle.fontSize + indent, maxWidth);
                     }
                 }
                 else
                 {
-                    if (GUI.Toggle(new Rect(0, y, width, height), cheatEffects.ContainsKey(effect), effect.name))
+                    maxWidth = Mathf.Max(GUI.skin.label.CalcSize(new GUIContent(effect.name)).x, maxWidth);
+                    foreach (var child in effect.children)
                     {
-                        if (!cheatEffects.ContainsKey(effect))
+                        maxWidth = Mathf.Max(GUI.skin.toggle.CalcSize(new GUIContent(effect.name)).x + GUI.skin.toggle.fontSize + indent, maxWidth);
+                    }
+                }
+            }
+        }
+
+
+        windowRect = RGUI.ResizableWindow(GetHashCode(), windowRect, _ =>
+        {
+            GUI.DragWindow(new Rect(0, 0, windowRect.width, 20));
+            using (var scrollView = new GUILayout.ScrollViewScope(scrollPos, GUIStyle.none, GUIStyle.none))
+            {
+                scrollPos = scrollView.scrollPosition;
+                foreach (var effect in cheatEffectsList)
+                {
+                    if (effect.isGroup)
+                    {
+                        using (new RGUI.EnabledScope(!effect.children.All(child => child.conflicts.Any(activeCheats.ContainsKey))))
                         {
-                            foreach (var conflict in effect.conflicts)
+                            if (effect.effectType == EffectInfo.EffectType.MultiGroup)
                             {
-                                if (cheatEffects.TryGetValue(conflict, out var component))
+                                var all = effect.children.Any(activeCheats.ContainsKey);
+                                if (all != GUILayout.Toggle(all, effect.name))
                                 {
-                                    Destroy(component);
-                                    cheatEffects.Remove(conflict);
+                                    if (all)
+                                    {
+                                        foreach (var child in effect.children) RemoveEffect(child);
+                                    }
+                                    else
+                                    {
+                                        foreach (var child in effect.children) AddEffect(child);
+                                    }
                                 }
                             }
-                            cheatEffects[effect] = (ChaosEffect)gameObject.AddComponent(effect.type);
+                            else GUILayout.Label(effect.name);
+                            using (new RGUI.IndentScope(indent))
+                            {
+
+                                foreach (var child in effect.children)
+                                {
+                                    using (new RGUI.EnabledScope(!child.conflicts.Any(activeCheats.ContainsKey)))
+                                    {
+                                        var active = activeCheats.ContainsKey(child);
+                                        if (active != GUILayout.Toggle(active, child.name))
+                                        {
+                                            if (active)
+                                            {
+                                                RemoveEffect(child);
+                                            }
+                                            else
+                                            {
+                                                if (effect.effectType == EffectInfo.EffectType.ExclusiveGroup)
+                                                {
+                                                    foreach (var otherChild in effect.children) RemoveEffect(otherChild);
+                                                }
+                                                AddEffect(child);
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    else if (effect.impulse)
+                    {
+                        using (new RGUI.EnabledScope(!effect.conflicts.Any(activeCheats.ContainsKey)))
+                        {
+                            if (GUILayout.Button(effect.name))
+                            {
+                                AddEffect(effect);
+                            }
+                            else
+                            {
+                                RemoveEffect(effect);
+                            }
                         }
                     }
                     else
                     {
-                        if (cheatEffects.ContainsKey(effect))
+                        using (new RGUI.EnabledScope(!effect.conflicts.Any(activeCheats.ContainsKey)))
                         {
-                            Destroy(cheatEffects[effect]);
-                            cheatEffects.Remove(effect);
+                            var active = activeCheats.ContainsKey(effect);
+                            if (active != GUILayout.Toggle(active, effect.name))
+                            {
+                                if (active)
+                                {
+                                    RemoveEffect(effect);
+                                }
+                                else
+                                {
+                                    AddEffect(effect);
+                                }
+                            }
                         }
                     }
                 }
             }
-
-            GUI.EndScrollView();
-        }
+        }, "Chaos Cheats", null, GUILayout.MinWidth(maxWidth + GUI.skin.window.padding.horizontal * 2));
     }
 
     #endregion

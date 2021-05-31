@@ -44,9 +44,6 @@ public class SaveState : MonoBehaviour
 	// (set) Token: 0x06000135 RID: 309 RVA: 0x00007401 File Offset: 0x00005601
 	public int music { get; set; }
 
-	public int chaos { get; set; }
-	public int steam { get; set; }
-
 	// Token: 0x06000136 RID: 310 RVA: 0x0000740A File Offset: 0x0000560A
 	private void Awake()
 	{
@@ -80,7 +77,6 @@ public class SaveState : MonoBehaviour
 		this.muted = SaveManager.Instance.state.muted;
 		this.volume = SaveManager.Instance.state.volume;
 		this.music = SaveManager.Instance.state.music;
-		this.chaos = SaveManager.Instance.state.chaos;
 	}
 
 	// Token: 0x0400013E RID: 318

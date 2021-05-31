@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.knightbus", "Mind your head")] // Thanks to Dit0h for the name
+    [Effect("chaos.knightbus", "Mind your head"), ConflictsWith(typeof(DisableShit.Car))] // Thanks to Dit0h for the name
     public class FuckyWuckyRenderUwU : ChaosEffect
     {
         Vector3 og;
         Vector3 target;
         Transform victim;
-        private void Awake()
+
+        private void OnEnable()
         {
             victim = car.transform.GetChild(0);
             og = victim.localScale;

@@ -5,8 +5,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    // fuck you these effects don't share an implementation but they're similar so i want them in the same file
-    [ConflictsWith(typeof(Gravity), typeof(CustomGravity))] // but they do share conflicts!
+    [EffectGroup("chaos.gravity.custom", "Custom Gravity", SeparateCheats = true)]
     public abstract class CustomGravity : ChaosEffect
     {
         [Effect("chaos.gravity.blackhole", "Black Hole")] // Thanks to Akuma73 for the idea
@@ -52,13 +51,10 @@ namespace Chaos
         public class CheckpointMagnet : CustomGravity
         {
             CheckpointUser user;
-            private void Awake()
-            {
-                user = car.GetComponent<CheckpointUser>();
-            }
 
             private void OnEnable()
             {
+                user = car.GetComponent<CheckpointUser>();
                 car.rb.useGravity = false;
             }
 

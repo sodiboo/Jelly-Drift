@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [ConflictsWith(typeof(Gravity), typeof(CustomGravity))]
+    [EffectGroup("chaos.gravity", "Gravity"), ConflictsWith(typeof(CustomGravity))]
     public abstract class Gravity : ChaosEffect
     {
         protected abstract float multiplier { get; }

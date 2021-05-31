@@ -13,6 +13,7 @@ namespace Chaos
         float rotSpeed;
         float movSpeed;
         bool dof;
+        int camMode;
         private void OnEnable()
         {
             ChaosController.Instance.text.text = $"POV: You're a bird watching an intense race on {MapManager.Instance.maps[GameState.Instance.map].name}";
@@ -26,6 +27,8 @@ namespace Chaos
             CameraController.Instance.distFromTarget = 0.1f;
             CameraController.Instance.moveSpeed *= 10f;
             CameraController.Instance.rotationSpeed *= 10f;
+            camMode = SaveState.Instance.cameraMode;
+            SaveState.Instance.cameraMode = 1;
             cam.orthographic = true;
             cam.orthographicSize = 80f;
             PPController.Instance.dof.enabled.value = false;
@@ -38,6 +41,7 @@ namespace Chaos
             CameraController.Instance.distFromTarget = camDist;
             CameraController.Instance.moveSpeed = movSpeed;
             CameraController.Instance.rotationSpeed = rotSpeed;
+            SaveState.Instance.cameraMode = camMode;
             CameraController.Instance.GetComponentInChildren<Camera>().orthographic = false;
         }
     }

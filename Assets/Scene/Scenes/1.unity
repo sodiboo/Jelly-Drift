@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 1478}
   - component: {fileID: 2769}
   - component: {fileID: 1597}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|3.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +719,7 @@ GameObject:
   - component: {fileID: 1166}
   - component: {fileID: 2660}
   - component: {fileID: 1596}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|56.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 1146}
   - component: {fileID: 2470}
   - component: {fileID: 1778}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|42.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,7 +885,7 @@ GameObject:
   - component: {fileID: 1359}
   - component: {fileID: 2650}
   - component: {fileID: 1883}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|44.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -903,7 +903,7 @@ GameObject:
   - component: {fileID: 919}
   - component: {fileID: 2627}
   - component: {fileID: 1631}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|58.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -939,7 +939,7 @@ GameObject:
   - component: {fileID: 1390}
   - component: {fileID: 2494}
   - component: {fileID: 1521}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|49.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1504,7 +1504,7 @@ GameObject:
   - component: {fileID: 911}
   - component: {fileID: 2594}
   - component: {fileID: 1861}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|18.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1557,9 +1557,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 849}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Terrain_collapsed
-  m_TagString: Terrain
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1906,7 +1906,7 @@ GameObject:
   - component: {fileID: 983}
   - component: {fileID: 2641}
   - component: {fileID: 2037}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|41.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2073,7 +2073,7 @@ GameObject:
   - component: {fileID: 1487}
   - component: {fileID: 2383}
   - component: {fileID: 1601}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|17.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2128,7 +2128,7 @@ GameObject:
   - component: {fileID: 1198}
   - component: {fileID: 2749}
   - component: {fileID: 1602}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|2.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2165,7 +2165,7 @@ GameObject:
   - component: {fileID: 1135}
   - component: {fileID: 2375}
   - component: {fileID: 1704}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|16.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2315,7 +2315,7 @@ GameObject:
   - component: {fileID: 1469}
   - component: {fileID: 2213}
   - component: {fileID: 1928}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|19.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2352,7 +2352,7 @@ GameObject:
   - component: {fileID: 1088}
   - component: {fileID: 2227}
   - component: {fileID: 1989}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|38.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2408,7 +2408,7 @@ GameObject:
   - component: {fileID: 1247}
   - component: {fileID: 2514}
   - component: {fileID: 1539}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|9.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2614,7 +2614,7 @@ GameObject:
   - component: {fileID: 1260}
   - component: {fileID: 2712}
   - component: {fileID: 1550}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|13.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2839,7 +2839,7 @@ GameObject:
   - component: {fileID: 1464}
   - component: {fileID: 2698}
   - component: {fileID: 2054}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|46.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3008,7 +3008,7 @@ GameObject:
   - component: {fileID: 1389}
   - component: {fileID: 2260}
   - component: {fileID: 2112}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|25.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3423,7 +3423,7 @@ GameObject:
   - component: {fileID: 1445}
   - component: {fileID: 2780}
   - component: {fileID: 2076}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|68.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3478,7 +3478,7 @@ GameObject:
   - component: {fileID: 1295}
   - component: {fileID: 2578}
   - component: {fileID: 1711}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|39.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3552,7 +3552,7 @@ GameObject:
   - component: {fileID: 1364}
   - component: {fileID: 2480}
   - component: {fileID: 1840}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|4.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3702,7 +3702,7 @@ GameObject:
   - component: {fileID: 1004}
   - component: {fileID: 2764}
   - component: {fileID: 2119}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|65.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3776,7 +3776,7 @@ GameObject:
   - component: {fileID: 984}
   - component: {fileID: 2410}
   - component: {fileID: 1906}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|21.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4000,7 +4000,7 @@ GameObject:
   - component: {fileID: 953}
   - component: {fileID: 2405}
   - component: {fileID: 2138}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|61.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4092,7 +4092,7 @@ GameObject:
   - component: {fileID: 1024}
   - component: {fileID: 2738}
   - component: {fileID: 2120}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|24.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4332,7 +4332,7 @@ GameObject:
   - component: {fileID: 1401}
   - component: {fileID: 2284}
   - component: {fileID: 1809}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|55.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4368,7 +4368,7 @@ GameObject:
   - component: {fileID: 1173}
   - component: {fileID: 2550}
   - component: {fileID: 2023}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|34.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4820,7 +4820,7 @@ GameObject:
   - component: {fileID: 1051}
   - component: {fileID: 2321}
   - component: {fileID: 1998}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|43.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4988,7 +4988,7 @@ GameObject:
   - component: {fileID: 976}
   - component: {fileID: 2198}
   - component: {fileID: 1738}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|31.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5006,7 +5006,7 @@ GameObject:
   - component: {fileID: 1231}
   - component: {fileID: 2482}
   - component: {fileID: 1895}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|40.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5080,7 +5080,7 @@ GameObject:
   - component: {fileID: 1360}
   - component: {fileID: 2782}
   - component: {fileID: 1698}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|54.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5490,7 +5490,7 @@ GameObject:
   - component: {fileID: 1061}
   - component: {fileID: 2775}
   - component: {fileID: 1569}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|52.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5866,7 +5866,7 @@ GameObject:
   - component: {fileID: 1477}
   - component: {fileID: 2376}
   - component: {fileID: 1610}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|33.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5941,7 +5941,7 @@ GameObject:
   - component: {fileID: 1120}
   - component: {fileID: 2530}
   - component: {fileID: 1595}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|0.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6633,7 +6633,7 @@ GameObject:
   - component: {fileID: 918}
   - component: {fileID: 2539}
   - component: {fileID: 1994}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|10.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6669,7 +6669,7 @@ GameObject:
   - component: {fileID: 1126}
   - component: {fileID: 2408}
   - component: {fileID: 1672}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|50.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7241,7 +7241,7 @@ GameObject:
   - component: {fileID: 1299}
   - component: {fileID: 2475}
   - component: {fileID: 1923}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|45.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7259,7 +7259,7 @@ GameObject:
   - component: {fileID: 982}
   - component: {fileID: 2752}
   - component: {fileID: 1605}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|14.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7408,7 +7408,7 @@ GameObject:
   - component: {fileID: 1019}
   - component: {fileID: 2718}
   - component: {fileID: 1514}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|36.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7897,7 +7897,7 @@ GameObject:
   - component: {fileID: 1248}
   - component: {fileID: 2508}
   - component: {fileID: 1516}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|12.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8046,7 +8046,7 @@ GameObject:
   - component: {fileID: 1226}
   - component: {fileID: 2672}
   - component: {fileID: 1669}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|22.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8253,7 +8253,7 @@ GameObject:
   - component: {fileID: 1064}
   - component: {fileID: 2704}
   - component: {fileID: 1632}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|37.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8309,7 +8309,7 @@ GameObject:
   - component: {fileID: 1230}
   - component: {fileID: 2736}
   - component: {fileID: 1618}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|23.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8345,7 +8345,7 @@ GameObject:
   - component: {fileID: 1150}
   - component: {fileID: 2617}
   - component: {fileID: 1987}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|59.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8551,7 +8551,7 @@ GameObject:
   - component: {fileID: 907}
   - component: {fileID: 2673}
   - component: {fileID: 1744}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|28.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8699,7 +8699,7 @@ GameObject:
   - component: {fileID: 1397}
   - component: {fileID: 2620}
   - component: {fileID: 1540}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|30.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8811,7 +8811,7 @@ GameObject:
   - component: {fileID: 1370}
   - component: {fileID: 2329}
   - component: {fileID: 1667}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|5.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8904,7 +8904,7 @@ GameObject:
   - component: {fileID: 1484}
   - component: {fileID: 2401}
   - component: {fileID: 1788}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|29.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8998,7 +8998,7 @@ GameObject:
   - component: {fileID: 1084}
   - component: {fileID: 2215}
   - component: {fileID: 1903}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|51.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9035,7 +9035,7 @@ GameObject:
   - component: {fileID: 862}
   - component: {fileID: 2221}
   - component: {fileID: 1755}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|15.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9315,7 +9315,7 @@ GameObject:
   - component: {fileID: 900}
   - component: {fileID: 2666}
   - component: {fileID: 1556}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|57.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9333,7 +9333,7 @@ GameObject:
   - component: {fileID: 1269}
   - component: {fileID: 2723}
   - component: {fileID: 1844}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|8.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9725,7 +9725,7 @@ GameObject:
   - component: {fileID: 869}
   - component: {fileID: 2656}
   - component: {fileID: 1982}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|67.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9761,7 +9761,7 @@ GameObject:
   - component: {fileID: 1160}
   - component: {fileID: 2226}
   - component: {fileID: 1588}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|32.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9893,7 +9893,7 @@ GameObject:
   - component: {fileID: 1238}
   - component: {fileID: 2395}
   - component: {fileID: 2143}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|69.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9911,7 +9911,7 @@ GameObject:
   - component: {fileID: 1074}
   - component: {fileID: 2562}
   - component: {fileID: 1547}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|11.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9929,7 +9929,7 @@ GameObject:
   - component: {fileID: 847}
   - component: {fileID: 2292}
   - component: {fileID: 2043}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|62.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9966,7 +9966,7 @@ GameObject:
   - component: {fileID: 1351}
   - component: {fileID: 2455}
   - component: {fileID: 1748}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|6.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10150,7 +10150,7 @@ GameObject:
   - component: {fileID: 1050}
   - component: {fileID: 2708}
   - component: {fileID: 1677}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|64.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10431,7 +10431,7 @@ GameObject:
   - component: {fileID: 1217}
   - component: {fileID: 2705}
   - component: {fileID: 2024}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|35.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10657,7 +10657,7 @@ GameObject:
   - component: {fileID: 988}
   - component: {fileID: 2687}
   - component: {fileID: 2137}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|27.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11348,7 +11348,7 @@ GameObject:
   - component: {fileID: 1133}
   - component: {fileID: 2231}
   - component: {fileID: 1913}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|47.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11512,7 +11512,7 @@ GameObject:
   - component: {fileID: 898}
   - component: {fileID: 2667}
   - component: {fileID: 1912}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|60.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11605,7 +11605,7 @@ GameObject:
   - component: {fileID: 1185}
   - component: {fileID: 2768}
   - component: {fileID: 1686}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|63.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11642,7 +11642,7 @@ GameObject:
   - component: {fileID: 930}
   - component: {fileID: 2770}
   - component: {fileID: 1523}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|48.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11758,7 +11758,7 @@ GameObject:
   - component: {fileID: 2815}
   m_Layer: 8
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11811,7 +11811,7 @@ GameObject:
   - component: {fileID: 1268}
   - component: {fileID: 2253}
   - component: {fileID: 1996}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|53.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11943,7 +11943,7 @@ GameObject:
   - component: {fileID: 2314}
   - component: {fileID: 1657}
   - component: {fileID: 2843}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|DeadTree.003|Dupli|
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12016,7 +12016,7 @@ GameObject:
   - component: {fileID: 1094}
   - component: {fileID: 2478}
   - component: {fileID: 1948}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|7.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12089,7 +12089,7 @@ GameObject:
   - component: {fileID: 1083}
   - component: {fileID: 2701}
   - component: {fileID: 1856}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Roc3.002|Dupli|66.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12107,7 +12107,7 @@ GameObject:
   - component: {fileID: 1009}
   - component: {fileID: 2526}
   - component: {fileID: 2121}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock.002|Dupli|1.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12181,7 +12181,7 @@ GameObject:
   - component: {fileID: 1073}
   - component: {fileID: 2679}
   - component: {fileID: 1817}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|26.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12293,7 +12293,7 @@ GameObject:
   - component: {fileID: 1063}
   - component: {fileID: 2397}
   - component: {fileID: 2141}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Terrain_collapsed|Rock2.002|Dupli|20.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65317,6 +65317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb6c719f9dd23d499292435db02ce62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dof: {fileID: 0}
 --- !u!114 &3829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71872,13 +71873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b5d13f6c49b5b4494709fbf1bce2fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackholeObjects: {fileID: 0}
-  road: {fileID: 150}
-  terrain: {fileID: 0}
-  sun: {fileID: 21}
-  FuckyWuckyControlsUwU: 0
   text: {fileID: 0}
   runNextCycle: 0
+  cheatSpacing: 6
+  cheatPadding: 6
 --- !u!114 &1549460409
 MonoBehaviour:
   m_ObjectHideFlags: 0

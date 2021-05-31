@@ -5657,9 +5657,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1455}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: TerrainNew
-  m_TagString: Terrain
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73718,6 +73718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb6c719f9dd23d499292435db02ce62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dof: {fileID: 0}
 --- !u!114 &4367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78305,13 +78306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b5d13f6c49b5b4494709fbf1bce2fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackholeObjects: {fileID: 0}
-  road: {fileID: 175}
-  terrain: {fileID: 0}
-  sun: {fileID: 27}
-  FuckyWuckyControlsUwU: 0
   text: {fileID: 0}
   runNextCycle: 0
+  cheatSpacing: 6
+  cheatPadding: 6
 --- !u!114 &1160340732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81529,9 +81527,9 @@ GameObject:
   - component: {fileID: 1871143175}
   - component: {fileID: 1871143174}
   - component: {fileID: 1871143173}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
