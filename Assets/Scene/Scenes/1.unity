@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 1501}
   - component: {fileID: 2155}
   - component: {fileID: 2820}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: CheckpointArc (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 1506}
   - component: {fileID: 2160}
   - component: {fileID: 2822}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: CheckpointArc (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 1509}
   - component: {fileID: 2163}
   - component: {fileID: 2823}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: CheckpointArc (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 1510}
   - component: {fileID: 2164}
   - component: {fileID: 2824}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: CheckpointArc (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3386,7 +3386,7 @@ GameObject:
   - component: {fileID: 1206}
   - component: {fileID: 2523}
   - component: {fileID: 1608}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5212,7 +5212,7 @@ GameObject:
   - component: {fileID: 2707}
   - component: {fileID: 2012}
   - component: {fileID: 2817}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Blocks1.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6238,7 +6238,7 @@ GameObject:
   - component: {fileID: 2235}
   - component: {fileID: 1967}
   - component: {fileID: 2837}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock3 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6257,7 +6257,7 @@ GameObject:
   - component: {fileID: 2237}
   - component: {fileID: 1969}
   - component: {fileID: 2838}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock3 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6276,7 +6276,7 @@ GameObject:
   - component: {fileID: 2236}
   - component: {fileID: 1968}
   - component: {fileID: 2839}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6295,7 +6295,7 @@ GameObject:
   - component: {fileID: 2232}
   - component: {fileID: 1964}
   - component: {fileID: 2840}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock3 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6314,7 +6314,7 @@ GameObject:
   - component: {fileID: 2234}
   - component: {fileID: 1966}
   - component: {fileID: 2842}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock3 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6333,7 +6333,7 @@ GameObject:
   - component: {fileID: 2233}
   - component: {fileID: 1965}
   - component: {fileID: 2841}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6352,7 +6352,7 @@ GameObject:
   - component: {fileID: 2238}
   - component: {fileID: 1970}
   - component: {fileID: 2836}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9445,7 +9445,7 @@ GameObject:
   - component: {fileID: 2604}
   - component: {fileID: 1575}
   - component: {fileID: 2830}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9464,7 +9464,7 @@ GameObject:
   - component: {fileID: 2609}
   - component: {fileID: 1580}
   - component: {fileID: 2831}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9483,7 +9483,7 @@ GameObject:
   - component: {fileID: 2607}
   - component: {fileID: 1577}
   - component: {fileID: 2833}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9502,7 +9502,7 @@ GameObject:
   - component: {fileID: 2608}
   - component: {fileID: 1576}
   - component: {fileID: 2832}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9521,7 +9521,7 @@ GameObject:
   - component: {fileID: 2605}
   - component: {fileID: 1579}
   - component: {fileID: 2835}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9540,7 +9540,7 @@ GameObject:
   - component: {fileID: 2606}
   - component: {fileID: 1578}
   - component: {fileID: 2834}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11311,7 +11311,7 @@ GameObject:
   - component: {fileID: 2753}
   - component: {fileID: 1931}
   - component: {fileID: 2816}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Blocks1.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11330,7 +11330,7 @@ GameObject:
   - component: {fileID: 2799}
   - component: {fileID: 2007}
   - component: {fileID: 2818}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Blocks1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12369,7 +12369,7 @@ GameObject:
   - component: {fileID: 2344}
   - component: {fileID: 1680}
   - component: {fileID: 2829}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12388,7 +12388,7 @@ GameObject:
   - component: {fileID: 2343}
   - component: {fileID: 1681}
   - component: {fileID: 2828}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12407,7 +12407,7 @@ GameObject:
   - component: {fileID: 2342}
   - component: {fileID: 1682}
   - component: {fileID: 2827}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12426,7 +12426,7 @@ GameObject:
   - component: {fileID: 2341}
   - component: {fileID: 1683}
   - component: {fileID: 2826}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73290,7 +73290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2004598419}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CheckpointArcs
   m_TagString: Untagged
   m_Icon: {fileID: 0}

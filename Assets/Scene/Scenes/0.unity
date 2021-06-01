@@ -2948,7 +2948,7 @@ GameObject:
   - component: {fileID: 1428}
   - component: {fileID: 1073}
   - component: {fileID: 240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OldRoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3551,7 +3551,7 @@ GameObject:
   - component: {fileID: 1329}
   - component: {fileID: 1049}
   - component: {fileID: 309}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OutlineRoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5999,7 +5999,7 @@ GameObject:
   - component: {fileID: 1346}
   - component: {fileID: 1003}
   - component: {fileID: 410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OldTerrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38510,6 +38510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb6c719f9dd23d499292435db02ce62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dof: {fileID: 0}
 --- !u!114 &2141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38754,7 +38755,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1245221909}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CheckpointArcs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38835,13 +38836,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b5d13f6c49b5b4494709fbf1bce2fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackholeObjects: {fileID: 0}
-  road: {fileID: 211}
-  terrain: {fileID: 1087}
-  sun: {fileID: 64}
-  FuckyWuckyControlsUwU: 0
   text: {fileID: 0}
   runNextCycle: 0
+  cheatSpacing: 6
+  cheatPadding: 6
 --- !u!114 &1615682073
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -42524,7 +42524,7 @@ GameObject:
   - component: {fileID: 1122741414}
   - component: {fileID: 1122741416}
   - component: {fileID: 1122741415}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OldTerrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60991,7 +60991,7 @@ GameObject:
   - component: {fileID: 1579725618}
   - component: {fileID: 1579725620}
   - component: {fileID: 1579725619}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OutlineRoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76566,7 +76566,7 @@ GameObject:
   - component: {fileID: 1987917190}
   - component: {fileID: 1987917192}
   - component: {fileID: 1987917191}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: BezierCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}

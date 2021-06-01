@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 1389}
   - component: {fileID: 1987}
   - component: {fileID: 2583}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: CheckpointArc (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 1390}
   - component: {fileID: 1988}
   - component: {fileID: 2584}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: CheckpointArc (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 1393}
   - component: {fileID: 1991}
   - component: {fileID: 2585}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: CheckpointArc (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 1397}
   - component: {fileID: 1995}
   - component: {fileID: 2593}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: CheckpointArc (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 1400}
   - component: {fileID: 1998}
   - component: {fileID: 2595}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: CheckpointArc (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 1401}
   - component: {fileID: 1999}
   - component: {fileID: 2596}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: CheckpointArc (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5667,7 +5667,7 @@ GameObject:
   - component: {fileID: 2067}
   - component: {fileID: 1828}
   - component: {fileID: 2607}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5686,7 +5686,7 @@ GameObject:
   - component: {fileID: 2068}
   - component: {fileID: 1829}
   - component: {fileID: 2606}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5724,7 +5724,7 @@ GameObject:
   - component: {fileID: 2186}
   - component: {fileID: 1721}
   - component: {fileID: 2597}
-  m_Layer: 12
+  m_Layer: 8
   m_Name: Bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8320,7 +8320,7 @@ GameObject:
   - component: {fileID: 2389}
   - component: {fileID: 1448}
   - component: {fileID: 2603}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8339,7 +8339,7 @@ GameObject:
   - component: {fileID: 2391}
   - component: {fileID: 1450}
   - component: {fileID: 2604}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8358,7 +8358,7 @@ GameObject:
   - component: {fileID: 2390}
   - component: {fileID: 1449}
   - component: {fileID: 2605}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9316,7 +9316,7 @@ GameObject:
   - component: {fileID: 2058}
   - component: {fileID: 1802}
   - component: {fileID: 649}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OldTerrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11323,7 +11323,7 @@ GameObject:
   - component: {fileID: 2166}
   - component: {fileID: 1527}
   - component: {fileID: 2602}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rock2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12051,7 +12051,7 @@ Transform:
   - {fileID: 844}
   - {fileID: 1135}
   m_Father: {fileID: 824}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &795
 Transform:
@@ -12479,7 +12479,6 @@ Transform:
   - {fileID: 1293}
   - {fileID: 1375}
   - {fileID: 836}
-  - {fileID: 1131}
   - {fileID: 1262}
   - {fileID: 1066}
   - {fileID: 1168}
@@ -12955,7 +12954,7 @@ Transform:
   m_LocalScale: {x: 0.04516644, y: 0.04516644, z: 0.893772}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &857
 Transform:
@@ -14019,7 +14018,7 @@ Transform:
   m_LocalScale: {x: 0.09944696, y: 1.215723, z: 0.2352026}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 35
+  m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &933
 Transform:
@@ -14327,7 +14326,7 @@ Transform:
   m_LocalScale: {x: 0.06152153, y: 0.4870937, z: 0.08900893}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &955
 Transform:
@@ -14971,7 +14970,7 @@ Transform:
   m_LocalScale: {x: 0.508015, y: 0.508015, z: 0.508015}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 31
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1001
 Transform:
@@ -15422,7 +15421,7 @@ Transform:
   m_LocalScale: {x: 0.276098, y: 0.276098, z: 0.06850347}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1038
 Transform:
@@ -15478,7 +15477,7 @@ Transform:
   m_LocalScale: {x: 0.09944696, y: 1.215723, z: 0.2352026}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 34
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1042
 Transform:
@@ -15576,7 +15575,7 @@ Transform:
   m_LocalScale: {x: 0.09944696, y: 1.215723, z: 0.2352026}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 33
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1049
 Transform:
@@ -15702,7 +15701,7 @@ Transform:
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 28
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1058
 Transform:
@@ -15828,7 +15827,7 @@ Transform:
   m_LocalScale: {x: 0.1703546, y: 0.147571, z: 0.1703546}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: -90.00001, y: 23.87477, z: -0.000001092462}
 --- !u!4 &1067
 Transform:
@@ -15842,7 +15841,7 @@ Transform:
   m_LocalScale: {x: 0.06152153, y: 0.4870937, z: 0.08900893}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1068
 Transform:
@@ -16332,7 +16331,7 @@ Transform:
   m_LocalScale: {x: 0.1560491, y: 0.8094654, z: 1}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1103
 Transform:
@@ -16402,7 +16401,7 @@ Transform:
   m_LocalScale: {x: 0.04516644, y: 0.04516644, z: 0.893772}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1108
 Transform:
@@ -16514,7 +16513,7 @@ Transform:
   m_LocalScale: {x: 35, y: 35, z: 35}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1116
 Transform:
@@ -16733,12 +16732,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.167512, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0008802499, y: 0.0073819477, z: -0.0002627204}
+  m_LocalScale: {x: 0.038917072, y: 0.033333335, z: 0.033333335}
   m_Children: []
-  m_Father: {fileID: 824}
-  m_RootOrder: 9
+  m_Father: {fileID: 1860833663}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1132
 Transform:
@@ -16921,7 +16920,7 @@ Transform:
   m_Children:
   - {fileID: 1046}
   m_Father: {fileID: 824}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1145
 Transform:
@@ -17257,7 +17256,7 @@ Transform:
   m_LocalScale: {x: 0.09967509, y: 0.08634432, z: 0.09967506}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: -90.00001, y: -2.54451, z: 0.0000002583791}
 --- !u!4 &1169
 Transform:
@@ -17677,7 +17676,7 @@ Transform:
   - {fileID: 854}
   - {fileID: 846}
   m_Father: {fileID: 824}
-  m_RootOrder: 26
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1174
 Transform:
@@ -17859,7 +17858,7 @@ Transform:
   m_LocalScale: {x: 0.3058348, y: 0.3058348, z: 0.3058348}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 24
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1187
 Transform:
@@ -18545,7 +18544,7 @@ Transform:
   m_LocalScale: {x: 0.06152153, y: 0.4870937, z: 0.08900893}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1236
 Transform:
@@ -18923,7 +18922,7 @@ Transform:
   m_LocalScale: {x: 0.9999999, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -153.5593, y: -46.69194, z: -180}
 --- !u!4 &1263
 Transform:
@@ -19343,7 +19342,7 @@ Transform:
   m_LocalScale: {x: 0.1387898, y: 0.1387898, z: 0.07085817}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 32
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1293
 Transform:
@@ -19525,7 +19524,7 @@ Transform:
   m_LocalScale: {x: 0.9472125, y: 0.3647423, z: 0.02137285}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: -90, y: -13.24545, z: 4.909545}
 --- !u!4 &1306
 Transform:
@@ -19637,7 +19636,7 @@ Transform:
   m_LocalScale: {x: 0.1848926, y: 1.139425, z: 1}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1314
 Transform:
@@ -20071,7 +20070,7 @@ Transform:
   m_LocalScale: {x: 0.06152153, y: 0.4870937, z: 0.08900893}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
 --- !u!4 &1345
 Transform:
@@ -20225,7 +20224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.9999999, z: 1}
   m_Children: []
   m_Father: {fileID: 824}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: -42.46643, y: 72.77923, z: -169.2563}
 --- !u!4 &1356
 Transform:
@@ -60196,7 +60195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1099809541}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CheckpointArcs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63660,9 +63659,10 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0.026407495, y: 0.007881641, z: 0.22145844}
   m_LocalScale: {x: 30, y: 30, z: 30}
-  m_Children: []
+  m_Children:
+  - {fileID: 1131}
   m_Father: {fileID: 824}
-  m_RootOrder: 27
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1860833664
 MeshRenderer:

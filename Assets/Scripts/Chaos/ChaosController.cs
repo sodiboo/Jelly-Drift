@@ -292,9 +292,15 @@ public class ChaosController : MonoBehaviour
     Rect windowRect;
     Vector2 scrollPos;
 
+    private string DisplayName(EffectInfo effect)
+    {
+        if (effect.valid) return effect.name;
+        return $"{effect.name} (!)";
+    }
+
     private void OnGUI()
     {
-        if (!useCheats) return;
+        if (!useCheats || Pause.Instance.paused || !GameController.Instance.playing) return;
         if (maxWidth == 0f)
         {
             foreach (var effect in cheatEffectsList)
@@ -346,7 +352,10 @@ public class ChaosController : MonoBehaviour
                                     }
                                     else
                                     {
-                                        foreach (var child in effect.children) AddEffect(child);
+                                        foreach (var child in effect.children)
+                                        {
+                                            if (!child.conflicts.Any(activeCheats.ContainsKey) && child.valid) AddEffect(child);
+                                        }
                                     }
                                 }
                             }
@@ -359,7 +368,7 @@ public class ChaosController : MonoBehaviour
                                     using (new RGUI.EnabledScope(!child.conflicts.Any(activeCheats.ContainsKey)))
                                     {
                                         var active = activeCheats.ContainsKey(child);
-                                        if (active != GUILayout.Toggle(active, child.name))
+                                        if (active != GUILayout.Toggle(active, DisplayName(child)))
                                         {
                                             if (active)
                                             {
@@ -384,7 +393,7 @@ public class ChaosController : MonoBehaviour
                     {
                         using (new RGUI.EnabledScope(!effect.conflicts.Any(activeCheats.ContainsKey)))
                         {
-                            if (GUILayout.Button(effect.name))
+                            if (GUILayout.Button(DisplayName(effect)))
                             {
                                 AddEffect(effect);
                             }
@@ -399,7 +408,7 @@ public class ChaosController : MonoBehaviour
                         using (new RGUI.EnabledScope(!effect.conflicts.Any(activeCheats.ContainsKey)))
                         {
                             var active = activeCheats.ContainsKey(effect);
-                            if (active != GUILayout.Toggle(active, effect.name))
+                            if (active != GUILayout.Toggle(active, DisplayName(effect)))
                             {
                                 if (active)
                                 {

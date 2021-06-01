@@ -72,13 +72,18 @@ namespace Chaos
                 rend = WorldObjects.Instance.road.GetComponent<Renderer>();
                 ogMat = rend.material;
                 rainbowMat = new Material(ogMat);
-                rend.material = rainbowMat;
                 base.OnEnable();
             }
 
             private void OnDisable()
             {
                 rend.material = ogMat;
+            }
+
+            protected override void Update()
+            {
+                rend.material = rainbowMat;
+                base.Update();
             }
         }
 

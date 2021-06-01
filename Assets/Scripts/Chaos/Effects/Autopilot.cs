@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.autopilot", "Autopilot"), ConflictsWith(typeof(FuckyWuckyControlsUwU), typeof(Southpaw))]
+    [Effect("chaos.autopilot", "Autopilot"), ConflictsWith(typeof(FuckyWuckyControlsUwU), typeof(Southpaw), typeof(Multiplayer))]
     public class Autopilot : ChaosEffect
     {
         private void OnEnable()

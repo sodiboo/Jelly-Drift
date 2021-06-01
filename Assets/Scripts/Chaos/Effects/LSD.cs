@@ -9,18 +9,51 @@ namespace Chaos
     public class LSD : ChaosEffect
     {
         FloatParameter hue;
+        PostProcessVolume volume;
+        BoolParameter ao;
+        BoolParameter bloom;
+        BoolParameter dof;
+        BoolParameter motionBlur;
+        BoolParameter vignette;
+
+        bool enableVolume;
         private void Awake()
         {
-            hue = GameObject.Find("/PP").GetComponent<PostProcessVolume>().profile.GetSetting<ColorGrading>().hueShift;
+            volume = GameObject.Find("/PP").GetComponent<PostProcessVolume>();
+            hue = volume.profile.GetSetting<ColorGrading>().hueShift;
+            ao = volume.profile.GetSetting<AmbientOcclusion>().enabled;
+            bloom = volume.profile.GetSetting<Bloom>().enabled;
+            dof = volume.profile.GetSetting<DepthOfField>().enabled;
+            motionBlur = volume.profile.GetSetting<MotionBlur>().enabled;
+            vignette = volume.profile.GetSetting<Vignette>().enabled;
         }
 
         private void OnEnable()
         {
             hue.overrideState = true;
+            enableVolume = volume.enabled;
+            volume.enabled = true;
+            if (!enableVolume)
+            {
+                ao.value = false;
+                bloom.value = false;
+                dof.value = false;
+                motionBlur.value = false;
+                vignette.value = false;
+            }
         }
         private void OnDisable()
         {
             hue.overrideState = false;
+            volume.enabled = enableVolume;
+            if (!enableVolume)
+            {
+                ao.value = true;
+                bloom.value = true;
+                dof.value = SaveState.Instance.dof == 1;
+                motionBlur.value = SaveState.Instance.motionBlur == 1;
+                vignette.value = true;
+            }
         }
 
         private void Update()
