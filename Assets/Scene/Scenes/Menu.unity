@@ -13776,6 +13776,7 @@ MonoBehaviour:
   - {fileID: 1788473188190847, guid: c643dfeedcb6ede4fb57494f741ff9a0, type: 3}
   - {fileID: 1770462275223219, guid: bf3b89fa967ddeb499c1c41c0545201c, type: 3}
   - {fileID: 1299824235541020, guid: 567013ade5ef7fa4f8fd72bfb124f0f9, type: 3}
+  sunMat: {fileID: 2100000, guid: 06cdca69ba968214daf8d1d8770775e7, type: 2}
 --- !u!114 &807
 MonoBehaviour:
   m_ObjectHideFlags: 0

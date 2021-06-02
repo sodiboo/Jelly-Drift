@@ -8,7 +8,7 @@ namespace Chaos
     [Effect("chaos.random.car", "Random Car"), Impulse]
     [Reload.OnEnable(typeof(FirstPerson), typeof(Speed), typeof(Scale), typeof(Grip),
         typeof(FuckyWuckyCollisionUwU), typeof(FuckyWuckyRenderUwU), typeof(DisableShit.Car),
-        typeof(CustomGravity), typeof(Autopilot), typeof(RearSteer), typeof(Rainbow.Car), typeof(Ghost))]
+        typeof(CustomGravity), typeof(Autopilot), typeof(RearSteer), typeof(Rainbow.Car), typeof(Ghost), typeof(BrightAsFuck))]
     public class RandomCar : ChaosEffect
     {
         private void Awake()

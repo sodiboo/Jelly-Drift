@@ -34,4 +34,5 @@ public class PrefabManager : MonoBehaviour
 	public InputActionAsset inputs;
 
 	public GameObject[] Ais;
+	public Material sunMat;
 }

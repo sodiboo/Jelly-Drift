@@ -36,6 +36,15 @@ namespace Chaos
                 base.OnDisable();
                 car.driftThreshold /= 10f;
             }
+
+            private void FixedUpdate()
+            {
+                var localAngularVelocity = car.transform.InverseTransformDirection(car.rb.angularVelocity);
+                if (Mathf.Abs(localAngularVelocity.z) > 0.25f)
+                {
+                   car.rb.angularVelocity = car.transform.TransformDirection(new Vector3(localAngularVelocity.x, localAngularVelocity.y, localAngularVelocity.z * 0.75f));
+                }
+            }
         }
 
         [Effect("chaos.speed.slow", "Slowpoke")]

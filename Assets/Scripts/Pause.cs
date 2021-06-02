@@ -30,19 +30,21 @@ public class Pause : MonoBehaviour
 
     public void PauseGame()
 	{
-		if (this.paused)
+		if (this.paused || !GameController.Instance.playing)
 		{
 			return;
 		}
 		Time.timeScale = 0f;
-		this.pauseMenu.SetActive(true);
 		this.paused = true;
 		unpausedLayout = InputManager.Instance.layout;
 		InputManager.Instance.layout = InputManager.Layout.Menu;
+		Invoke("EnablePauseMenu", 0f); // next frame because otherwise input system might fire the "canceled" callback of the menu since that might be pressed this frame, depending on the order it was processing shit in
 #if MOBILE
 		MobileControls.Instance.pause.SetActive(false);
 #endif
 	}
+
+	private void EnablePauseMenu() => this.pauseMenu.SetActive(true);
 
 	// Token: 0x060000FB RID: 251 RVA: 0x00006521 File Offset: 0x00004721
 	public void ResumeGame()
