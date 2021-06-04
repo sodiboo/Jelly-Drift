@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
 			this.AssignTarget(this.target);
 		}
 		this.mainCam = base.GetComponentInChildren<Camera>();
+		speedometer = Instantiate(PrefabManager.Instance.speedometer).GetComponent<TextMesh>();
 	}
 
 	// Token: 0x0600001F RID: 31 RVA: 0x0000269A File Offset: 0x0000089A
@@ -57,6 +58,35 @@ public class CameraController : MonoBehaviour
 			this.OffsetCamera(Vector3.down * d2);
 		}
 	}
+
+    private void LateUpdate()
+    {
+        if (speedometer != null)
+        {
+			switch (SaveState.Instance.speedometer)
+			{
+				case 0:
+					speedometer.text = "";
+					return;
+				case 1:
+					speedometer.text = $"{targetRb.velocity.magnitude:0.0} u/s";
+					goto relocate;
+				case 2:
+					speedometer.text = $"{targetRb.velocity.magnitude * 3.6:0.0} ku/h";
+					goto relocate;
+
+				relocate:
+					speedometer.transform.rotation = mainCam.transform.rotation;
+					speedometer.transform.position = targetCar.transform.position + mainCam.transform.right * 10;
+					break;
+			}
+		}
+    }
+
+    private void OnDisable()
+    {
+		if (speedometer != null) speedometer.text = "";
+    }
 
     // Token: 0x06000021 RID: 33 RVA: 0x00002982 File Offset: 0x00000B82
     public void OffsetCamera(Vector3 offset)
@@ -124,4 +154,6 @@ public class CameraController : MonoBehaviour
 
 	// Token: 0x04000036 RID: 54
 	private bool readyToOffset = true;
+
+	private TextMesh speedometer;
 }

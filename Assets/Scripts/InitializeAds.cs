@@ -103,7 +103,7 @@ public class InitializeAds : MonoBehaviour
     {
         private void Awake()
         {
-			Application.OpenURL("steam://advertise/1228610");
+			Application.OpenURL("https://store.steampowered.com/app/1228610");
         }
 
 		public static bool Valid() => UnityEngine.Random.value < 0.03f;

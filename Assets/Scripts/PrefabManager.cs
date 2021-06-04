@@ -35,4 +35,5 @@ public class PrefabManager : MonoBehaviour
 
 	public GameObject[] Ais;
 	public Material sunMat;
+	public GameObject speedometer;
 }

@@ -21,6 +21,7 @@ public class SettingsUi : MonoBehaviour
 		this.LoadSetting(this.camShake, SaveState.Instance.cameraShake);
 		this.LoadSettingSlider(this.volume, SaveState.Instance.volume);
 		this.LoadSettingSlider(this.music, SaveState.Instance.music);
+		this.LoadSetting(this.speedometer, SaveState.Instance.speedometer);
 	}
 
 	// Token: 0x0600018F RID: 399 RVA: 0x000089BD File Offset: 0x00006BBD
@@ -48,6 +49,7 @@ public class SettingsUi : MonoBehaviour
 		this.CamShake(this.camShake.selected);
 		this.Volume();
 		this.Music();
+		this.Speedometer();
 	}
 
 	// Token: 0x06000192 RID: 402 RVA: 0x00008A5B File Offset: 0x00006C5B
@@ -124,6 +126,14 @@ public class SettingsUi : MonoBehaviour
 		MusicController.Instance.UpdateMusic((float)this.music.selected);
 	}
 
+	public void Speedometer()
+    {
+		SaveManager.Instance.state.speedometer = this.speedometer.selected;
+		SaveManager.Instance.Save();
+		SaveState.Instance.speedometer = this.speedometer.selected;
+    }
+
+
 	// Token: 0x0600019A RID: 410 RVA: 0x00008C58 File Offset: 0x00006E58
 	public void ResetSave()
 	{
@@ -154,6 +164,8 @@ public class SettingsUi : MonoBehaviour
 
 	// Token: 0x040001A7 RID: 423
 	public SliderSettingCycle music;
+
+	public SettingCycle speedometer;
 
 	// Token: 0x040001A8 RID: 424
 	private Color selected = Color.white;

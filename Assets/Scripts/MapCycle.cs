@@ -68,6 +68,7 @@ public class MapCycle : ItemCycle
 			this.mapImg.sprite = MapManager.Instance.maps[n].image;
 			this.name.text = "| " + MapManager.Instance.maps[n].name;
 			this.time.text = "PB - " + Timer.GetFormattedTime(SaveManager.Instance.state.times[n]);
+			this.time.enableWordWrapping = false;
 			if (this.ghostCycle)
 			{
 				this.ghostCycle.UpdateText();
