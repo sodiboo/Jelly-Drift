@@ -70,6 +70,8 @@ public class ChaosController : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
         gameObject.AddComponent<WorldObjects>();
         InputManager.Instance.debug += EnableCheats;
+        globalFormatting.Add("map", () => MapManager.Instance.maps[GameState.Instance.map].name);
+        globalFormatting.Add("car", () => PrefabManager.Instance.cars[GameState.Instance.car].name);
     }
 
     public void RegisterChaos()
@@ -111,6 +113,8 @@ public class ChaosController : MonoBehaviour
     public EffectInfo riggedEffect { get; set; }
     public bool runNextCycle;
 
+    public Dictionary<string, Func<string>> globalFormatting = new Dictionary<string, Func<string>>();
+
     private IEnumerator Chaos()
     {
         while (runNextCycle)
@@ -121,18 +125,10 @@ public class ChaosController : MonoBehaviour
                 foreach (var effect in effects)
                 {
                     if (effect.isChild) continue;
-                    if (effect == currentEffect) continue;
+                    if (effect == currentEffect || effect == currentEffect?.parent) continue;
                     if (effect.valid)
                     {
-                        if (effect.effectType != EffectInfo.EffectType.ExclusiveGroup)
-                        {
-                            valid.Add(effect);
-                            continue;
-                        }
-                        else
-                        {
-                            foreach (var child in effect.children) valid.Add(child);
-                        }
+                        valid.Add(effect);
                     }
                 }
                 currentEffect = valid[Random.Range(0, valid.Count)];
@@ -143,7 +139,13 @@ public class ChaosController : MonoBehaviour
                 riggedEffect = null;
             }
 
-            text.text = currentEffect.name;
+            if (currentEffect.effectType == EffectInfo.EffectType.ExclusiveGroup)
+            {
+                currentEffect = currentEffect.children[Random.Range(0, currentEffect.children.Length)];
+            }
+
+            text.text = globalFormatting.Aggregate(currentEffect.name, (name, format) => name.Replace($"@{format.Key}", format.Value()));
+
             if (currentEffect.effectType == EffectInfo.EffectType.MultiGroup)
             {
                 activeChildren = new List<ChaosEffect>();
@@ -157,6 +159,8 @@ public class ChaosController : MonoBehaviour
                 if (currentEffect.isChild || currentEffect.isGroup) Debug.LogWarning($"{currentEffect.id} is not independent but should be");
                 activeEffect = (ChaosEffect)gameObject.AddComponent(currentEffect.type);
             }
+            var effectSpecificParams = activeEffect?.CustomParameters();
+            if (effectSpecificParams != null) text.text = string.Format(text.text, effectSpecificParams);
 
             yield return new WaitForSeconds(5f);
 

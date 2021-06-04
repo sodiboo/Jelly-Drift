@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.view.iso", "POV: You're a bird watching an intense race on [MAP]"), ConflictsWith(typeof(FirstPerson))]
+    [Effect("chaos.view.iso", "POV: You're a bird watching an intense race on @map"), ConflictsWith(typeof(FirstPerson))]
     public class IsoView : ChaosEffect
     {
         Camera cam;
@@ -16,7 +16,6 @@ namespace Chaos
         int camMode;
         private void OnEnable()
         {
-            ChaosController.Instance.text.text = $"POV: You're a bird watching an intense race on {MapManager.Instance.maps[GameState.Instance.map].name}";
             cam = CameraController.Instance.GetComponentInChildren<Camera>();
             camHeight = CameraController.Instance.camHeight;
             camDist = CameraController.Instance.distFromTarget;

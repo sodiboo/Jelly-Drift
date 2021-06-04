@@ -28,7 +28,7 @@ namespace Chaos
             rainbowMat.color = Color.HSVToRGB(H, S, V);
         }
 
-        [ChildEffect("chaos.gay.car", "Star Power")]
+        [ChildEffect("chaos.gay.car", "Star Power"), ConflictsWith(typeof(Ghost), typeof(BrightAsFuck.Player))]
         public class Car : Rainbow
         {
             protected override void OnEnable()
