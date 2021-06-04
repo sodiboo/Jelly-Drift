@@ -49,7 +49,7 @@ public class Suspension : MonoBehaviour
 		this.maxLength = this.restLength + this.springTravel;
 		float suspensionLength = this.car.suspensionLength;
 		RaycastHit raycastHit;
-		if (Physics.Raycast(base.transform.position, -base.transform.up, out raycastHit, this.maxLength + suspensionLength))
+		if (Physics.Raycast(new Ray(base.transform.position, -base.transform.up), out raycastHit, this.maxLength + suspensionLength, car.suspensionLayers, QueryTriggerInteraction.Ignore))
 		{
 			this.lastLength = this.springLength;
 			this.springLength = raycastHit.distance - suspensionLength;

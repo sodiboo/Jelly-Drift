@@ -38,6 +38,7 @@ public class Car : MonoBehaviour
 	// Token: 0x06000033 RID: 51 RVA: 0x00002ACC File Offset: 0x00000CCC
 	private void Awake()
 	{
+		suspensionLayers ^= (1 << LayerMask.NameToLayer("Trigger")) | (1 << LayerMask.NameToLayer("Ghost"));
 		this.rb = base.GetComponent<Rigidbody>();
 		if (this.autoValues)
 		{
@@ -418,4 +419,5 @@ public class Car : MonoBehaviour
 
 	public float firstPersonDistance;
 	public float firstPersonHeight;
+	public int suspensionLayers = Physics.AllLayers;
 }

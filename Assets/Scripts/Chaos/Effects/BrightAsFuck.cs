@@ -61,5 +61,27 @@ namespace Chaos
                 }
             }
         }
+
+        [ChildEffect("chaos.bright.cones", "Light Boxes")]
+        public class Cones : BrightAsFuck
+        {
+            Renderer[] rends;
+            Material[] ogMats;
+            private void OnEnable()
+            {
+                rends = GameObject.Find("/Cones").GetComponentsInChildren<Renderer>();
+                ogMats = rends[0].materials;
+                var newMats = new Material[ogMats.Length];
+                for (var i = 0; i < newMats.Length; i++) newMats[i] = sun;
+                for (var i = 0; i < rends.Length; i++) rends[i].materials = newMats;
+            }
+
+            private void OnDisable()
+            {
+                for (var i = 0; i < rends.Length; i++) rends[i].materials = ogMats;
+            }
+
+            public static bool Valid() => GameState.Instance.map == 1;
+        }
     }
 }
