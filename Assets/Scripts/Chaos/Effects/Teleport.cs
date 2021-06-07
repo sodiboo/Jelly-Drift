@@ -8,6 +8,7 @@ namespace Chaos
     public sealed class Teleport
     {
         [Effect("chaos.teleportai", "(teleports behind you)"), Impulse] // Thanks to Reclaimer64 for the name
+        [Description("Teleports the AI 3 units behind you")]
         public class TeleportAI : ChaosEffect
         {
             public static bool Valid() => HasEnemy;
@@ -19,6 +20,7 @@ namespace Chaos
         }
 
         [Effect("chaos.teleportplayer", "I wonder where the AI is"), Impulse]
+        [Description("Teleports you to the AI")]
         public class TeleportToAI : ChaosEffect
         {
             public static bool Valid() => HasEnemy;

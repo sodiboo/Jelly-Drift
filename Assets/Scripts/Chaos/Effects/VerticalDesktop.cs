@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace Chaos
 {
-#if !MOBILE
-    [Effect("chaos.view.mobile", "Mobile Experience")]
+#if MOBILE
+    [HideInCheatGUI]
 #endif
+    [Effect("chaos.view.mobile", "Mobile Experience")]
+    [Description("Attempts (but fails) to make your view 9:16")]
     class VerticalDesktop : ChaosEffect
     {
         Camera cam;
@@ -40,5 +42,11 @@ namespace Chaos
         {
             Destroy(clearCam);
         }
+
+#if MOBILE
+        public static bool Valid() => false;
+#else
+        public static bool Valid() => true;
+#endif
     }
 }

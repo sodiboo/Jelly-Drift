@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Chaos
 {
     [Effect("chaos.knightbus", "Mind your head"), ConflictsWith(typeof(DisableShit.Car))] // Thanks to Dit0h for the name
+    [Description("Stretches your car in a random direction")]
     public class FuckyWuckyRenderUwU : ChaosEffect
     {
         Vector3 og;

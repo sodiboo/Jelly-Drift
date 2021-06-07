@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Chaos
 {
     [Effect("chaos.rearsteer", "Rear Wheel Steering")]
+    [Description("Makes your rear wheels front wheels, and your front wheels rear wheels")]
     class RearSteer : ChaosEffect
     {
         private void Toggle()

@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Chaos
 {
     [Effect("chaos.controls.cursed", "Cursed Controls")] // Thanks to MY DUMBASS for the accidental invention of this effect.
+    [Description("Makes your controls never reset to zero")]
     public class FuckyWuckyControlsUwU : ChaosEffect // Thanks to the internet for the name of the class.
     {
         public static FuckyWuckyControlsUwU Instance; // Implementation in InputManager.Car, look for references to this property

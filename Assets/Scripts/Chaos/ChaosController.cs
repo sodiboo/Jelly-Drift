@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
@@ -84,6 +85,50 @@ public class ChaosController : MonoBehaviour
         foreach (var effect in effects)
         {
             effect.Setup();
+        }
+
+        var serializedEffects = new List<ChaosConfig.SerializedEffect>();
+        foreach (var effect in effects)
+        {
+            if (effect.id == "null") continue;
+            serializedEffects.Add(new ChaosConfig.SerializedEffect(effect));
+        }
+        var path = Path.Combine(Application.persistentDataPath, "effects.json");
+        using (var file = File.Open(path, FileMode.OpenOrCreate))
+        using (var writer = new StreamWriter(file))
+            writer.Write(JsonUtility.ToJson(new ChaosConfig { effects = serializedEffects.ToArray() }));
+    }
+    [Serializable]
+    private class ChaosConfig
+    {
+        public SerializedEffect[] effects;
+
+        [Serializable]
+        public class SerializedEffect
+        {
+            public SerializedEffect(EffectInfo effect)
+            {
+                id = effect.id;
+                name = effect.name;
+                parent = effect.parent?.id;
+                description = effect.description;
+                conflicts = effect.conflicts.Select(conflict => conflict.id).ToArray();
+                children = effect.children?.Select(child => child.id).ToArray();
+                type = (int)effect.effectType;
+                splitCheats = effect.splitCheats;
+                noCheat = effect.noCheat;
+                impulse = effect.impulse;
+            }
+            public string id;
+            public string name;
+            public string parent;
+            public string description;
+            public string[] conflicts;
+            public string[] children;
+            public int type;
+            public bool splitCheats;
+            public bool noCheat;
+            public bool impulse;
         }
     }
 

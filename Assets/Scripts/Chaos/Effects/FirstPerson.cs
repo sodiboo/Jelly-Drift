@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Chaos
 {
     [Effect("chaos.firstperson", "First Person"), ConflictsWith(typeof(IsoView))]
+    [Description("Puts your camera on the hood of your car (or the stalk of the banana)")]
     public class FirstPerson : ChaosEffect
     {
         public static bool value; // checked in CameraController.Update to prevent regular camera motion

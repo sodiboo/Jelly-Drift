@@ -9,6 +9,7 @@ namespace Chaos
     [Reload.OnEnable(typeof(FirstPerson), typeof(Speed), typeof(Scale), typeof(Grip),
         typeof(FuckyWuckyCollisionUwU), typeof(FuckyWuckyRenderUwU), typeof(DisableShit.Car),
         typeof(CustomGravity), typeof(Autopilot), typeof(RearSteer), typeof(Rainbow.Car), typeof(Ghost), typeof(BrightAsFuck))]
+    [Description("Replaces your car with a random one in the game")]
     public class RandomCar : ChaosEffect
     {
         private void Awake()

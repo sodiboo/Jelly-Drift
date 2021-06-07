@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Chaos
 {
     [Effect("chaos.highfov", "Quake FOV")] // Thanks to ChaosModV for the name and idea
+    [Description("Doubles your FOV")]
     class QuakeFOV : ChaosEffect
     {
         Camera cam;

@@ -5,9 +5,11 @@ using UnityEngine.InputSystem;
 
 namespace Chaos
 {
-#if MOBILE
-    [Effect("chaos.view.portrait", "Portrait Mode")]
+#if !MOBILE
+    [HideInCheatGUI]
 #endif
+    [Effect("chaos.view.portrait", "Portrait Mode")]
+    [Description("Turns your screen to portrait mode")]
     class VerticalMobile : ChaosEffect
     {
         private void OnEnable()
@@ -38,5 +40,12 @@ namespace Chaos
             pause.Enable();
             MobileControls.Instance.pause.SetActive(true);
         }
+
+
+#if MOBILE
+        public static bool Valid() => true;
+#else
+        public static bool Valid() => false;
+#endif
     }
 }

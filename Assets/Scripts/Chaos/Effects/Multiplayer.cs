@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.fake_player", "Multiplayer")]
+    [Effect("chaos.fakeplayer", "Multiplayer")]
     [Reload.OnDisable(typeof(FirstPerson), typeof(Speed), typeof(Scale), typeof(Grip),
         typeof(FuckyWuckyCollisionUwU), typeof(FuckyWuckyRenderUwU), typeof(DisableShit.Car),
         typeof(CustomGravity), typeof(Autopilot), typeof(RearSteer), typeof(Ghost))]
+    [Description("Spawns a fake player which can collect checkpoints for you, and has a 50% chance to make that your main player when disabled")]
     public class Multiplayer : ChaosEffect
     {
         GameObject otherCar;

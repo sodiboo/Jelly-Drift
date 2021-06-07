@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Chaos
 {
     [Effect("chaos.autopilot", "Autopilot"), ConflictsWith(typeof(FuckyWuckyControlsUwU), typeof(Southpaw), typeof(Multiplayer))]
+    [Description("Disables your controls and adds an AI to your car")]
     public class Autopilot : ChaosEffect
     {
         private void OnEnable()

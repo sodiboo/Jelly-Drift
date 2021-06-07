@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Chaos
 {
     [EffectGroup("chaos.bright", "Light Mode")]
+    [Description("Makes things very bright")]
     public abstract class BrightAsFuck : ChaosEffect
     {
         Material sun;
@@ -14,6 +15,7 @@ namespace Chaos
         }
 
         [ChildEffect("chaos.bright.player", "Lone Light"), ConflictsWith(typeof(Rainbow.Car), typeof(DisableShit.Car), typeof(Ghost))]
+        [Description("Makes the player blindingly bright, and it's even worse if you lose traction")]
         public class Player : BrightAsFuck
         {
             Material[][] ogMats;
@@ -39,6 +41,7 @@ namespace Chaos
         }
 
         [ChildEffect("chaos.bright.checkpoints", "Golden Rings"), ConflictsWith(typeof(Rainbow.Checkpoints))]
+        [Description("Makes the checkpoints very bright")]
         public class Checkpoint : BrightAsFuck
         {
             Material ogMat;
@@ -63,6 +66,7 @@ namespace Chaos
         }
 
         [ChildEffect("chaos.bright.cones", "Light Boxes")]
+        [Description("Makes the cones on Funky Forest glow")]
         public class Cones : BrightAsFuck
         {
             Renderer[] rends;

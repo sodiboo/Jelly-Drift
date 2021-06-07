@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Chaos
 {
     [Effect("chaos.lowfps", "Console Experience")] // Thanks to ChaosModV for the name and idea
+    [Description("Sets the target framerate to 15fps")]
     public class LowFPS : ChaosEffect
     {
         private void OnEnable()

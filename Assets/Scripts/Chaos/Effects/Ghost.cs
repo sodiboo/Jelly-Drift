@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Chaos
 {
     [Effect("chaos.collision.none", "Ghost")]
+    [Description("Prevents you from colliding with most objects in a level")]
     public class Ghost : ChaosEffect
     {
         global::Ghost ghost;

@@ -5,10 +5,11 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [EffectGroup("chaos.gravity.custom", "Custom Gravity", SeparateCheats = true)]
+    [EffectGroup("chaos.gravity.custom", "Custom Gravity")]
     public abstract class CustomGravity : ChaosEffect
     {
         [Effect("chaos.gravity.blackhole", "Black Hole")] // Thanks to Akuma73 for the idea
+        [Description("Makes you dense enough to attract all cones and AI")]
         public class Blackhole : CustomGravity
         {
             public static bool Valid() => HasEnemy;
@@ -48,6 +49,7 @@ namespace Chaos
         }
 
         [Effect("chaos.gravity.checkpoint", "Checkpoint Magnet")] // Thanks to Akuma73 for the idea
+        [Description("Turns your gravitational pull towards the next checkpoint")]
         public class CheckpointMagnet : CustomGravity
         {
             CheckpointUser user;

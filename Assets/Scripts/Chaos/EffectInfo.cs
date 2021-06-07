@@ -9,6 +9,7 @@ public class EffectInfo
     private static EffectInfo[] EmptyEffects = new EffectInfo[] { };
     public readonly string name;
     public readonly string id;
+    public readonly string description;
     public readonly Type type;
     public EffectInfo[] conflicts => _computedConflicts = _computedConflicts ?? ComputeConflicts().ToArray();
     public EffectInfo[] reloadOnEnable => _reloadEnable = _reloadEnable ?? GetInfos(_reloadOnEnable).ToArray();
@@ -30,6 +31,7 @@ public class EffectInfo
         this.type = type;
 
         name = attribute.Name ?? type.FullName;
+        description = type.GetCustomAttribute<DescriptionAttribute>()?.Description;
         impulse = type.GetCustomAttribute<ImpulseAttribute>() != null;
         noCheat = type.GetCustomAttribute<HideInCheatGUIAttribute>() != null;
 
@@ -46,6 +48,7 @@ public class EffectInfo
         _children = EmptyEffects;
         id = attribute.Id;
         name = attribute.Name ?? type.FullName;
+        description = type.GetCustomAttribute<DescriptionAttribute>()?.Description;
         this.type = type;
         impulse = type.GetCustomAttribute<ImpulseAttribute>() != null;
         noCheat = type.GetCustomAttribute<HideInCheatGUIAttribute>() != null;
@@ -64,6 +67,7 @@ public class EffectInfo
         id = attribute.Id;
         name = attribute.Name ?? type.FullName;
         splitCheats = attribute.SeparateCheats;
+        description = type.GetCustomAttribute<DescriptionAttribute>()?.Description;
         this.type = type;
 
         _conflicts = Type.EmptyTypes;

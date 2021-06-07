@@ -9,6 +9,7 @@ namespace Chaos
     {
 
         [Effect("chaos.time.tas", "TAS")]
+        [Description("Makes your car always appear to go at 50 ku/h")]
         class TAS : TimeManipulation
         {
             private void OnDisable()
@@ -24,6 +25,7 @@ namespace Chaos
         }
 
         [Effect("chaos.time.superhot", "Superhot")]
+        [Description("Time only moves as fast as you move")]
         public class Superhot : TimeManipulation
         {
             private void Update()

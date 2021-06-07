@@ -7,6 +7,7 @@ namespace Chaos
 {
     // Thanks to Akuma73 for the idea
     [EffectGroup("chaos.gay", "Rainbow")]
+    [Description("Hue shifts objects in the game")]
     public abstract class Rainbow : ChaosEffect
     {
         protected Material rainbowMat;
@@ -29,6 +30,7 @@ namespace Chaos
         }
 
         [ChildEffect("chaos.gay.car", "Star Power"), ConflictsWith(typeof(Ghost), typeof(BrightAsFuck.Player))]
+        [Description("Hue shifts your car's material")]
         public class Car : Rainbow
         {
             protected override void OnEnable()
@@ -49,6 +51,7 @@ namespace Chaos
         }
 
         [ChildEffect("chaos.gay.checkpoint", "Actual Rainbows")]
+        [Description("Hue shifts checkpoint arcs")]
         public class Checkpoints : Rainbow
         {
             protected override void OnEnable()
@@ -64,6 +67,7 @@ namespace Chaos
         }
 
         [ChildEffect("chaos.gay.road", "Rainbow Road")]
+        [Description("Hue shifts the road texture")]
         public class Road : Rainbow {
             Renderer rend;
             Material ogMat;
@@ -88,6 +92,7 @@ namespace Chaos
         }
 
         [ChildEffect("chaos.gay.sun", "Disco Party"), ConflictsWith(typeof(DisableShit.Sun))]
+        [Description("Hue shifts the sun color")]
         public class Sun : Rainbow
         {
             Color ogColor;

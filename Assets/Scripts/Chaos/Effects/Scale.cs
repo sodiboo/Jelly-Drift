@@ -40,6 +40,7 @@ namespace Chaos
         }
 
         [Effect("chaos.scale.big", "Big")]
+        [Description("Makes your car 1.2x-3x bigger (and more powerful)")]
         public class Big : Scale
         {
             float _multiplier;
@@ -48,6 +49,7 @@ namespace Chaos
         }
 
         [Effect("chaos.scale.small", "Tiny")]
+        [Description("Makes your car 0.4x-0.8x as big (and as powerful)")]
         public class Tiny : Scale
         {
             float _multiplier;

@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Chaos
 {
     [Effect("chaos.collision.offset", "Bad Collision")]
+    [Description("Offsets your collision mesh by 1 unit in a random direction")]
     public class FuckyWuckyCollisionUwU : ChaosEffect
     {
         Vector3 offset;

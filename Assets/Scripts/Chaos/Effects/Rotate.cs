@@ -16,12 +16,14 @@ namespace Chaos
         }
 
         [Effect("chaos.rotate.random", "Where are you going?"), Impulse]
+        [Description("Randomizes your car rotation")]
         public class Random : Rotate
         {
             protected override Quaternion rotation => UnityEngine.Random.rotationUniform;
         }
 
         [Effect("chaos.rotate.flip", "Wrong way lol"), Impulse]
+        [Description("Turns your car the other way")]
         public class Flip : Rotate
         {
             protected override Quaternion rotation => Quaternion.LookRotation(-car.transform.forward, car.transform.up);

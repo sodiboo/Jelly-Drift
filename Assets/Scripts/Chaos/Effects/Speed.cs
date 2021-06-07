@@ -19,6 +19,7 @@ namespace Chaos
         }
 
         [Effect("chaos.speed.fast", "Sanik"), ConflictsWith(typeof(Grip))]
+        [Description("Makes your car 1.2x-5x faster (and prevents you from drifting or rolling as easily)")]
         public class Fast : Speed
         {
             float _multiplier;
@@ -48,6 +49,7 @@ namespace Chaos
         }
 
         [Effect("chaos.speed.slow", "Slowpoke")]
+        [Description("Makes your car 0.5x-0.8x as fast")]
         public class Slow : Speed
         {
             float _multiplier;

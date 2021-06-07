@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Chaos
 {
     [Effect("chaos.forces.kickflip", "Kickflip"), Impulse]
+    [Description("Throws you up in the air and makes you spin a little")]
     public class Kickflip : ChaosEffect
     {
         private void Start()
