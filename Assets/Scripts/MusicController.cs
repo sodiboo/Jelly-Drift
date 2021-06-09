@@ -28,11 +28,6 @@ public class MusicController : MonoBehaviour
         AudioListener.volume = SaveState.Instance.volume / 10f;
     }
 
-    // Token: 0x060000E9 RID: 233 RVA: 0x000020AB File Offset: 0x000002AB
-    private void Update()
-    {
-    }
-
     // Token: 0x060000EA RID: 234 RVA: 0x00006381 File Offset: 0x00004581
     public void UpdateMusic(float f) => music.volume = f / 10f;
 

@@ -21,7 +21,7 @@ public class UnlockManager : MonoBehaviour
     public void NextDisplay()
     {
         readyToSkip = false;
-        base.Invoke("SetSkipReady", 0.4f);
+        base.Invoke(nameof(SetSkipReady), 0.4f);
         if (n >= unlocks.Count)
         {
             base.gameObject.SetActive(false);

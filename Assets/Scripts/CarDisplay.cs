@@ -19,11 +19,6 @@ public class CarDisplay : MonoBehaviour
         SpawnCar(0);
     }
 
-    // Token: 0x06000059 RID: 89 RVA: 0x000020AB File Offset: 0x000002AB
-    private void Start()
-    {
-    }
-
     // Token: 0x0600005A RID: 90 RVA: 0x000040CA File Offset: 0x000022CA
     public void SetSkin(int n)
     {

@@ -8,8 +8,8 @@ public class SplitUi : MonoBehaviour
     private void Awake()
     {
         text = base.GetComponentInChildren<TextMeshProUGUI>();
-        base.Invoke("DestroySelf", 3f);
-        base.Invoke("StartFade", 1.5f);
+        base.Invoke(nameof(DestroySelf), 3f);
+        base.Invoke(nameof(StartFade), 1.5f);
         desiredScale = Vector3.one * 1f;
         base.transform.localScale = Vector3.zero;
     }

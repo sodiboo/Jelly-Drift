@@ -24,9 +24,6 @@ public class CheckPoint : MonoBehaviour
         }
     }
 
-    // Token: 0x040000A0 RID: 160
-    private readonly bool done;
-
     // Token: 0x040000A1 RID: 161
     public GameObject clearFx;
 }

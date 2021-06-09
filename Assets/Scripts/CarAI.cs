@@ -15,7 +15,7 @@ public class CarAI : MonoBehaviour
             difficulty
         }));
         car.engineForce = difficultyConfig[difficulty];
-        base.InvokeRepeating("AdjustSpeed", 0.5f, 0.5f);
+        base.InvokeRepeating(nameof(AdjustSpeed), 0.5f, 0.5f);
         if (GameController.Instance.finalCheckpoint != 0)
         {
             base.GetComponent<CheckpointUser>().ForceCheckpoint(0);
@@ -44,20 +44,20 @@ public class CarAI : MonoBehaviour
         {
             Recover();
         }
-        if (base.IsInvoking("Recover"))
+        if (base.IsInvoking(nameof(Recover)))
         {
             if (car.speed > 3f)
             {
-                base.CancelInvoke("Recover");
+                base.CancelInvoke(nameof(Recover));
             }
             return;
         }
         if (car.speed < 3f)
         {
-            base.Invoke("Recover", recoverTime);
+            base.Invoke(nameof(Recover), recoverTime);
             return;
         }
-        base.CancelInvoke("Recover");
+        base.CancelInvoke(nameof(Recover));
     }
 
     // Token: 0x06000044 RID: 68 RVA: 0x00003827 File Offset: 0x00001A27
@@ -197,23 +197,8 @@ public class CarAI : MonoBehaviour
     // Token: 0x0400006B RID: 107
     public Car car;
 
-    // Token: 0x0400006C RID: 108
-    private readonly LineRenderer line;
-
-    // Token: 0x0400006D RID: 109
-    private readonly float roadWidth = 0.4f;
-
-    // Token: 0x0400006E RID: 110
-    private readonly float maxOffset = 0.36f;
-
-    // Token: 0x0400006F RID: 111
-    private readonly int lookAhead = 4;
-
     // Token: 0x04000070 RID: 112
     private readonly int maxLookAhead = 6;
-
-    // Token: 0x04000071 RID: 113
-    private readonly int currentDriftNode;
 
     // Token: 0x04000072 RID: 114
     public int respawnHeight;

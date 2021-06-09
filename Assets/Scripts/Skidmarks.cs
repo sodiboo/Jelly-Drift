@@ -178,24 +178,6 @@ public class Skidmarks : MonoBehaviour
     [SerializeField]
     private Material skidmarksMaterial;
 
-    // Token: 0x0400017A RID: 378
-    private const int MAX_MARKS = 1024;
-
-    // Token: 0x0400017B RID: 379
-    private const float MARK_WIDTH = 0.25f;
-
-    // Token: 0x0400017C RID: 380
-    private const float GROUND_OFFSET = 0.02f;
-
-    // Token: 0x0400017D RID: 381
-    private const float MIN_DISTANCE = 0.25f;
-
-    // Token: 0x0400017E RID: 382
-    private const float MIN_SQR_DISTANCE = 0.0625f;
-
-    // Token: 0x0400017F RID: 383
-    private const float MAX_OPACITY = 1f;
-
     // Token: 0x04000180 RID: 384
     private int markIndex;
 

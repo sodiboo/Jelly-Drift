@@ -104,7 +104,7 @@ public class CameraController : MonoBehaviour
         }
         this.offset += offset;
         readyToOffset = false;
-        base.Invoke("GetReady", 0.5f);
+        base.Invoke(nameof(GetReady), 0.5f);
         ShakeController.Instance.Shake();
     }
 

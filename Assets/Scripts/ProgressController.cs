@@ -23,7 +23,7 @@ public class ProgressController : MonoBehaviour
         var num2 = SaveManager.Instance.state.XpForLevel(currentLevel + 1) - SaveManager.Instance.state.XpForLevel(currentLevel);
         var x = num / num2;
         progress.localScale = new Vector3(x, 1f, 1f);
-        base.Invoke("GetReady", 0.5f);
+        base.Invoke(nameof(GetReady), 0.5f);
     }
 
     // Token: 0x06000109 RID: 265 RVA: 0x000067B1 File Offset: 0x000049B1
@@ -36,8 +36,8 @@ public class ProgressController : MonoBehaviour
         {
             return;
         }
-        xp = Mathf.Lerp(xp, desiredXp, Time.fixedDeltaTime * 0.5f);
-        currentMoney = Mathf.Lerp(currentMoney, desiredMoney, Time.fixedDeltaTime * 0.5f);
+        xp = Mathf.Lerp(xp, desiredXp, Time.deltaTime * 0.5f);
+        currentMoney = Mathf.Lerp(currentMoney, desiredMoney, Time.deltaTime * 0.5f);
         var num = (float)((int)xp - SaveManager.Instance.state.XpForLevel(currentLevel));
         var num2 = SaveManager.Instance.state.XpForLevel(currentLevel + 1) - SaveManager.Instance.state.XpForLevel(currentLevel);
         var x = num / num2;

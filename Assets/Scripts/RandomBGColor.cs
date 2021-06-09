@@ -17,7 +17,7 @@ public class RandomBGColor : MonoBehaviour
     private void OnEnable() => RandomColor();
 
     // Token: 0x0400012C RID: 300
-    private Camera camera;
+    private new Camera camera;
 
     // Token: 0x0400012D RID: 301
     private readonly Color[] colors = new Color[]

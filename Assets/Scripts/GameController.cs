@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
         GameController.Instance = this;
         Time.timeScale = 1f;
         startPos = checkPoints.GetChild(0);
-        base.Invoke("StartRace", startTime);
+        base.Invoke(nameof(StartRace), startTime);
         currentCar = UnityEngine.Object.Instantiate<GameObject>(PrefabManager.Instance.cars[GameState.Instance.car], startPos.position, startPos.rotation);
         currentCar.GetComponent<CarSkin>().SetSkin(GameState.Instance.skin);
         action = PrefabManager.Instance.inputs.FindActionMap("Menu").FindAction("Cancel");
@@ -108,7 +108,7 @@ public class GameController : MonoBehaviour
         victory = win;
         playing = false;
         Time.timeScale = 0.3f;
-        base.Invoke("ShowFinishScreen", 1f);
+        base.Invoke(nameof(ShowFinishScreen), 1f);
         if (endCamera)
         {
             endCamera.target = car;

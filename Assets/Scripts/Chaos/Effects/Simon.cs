@@ -66,7 +66,7 @@ namespace Chaos
             }
         }
 
-        [Effect("chaos.simon.punishment", "Punishment", default(EffectInfo.Alignment)), HideInCheatGUI]
+        [Effect("chaos.simon.punishment", "Punishment", default), HideInCheatGUI]
         [Description("Punishes you for failing simon says, by locking your position and rotation")]
         public class Punishment : ChaosEffect
         {

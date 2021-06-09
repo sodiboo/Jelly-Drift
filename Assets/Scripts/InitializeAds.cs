@@ -83,12 +83,6 @@ public class InitializeAds : MonoBehaviour
     // Token: 0x040000D7 RID: 215
     private readonly string gameId = "4035567";
 
-    // Token: 0x040000D8 RID: 216
-    private readonly string videoAd = "video";
-
-    // Token: 0x040000D9 RID: 217
-    private readonly string rewardAd = "rewardedVideo";
-
     // Token: 0x040000DA RID: 218
     private readonly bool testMode;
 

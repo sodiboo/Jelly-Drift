@@ -34,7 +34,6 @@ public class BallCar : MonoBehaviour
     {
         steering = Input.GetAxisRaw("Horizontal");
         throttle = Input.GetAxis("Vertical");
-        breaking = Input.GetButton("Breaking");
     }
 
     // Token: 0x0400001A RID: 26
@@ -52,17 +51,11 @@ public class BallCar : MonoBehaviour
     // Token: 0x0400001E RID: 30
     private float throttle;
 
-    // Token: 0x0400001F RID: 31
-    private bool breaking;
-
     // Token: 0x04000020 RID: 32
     private readonly float C_drag = 3.5f;
 
     // Token: 0x04000021 RID: 33
     private readonly float C_rollFriction = 91f;
-
-    // Token: 0x04000022 RID: 34
-    private readonly float C_breaking = 3000f;
 
     // Token: 0x04000023 RID: 35
     private readonly float speed = 18000f;

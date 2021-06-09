@@ -162,10 +162,4 @@ public class SettingsUi : MonoBehaviour
     public SliderSettingCycle music;
 
     public SettingCycle speedometer;
-
-    // Token: 0x040001A8 RID: 424
-    private Color selected = Color.white;
-
-    // Token: 0x040001A9 RID: 425
-    private Color deselected = new Color(0f, 0f, 0f, 0.3f);
 }

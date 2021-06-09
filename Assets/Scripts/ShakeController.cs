@@ -25,7 +25,6 @@ public class ShakeController : MonoBehaviour
         {
             return;
         }
-        var magnitude = car.acceleration.magnitude;
         var num = 0f;
         foreach (var suspension in car.wheelPositions)
         {

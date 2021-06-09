@@ -9,7 +9,7 @@ public class StartLight : MonoBehaviour
         rend = base.GetComponent<MeshRenderer>();
         colors = rend.materials;
         SetColor(-1);
-        base.Invoke("NextColor", GameController.Instance.startTime / 3f);
+        base.Invoke(nameof(NextColor), GameController.Instance.startTime / 3f);
     }
 
     // Token: 0x060001BC RID: 444 RVA: 0x00009344 File Offset: 0x00007544
@@ -24,7 +24,7 @@ public class StartLight : MonoBehaviour
         c++;
         if (c < 3)
         {
-            base.Invoke("NextColor", GameController.Instance.startTime / 3f);
+            base.Invoke(nameof(NextColor), GameController.Instance.startTime / 3f);
         }
     }
 
@@ -57,7 +57,7 @@ public class StartLight : MonoBehaviour
     public Material[] colors;
 
     // Token: 0x040001C5 RID: 453
-    public AudioSource audio;
+    public new AudioSource audio;
 
     // Token: 0x040001C6 RID: 454
     private int c;

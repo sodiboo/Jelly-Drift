@@ -52,15 +52,6 @@ public class WheelSkid : MonoBehaviour
     // Token: 0x04000192 RID: 402
     private WheelHit wheelHitInfo;
 
-    // Token: 0x04000193 RID: 403
-    private const float SKID_FX_SPEED = 0.5f;
-
-    // Token: 0x04000194 RID: 404
-    private const float MAX_SKID_INTENSITY = 20f;
-
-    // Token: 0x04000195 RID: 405
-    private const float WHEEL_SLIP_MULTIPLIER = 10f;
-
     // Token: 0x04000196 RID: 406
     private int lastSkid = -1;
 

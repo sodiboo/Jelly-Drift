@@ -25,7 +25,7 @@ public class LowpasController : MonoBehaviour
         {
             desiredFreq = 22000f;
         }
-        lowpass.cutoffFrequency = Mathf.Lerp(lowpass.cutoffFrequency, desiredFreq, Time.fixedDeltaTime * 4f);
+        lowpass.cutoffFrequency = Mathf.Lerp(lowpass.cutoffFrequency, desiredFreq, Time.deltaTime * 4f);
     }
 
     // Token: 0x040000E3 RID: 227

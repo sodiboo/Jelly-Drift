@@ -10,8 +10,8 @@ namespace Chaos
 
         protected override void Disable()
         {
-            CancelInvoke("StoreLag");
-            CancelInvoke("LoadLag");
+            CancelInvoke(nameof(StoreLag));
+            CancelInvoke(nameof(LoadLag));
         }
 
         private Vector3 position;
@@ -25,7 +25,7 @@ namespace Chaos
             rotation = car.rb.rotation;
             velocity = car.rb.velocity;
             angularVelocity = car.rb.angularVelocity;
-            Invoke("LoadLag", 0.5f);
+            Invoke(nameof(LoadLag), 0.5f);
         }
 
         private void LoadLag()
@@ -34,7 +34,7 @@ namespace Chaos
             car.rb.rotation = rotation;
             car.rb.velocity = velocity;
             car.rb.angularVelocity = angularVelocity;
-            Invoke("StoreLag", 0.5f);
+            Invoke(nameof(StoreLag), 0.5f);
         }
     }
 }

@@ -40,11 +40,11 @@ public class SkinCycle : ItemCycle
             SaveManager.Instance.Save();
         }
         GameState.Instance.skin = num;
-        UpdateText(num == base.selected);
+        UpdateText();
     }
 
     // Token: 0x060001A9 RID: 425 RVA: 0x00008F40 File Offset: 0x00007140
-    public void UpdateText(bool unlocked)
+    public void UpdateText()
     {
         var selected = carCycle.selected;
         var selected2 = base.selected;
@@ -96,7 +96,7 @@ public class SkinCycle : ItemCycle
             SaveManager.Instance.state.money -= skinPrice;
             SaveManager.Instance.state.skins[carCycle.selected][base.selected] = true;
             SaveManager.Instance.Save();
-            UpdateText(true);
+            UpdateText();
             unlockManager.unlocks.Add(new UnlockManager.Unlock(UnlockManager.UnlockType.Skin, carCycle.selected, base.selected));
             unlockManager.gameObject.SetActive(true);
             menuStats.UpdateStats();

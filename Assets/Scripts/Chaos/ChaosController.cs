@@ -106,21 +106,19 @@ public class ChaosController : MonoBehaviour
             try
             {
 
-                using (var file = File.Open(path, FileMode.OpenOrCreate))
-                {
-                    using (var reader = new StreamReader(file)) config = JsonUtility.FromJson<ChaosConfig>(reader.ReadToEnd());
-                    if (config.config != null)
-                        foreach (var configured in config.config)
+                using var file = File.Open(path, FileMode.OpenOrCreate);
+                using (var reader = new StreamReader(file)) config = JsonUtility.FromJson<ChaosConfig>(reader.ReadToEnd());
+                if (config.config != null)
+                    foreach (var configured in config.config)
+                    {
+                        try
                         {
-                            try
-                            {
-                                var effect = effects.First(e => e.id == configured.id);
-                                effect.name = configured.name;
-                                effect.duration = configured.duration;
-                            }
-                            catch (InvalidOperationException) { } // no effect has that id
+                            var effect = effects.First(e => e.id == configured.id);
+                            effect.name = configured.name;
+                            effect.duration = configured.duration;
                         }
-                }
+                        catch (InvalidOperationException) { } // no effect has that id
+                    }
             }
             catch (Exception)
             {
@@ -306,7 +304,9 @@ public class ChaosController : MonoBehaviour
             return;
         }
         text.text = globalFormatting.Aggregate(currentEffect.name, (name, format) => name.Replace($"@{format.Key}", format.Value()));
+#pragma warning disable UNT0008 // Null propagation on Unity objects
         var effectSpecificParams = activeEffect?.CustomParameters();
+#pragma warning restore UNT0008 // Null propagation on Unity objects
         if (effectSpecificParams != null) text.text = string.Format(text.text, effectSpecificParams);
     }
 
@@ -459,92 +459,90 @@ public class ChaosController : MonoBehaviour
         windowRect = RGUI.ResizableWindow(GetHashCode(), windowRect, _ =>
         {
             GUI.DragWindow(new Rect(0, 0, windowRect.width, 20));
-            using (var scrollView = new GUILayout.ScrollViewScope(scrollPos, GUIStyle.none, GUIStyle.none))
+            using var scrollView = new GUILayout.ScrollViewScope(scrollPos, GUIStyle.none, GUIStyle.none);
+            scrollPos = scrollView.scrollPosition;
+            foreach (var effect in cheatEffectsList)
             {
-                scrollPos = scrollView.scrollPosition;
-                foreach (var effect in cheatEffectsList)
+                if (effect.isGroup)
                 {
-                    if (effect.isGroup)
+                    using (new RGUI.EnabledScope(!effect.children.All(child => child.conflicts.Any(activeCheats.ContainsKey))))
                     {
-                        using (new RGUI.EnabledScope(!effect.children.All(child => child.conflicts.Any(activeCheats.ContainsKey))))
+                        if (effect.effectType == EffectInfo.EffectType.MultiGroup)
                         {
-                            if (effect.effectType == EffectInfo.EffectType.MultiGroup)
+                            var all = effect.children.Any(activeCheats.ContainsKey);
+                            if (all != GUILayout.Toggle(all, effect.name))
                             {
-                                var all = effect.children.Any(activeCheats.ContainsKey);
-                                if (all != GUILayout.Toggle(all, effect.name))
+                                if (all)
                                 {
-                                    if (all)
-                                    {
-                                        foreach (var child in effect.children) RemoveEffect(child);
-                                    }
-                                    else
-                                    {
-                                        foreach (var child in effect.children)
-                                        {
-                                            if (!child.conflicts.Any(activeCheats.ContainsKey) && child.valid) AddEffect(child);
-                                        }
-                                    }
-                                }
-                            }
-                            else GUILayout.Label(effect.name);
-                            using (new RGUI.IndentScope(indent))
-                            {
-
-                                foreach (var child in effect.children)
-                                {
-                                    using (new RGUI.EnabledScope(!child.conflicts.Any(activeCheats.ContainsKey)))
-                                    {
-                                        var active = activeCheats.ContainsKey(child);
-                                        if (active != GUILayout.Toggle(active, DisplayName(child)))
-                                        {
-                                            if (active)
-                                            {
-                                                RemoveEffect(child);
-                                            }
-                                            else
-                                            {
-                                                if (effect.effectType == EffectInfo.EffectType.ExclusiveGroup)
-                                                {
-                                                    foreach (var otherChild in effect.children) RemoveEffect(otherChild);
-                                                }
-                                                AddEffect(child);
-                                            }
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                    else if (effect.impulse)
-                    {
-                        using (new RGUI.EnabledScope(!effect.conflicts.Any(activeCheats.ContainsKey)))
-                        {
-                            if (GUILayout.Button(DisplayName(effect)))
-                            {
-                                AddEffect(effect);
-                            }
-                            else
-                            {
-                                RemoveEffect(effect);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        using (new RGUI.EnabledScope(!effect.conflicts.Any(activeCheats.ContainsKey)))
-                        {
-                            var active = activeCheats.ContainsKey(effect);
-                            if (active != GUILayout.Toggle(active, DisplayName(effect)))
-                            {
-                                if (active)
-                                {
-                                    RemoveEffect(effect);
+                                    foreach (var child in effect.children) RemoveEffect(child);
                                 }
                                 else
                                 {
-                                    AddEffect(effect);
+                                    foreach (var child in effect.children)
+                                    {
+                                        if (!child.conflicts.Any(activeCheats.ContainsKey) && child.valid) AddEffect(child);
+                                    }
                                 }
+                            }
+                        }
+                        else GUILayout.Label(effect.name);
+                        using (new RGUI.IndentScope(indent))
+                        {
+
+                            foreach (var child in effect.children)
+                            {
+                                using (new RGUI.EnabledScope(!child.conflicts.Any(activeCheats.ContainsKey)))
+                                {
+                                    var active = activeCheats.ContainsKey(child);
+                                    if (active != GUILayout.Toggle(active, DisplayName(child)))
+                                    {
+                                        if (active)
+                                        {
+                                            RemoveEffect(child);
+                                        }
+                                        else
+                                        {
+                                            if (effect.effectType == EffectInfo.EffectType.ExclusiveGroup)
+                                            {
+                                                foreach (var otherChild in effect.children) RemoveEffect(otherChild);
+                                            }
+                                            AddEffect(child);
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+                else if (effect.impulse)
+                {
+                    using (new RGUI.EnabledScope(!effect.conflicts.Any(activeCheats.ContainsKey)))
+                    {
+                        if (GUILayout.Button(DisplayName(effect)))
+                        {
+                            AddEffect(effect);
+                        }
+                        else
+                        {
+                            RemoveEffect(effect);
+                        }
+                    }
+                }
+                else
+                {
+                    using (new RGUI.EnabledScope(!effect.conflicts.Any(activeCheats.ContainsKey)))
+                    {
+                        var active = activeCheats.ContainsKey(effect);
+                        if (active != GUILayout.Toggle(active, DisplayName(effect)))
+                        {
+                            if (active)
+                            {
+                                RemoveEffect(effect);
+                            }
+                            else
+                            {
+                                AddEffect(effect);
                             }
                         }
                     }

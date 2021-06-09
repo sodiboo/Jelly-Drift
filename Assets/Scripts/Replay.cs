@@ -16,7 +16,6 @@ public class Replay : MonoBehaviour
         }
         var ghost = GameState.Instance.ghost;
         replay = new List<ReplayController.ReplayFrame>();
-        replayDeltaTime = 1f / ReplayController.Instance.hz;
         var text = "pb";
         text += GameState.Instance.map;
         if (ghost == GhostCycle.Ghost.PB)
@@ -147,9 +146,6 @@ public class Replay : MonoBehaviour
     // Token: 0x0400012E RID: 302
     private List<ReplayController.ReplayFrame> replay;
 
-    // Token: 0x0400012F RID: 303
-    private float replayDeltaTime;
-
     // Token: 0x04000130 RID: 304
     private string filePath;
 
@@ -158,9 +154,6 @@ public class Replay : MonoBehaviour
 
     // Token: 0x04000132 RID: 306
     private int currentFrame;
-
-    // Token: 0x04000133 RID: 307
-    private Vector3 nextPos;
 
     // Token: 0x04000134 RID: 308
     public Rigidbody rb;

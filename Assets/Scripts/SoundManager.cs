@@ -62,5 +62,5 @@ public class SoundManager : MonoBehaviour
     public AudioClip error;
 
     // Token: 0x040001C2 RID: 450
-    public AudioSource audio;
+    public new AudioSource audio;
 }

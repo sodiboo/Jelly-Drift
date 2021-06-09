@@ -12,6 +12,6 @@ public class MySetting : MonoBehaviour
 
     // Token: 0x060000F1 RID: 241 RVA: 0x000063B8 File Offset: 0x000045B8
     private void Awake() => options = (from r in base.GetComponentsInChildren<TextMeshProUGUI>()
-                                       where r.tag != "Ignore"
+                                       where !r.CompareTag("Ignore")
                                        select r).ToArray<TextMeshProUGUI>();
 }

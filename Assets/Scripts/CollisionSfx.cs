@@ -27,7 +27,7 @@ public class CollisionSfx : MonoBehaviour
         }
         crashAudio.Randomize();
         ready = false;
-        base.Invoke("GetReady", 0.5f);
+        Invoke(nameof(GetReady), 0.5f);
     }
 
     // Token: 0x0600006E RID: 110 RVA: 0x000045BA File Offset: 0x000027BA

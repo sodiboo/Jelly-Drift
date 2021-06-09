@@ -35,7 +35,6 @@ public class ReplayController : MonoBehaviour
             ".txt"
         });
         replay = new List<ReplayController.ReplayFrame>();
-        startTime = Time.time;
     }
 
     // Token: 0x0600011D RID: 285 RVA: 0x0000717C File Offset: 0x0000537C
@@ -81,19 +80,8 @@ public class ReplayController : MonoBehaviour
         }
     }
 
-    // Token: 0x0600011F RID: 287 RVA: 0x000020AB File Offset: 0x000002AB
-    private void Update()
-    {
-    }
-
     // Token: 0x04000135 RID: 309
     private List<ReplayController.ReplayFrame> replay;
-
-    // Token: 0x04000138 RID: 312
-    private float startTime;
-
-    // Token: 0x04000139 RID: 313
-    private readonly float endTime;
 
     // Token: 0x0400013A RID: 314
     private string filePath;

@@ -8,7 +8,6 @@ public class Suspension : MonoBehaviour
     {
         car = base.transform.parent.GetComponent<Car>();
         bodyRb = car.GetComponent<Rigidbody>();
-        raycastOffset = car.suspensionLength * 0.5f;
         smokeEmitting = smokeFx.emission;
         spinEmitting = spinFx.emission;
     }
@@ -169,9 +168,6 @@ public class Suspension : MonoBehaviour
     // Token: 0x040001DB RID: 475
     public LayerMask whatIsGround;
 
-    // Token: 0x040001DC RID: 476
-    private readonly MeshRenderer mesh;
-
     // Token: 0x040001DD RID: 477
     public Vector3 hitPos;
 
@@ -186,12 +182,6 @@ public class Suspension : MonoBehaviour
 
     // Token: 0x040001E1 RID: 481
     public float lastCompression;
-
-    // Token: 0x040001E2 RID: 482
-    private float raycastOffset;
-
-    // Token: 0x040001E3 RID: 483
-    private readonly float maxEmission;
 
     // Token: 0x040001E5 RID: 485
     public float restLength;

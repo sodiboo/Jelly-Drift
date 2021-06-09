@@ -7,7 +7,6 @@ public class AnimateUI : MonoBehaviour
     private void Awake()
     {
         defaultScale = base.transform.localScale;
-        defaultRot = 0f;
         desiredScale = defaultScale;
     }
 
@@ -24,9 +23,6 @@ public class AnimateUI : MonoBehaviour
 
     // Token: 0x0400000A RID: 10
     private Vector3 defaultScale;
-
-    // Token: 0x0400000B RID: 11
-    private float defaultRot;
 
     // Token: 0x0400000C RID: 12
     private float rotVel;

@@ -80,7 +80,9 @@ namespace Chaos
         {
             var result = ChaosController.Instance.globalFormatting.Aggregate(info.name,
             (name, format) => name.Replace($"@{format.Key}", format.Value()));
+#pragma warning disable UNT0008 // Null propagation on Unity objects
             var parameters = effect?.CustomParameters();
+#pragma warning restore UNT0008 // Null propagation on Unity objects
             if (parameters != null) result = string.Format(result, parameters);
             return result;
         }

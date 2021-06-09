@@ -109,8 +109,7 @@ public class EffectInfo
 
     private IEnumerable<EffectInfo> ComputeConflicts()
     {
-        var cleared = new HashSet<EffectInfo>();
-        cleared.Add(this);
+        var cleared = new HashSet<EffectInfo> { this };
         foreach (var effect in GetInfos(_conflicts))
         {
             if (effect.isGroup) continue;
@@ -132,8 +131,7 @@ public class EffectInfo
 
     private IEnumerable<EffectInfo> GetInfos(Type[] types)
     {
-        var cleared = new HashSet<EffectInfo>();
-        cleared.Add(this);
+        var cleared = new HashSet<EffectInfo> { this };
         foreach (var type in types)
         {
             foreach (var effect in ChaosController.effects)

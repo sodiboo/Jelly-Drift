@@ -54,13 +54,6 @@ public class Car : MonoBehaviour
         {
             rb.centerOfMass = centerOfMass.localPosition;
         }
-        c = base.GetComponentInChildren<Collider>();
-        wheelBase = Vector3.Distance(wheelPositions[0].transform.position, wheelPositions[2].transform.position);
-        CG = c.bounds.center;
-        cgHeight = c.bounds.extents.y + suspensionLength;
-        cgToFrontAxle = Vector3.Distance(wheelPositions[0].transform.position + (wheelPositions[1].transform.position - wheelPositions[0].transform.position) * 0.5f, CG);
-        cgToRearAxle = Vector3.Distance(wheelPositions[2].transform.position + (wheelPositions[3].transform.position - wheelPositions[2].transform.position) * 0.5f, CG);
-        wheelRadius = suspensionLength / 2f;
         InitWheels();
     }
 
@@ -245,13 +238,7 @@ public class Car : MonoBehaviour
             var num = suspensionLength;
             var hitHeight = suspension.hitHeight;
             var y = Mathf.Lerp(suspension.wheelObject.transform.localPosition.y, -hitHeight + num, Time.deltaTime * 20f);
-            var num2 = 0.2f * suspensionLength * 2f;
-            if (suspension.transform.localPosition.x < 0f)
-            {
-                num2 = -num2;
-            }
-            num2 = 0f;
-            suspension.wheelObject.transform.localPosition = new Vector3(num2, y, 0f);
+            suspension.wheelObject.transform.localPosition = new Vector3(0f, y, 0f);
             suspension.wheelObject.Rotate(Vector3.right, XZVector(rb.velocity).magnitude * 1f * dir);
             suspension.wheelObject.localScale = Vector3.one * (suspensionLength * 2f);
             suspension.transform.localScale = Vector3.one / base.transform.localScale.x;
@@ -297,9 +284,6 @@ public class Car : MonoBehaviour
     // Token: 0x0400003D RID: 61
     public TextMeshProUGUI text;
     public new GameObject collider;
-
-    // Token: 0x0400003E RID: 62
-    private Collider c;
 
     // Token: 0x0400003F RID: 63
     [Header("Suspension Variables")]
@@ -362,56 +346,11 @@ public class Car : MonoBehaviour
     // Token: 0x04000055 RID: 85
     private bool grounded;
 
-    // Token: 0x04000056 RID: 86
-    private Vector3 CG;
-
-    // Token: 0x04000057 RID: 87
-    private float cgHeight;
-
-    // Token: 0x04000058 RID: 88
-    private float wheelBase;
-
-    // Token: 0x04000059 RID: 89
-    private readonly float axleWeightRatioFront = 0.5f;
-
-    // Token: 0x0400005A RID: 90
-    private readonly float axleWeightRatioRear = 0.5f;
-
-    // Token: 0x0400005B RID: 91
-    private float wheelRadius;
-
-    // Token: 0x0400005D RID: 93
-    private readonly float yawRate;
-
-    // Token: 0x0400005E RID: 94
-    private readonly float weightTransfer = 0.2f;
-
-    // Token: 0x0400005F RID: 95
-    private float cgToRearAxle;
-
-    // Token: 0x04000060 RID: 96
-    private float cgToFrontAxle;
-
-    // Token: 0x04000061 RID: 97
-    private readonly float tireGrip = 2f;
-
-    // Token: 0x04000062 RID: 98
-    private readonly float lockGrip = 0.7f;
-
-    // Token: 0x04000063 RID: 99
-    private readonly float cornerStiffnessFront = 5f;
-
-    // Token: 0x04000064 RID: 100
-    private readonly float cornerStiffnessRear = 5.2f;
-
     // Token: 0x04000065 RID: 101
     private readonly float yawGripThreshold = 0.6f;
 
     // Token: 0x04000066 RID: 102
     private readonly float yawGripMultiplier = 0.15f;
-
-    // Token: 0x04000068 RID: 104
-    public bool yes;
 
     public float firstPersonDistance;
     public float firstPersonHeight;

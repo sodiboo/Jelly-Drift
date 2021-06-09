@@ -23,8 +23,8 @@ public class Ghost : MonoBehaviour
             {
                 materials[i][j] = renderers[i].materials[j];
                 var material = new Material(ghost);
-                material.color = materials[i][j].color;
-                material.color = new Color(material.color.r, material.color.g, material.color.b, 0.2f);
+                var color = materials[i][j].color;
+                material.color = new Color(color.r, color.g, color.b, 0.2f);
                 newMats[j] = material;
             }
             renderers[i].materials = newMats;

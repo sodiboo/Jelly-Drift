@@ -28,7 +28,7 @@ public class Pause : MonoBehaviour
         paused = true;
         unpausedLayout = InputManager.Instance.layout;
         InputManager.Instance.layout = InputManager.Layout.Menu;
-        Invoke("EnablePauseMenu", 0f); // next frame because otherwise input system might fire the "canceled" callback of the menu since that might be pressed this frame, depending on the order it was processing shit in
+        Invoke(nameof(EnablePauseMenu), 0f); // next frame because otherwise input system might fire the "canceled" callback of the menu since that might be pressed this frame, depending on the order it was processing shit in
 #if MOBILE
 		MobileControls.Instance.pause.SetActive(false);
 #endif
