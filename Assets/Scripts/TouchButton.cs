@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -8,7 +6,7 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 [RequireComponent(typeof(RectTransform))]
 public class TouchButton : MonoBehaviour
 {
-    RectTransform rectTransform;
+    private RectTransform rectTransform;
     public InputType type;
     private void Awake()
     {
@@ -62,7 +60,7 @@ public class TouchButton : MonoBehaviour
     //    }
     //}
 
-    bool lastValue;
+    private bool lastValue;
 
     private void Update()
     {

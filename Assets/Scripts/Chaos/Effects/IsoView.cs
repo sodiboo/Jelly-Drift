@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -8,13 +6,13 @@ namespace Chaos
     [Description("Gives you a top-down (bird's eye) view of the map in isometric mode")]
     public class IsoView : ChaosEffect
     {
-        Camera cam;
-        float camHeight;
-        float camDist;
-        float rotSpeed;
-        float movSpeed;
-        bool dof;
-        int camMode;
+        private Camera cam;
+        private float camHeight;
+        private float camDist;
+        private float rotSpeed;
+        private float movSpeed;
+        private bool dof;
+        private int camMode;
         protected override void Enable()
         {
             cam = CameraController.Instance.GetComponentInChildren<Camera>();

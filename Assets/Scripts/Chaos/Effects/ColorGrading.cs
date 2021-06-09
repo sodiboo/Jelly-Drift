@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using CG = UnityEngine.Rendering.PostProcessing.ColorGrading;
 
@@ -9,14 +7,13 @@ namespace Chaos
     [EffectGroup("chaos.colorgrading", "Color Grading", SeparateCheats = true)]
     public abstract class ColorGrading : ChaosEffect
     {
-        PostProcessVolume volume;
-        BoolParameter ao;
-        BoolParameter bloom;
-        BoolParameter dof;
-        BoolParameter motionBlur;
-        BoolParameter vignette;
-
-        bool enableVolume;
+        private PostProcessVolume volume;
+        private BoolParameter ao;
+        private BoolParameter bloom;
+        private BoolParameter dof;
+        private BoolParameter motionBlur;
+        private BoolParameter vignette;
+        private bool enableVolume;
         protected override void Awake()
         {
             base.Awake();
@@ -59,8 +56,8 @@ namespace Chaos
         [Description("Deletes the blue and red color channels, doesn't require ")]
         public class NightVision : ColorGrading
         {
-            FloatParameter red;
-            FloatParameter blue;
+            private FloatParameter red;
+            private FloatParameter blue;
             protected override void Awake()
             {
                 base.Awake();
@@ -87,7 +84,7 @@ namespace Chaos
         [Description("Hue shifts your entire view")]
         public class LSD : ColorGrading
         {
-            FloatParameter hue;
+            private FloatParameter hue;
             protected override void Awake()
             {
                 base.Awake();

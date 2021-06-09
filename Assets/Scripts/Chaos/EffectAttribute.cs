@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class EffectAttribute : Attribute
 {
-    private string name;
-    private string id;
-    private EffectInfo.Alignment alignment;
+    private readonly string name;
+    private readonly string id;
+    private readonly EffectInfo.Alignment alignment;
     public EffectAttribute(string id, string name, EffectInfo.Alignment alignment)
     {
         this.name = name;

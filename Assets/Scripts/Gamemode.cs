@@ -1,8 +1,6 @@
-﻿using System;
-
-public enum Gamemode
+﻿public enum Gamemode
 {
-	Race,
-	TimeTrial,
-	Chaos,
+    Race,
+    TimeTrial,
+    Chaos,
 }

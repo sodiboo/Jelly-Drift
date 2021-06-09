@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Chaos
+﻿namespace Chaos
 {
     [Effect("chaos.autopilot", "Autopilot", EffectInfo.Alignment.Bad), ConflictsWith(typeof(FuckyWuckyControlsUwU), typeof(Southpaw), typeof(Multiplayer))]
     [Description("Disables your controls and adds an AI to your car")]

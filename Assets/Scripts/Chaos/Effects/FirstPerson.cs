@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -9,7 +7,7 @@ namespace Chaos
     public class FirstPerson : ChaosEffect
     {
         public static bool value; // checked in CameraController.Update to prevent regular camera motion
-        Camera cam;
+        private Camera cam;
         protected override void Enable()
         {
             value = true;

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -8,9 +6,6 @@ namespace Chaos
     [Description("Throws you up in the air and makes you spin a little")]
     public class Kickflip : ChaosEffect
     {
-        protected override void Enable()
-        {
-            car.rb.AddForceAtPosition(car.transform.up * 10, car.transform.right, ForceMode.VelocityChange);
-        }
+        protected override void Enable() => car.rb.AddForceAtPosition(car.transform.up * 10, car.transform.right, ForceMode.VelocityChange);
     }
 }

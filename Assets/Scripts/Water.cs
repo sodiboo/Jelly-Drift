@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Water : MonoBehaviour
 {
@@ -10,5 +9,5 @@ public class Water : MonoBehaviour
 	}
 #endif
 
-	public Material bad;
+    public Material bad;
 }

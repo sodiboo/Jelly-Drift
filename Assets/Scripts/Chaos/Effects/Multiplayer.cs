@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -11,7 +9,7 @@ namespace Chaos
     [Description("Spawns a fake player which can collect checkpoints for you, and has a 50% chance to make that your main player when disabled")]
     public class Multiplayer : ChaosEffect
     {
-        GameObject otherCar;
+        private GameObject otherCar;
         protected override void Enable()
         {
             otherCar = Instantiate(PrefabManager.Instance.cars[Random.Range(0, PrefabManager.Instance.cars.Length)], car.transform.position + car.transform.forward * 5, car.transform.rotation);

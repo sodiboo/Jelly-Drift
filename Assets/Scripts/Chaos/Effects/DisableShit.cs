@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -11,8 +9,9 @@ namespace Chaos
 
         protected override void Enable()
         {
-            switch (things) {
-                case Renderer[] renderers:  foreach (var el in renderers) el.enabled = false; break;
+            switch (things)
+            {
+                case Renderer[] renderers: foreach (var el in renderers) el.enabled = false; break;
                 case Behaviour[] behaviours: foreach (var el in behaviours) el.enabled = false; break;
                 case GameObject[] objects: foreach (var el in objects) el.SetActive(false); break;
             }

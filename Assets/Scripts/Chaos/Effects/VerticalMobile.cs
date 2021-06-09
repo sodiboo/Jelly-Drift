@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +9,7 @@ namespace Chaos
 #endif
     [Effect("chaos.view.portrait", "Portrait Mode", EffectInfo.Alignment.Neutral)]
     [Description("Turns your screen to portrait mode")]
-    class VerticalMobile : ChaosEffect
+    internal class VerticalMobile : ChaosEffect
     {
         protected override void Enable()
         {
@@ -30,8 +29,9 @@ namespace Chaos
             StartCoroutine(Wait3Seconds());
         }
 
-        InputAction pause = InputManager.Instance.inputs.FindActionMap("Global").FindAction("Pause");
-        IEnumerator Wait3Seconds()
+        private readonly InputAction pause = InputManager.Instance.inputs.FindActionMap("Global").FindAction("Pause");
+
+        private IEnumerator Wait3Seconds()
         {
             MobileControls.Instance.pause.SetActive(false);
             Time.timeScale = 0f;

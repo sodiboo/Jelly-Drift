@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -8,15 +6,9 @@ namespace Chaos
     public abstract class Speed : ChaosEffect
     {
         protected abstract float multiplier { get; }
-        protected override void Enable()
-        {
-            car.engineForce *= multiplier;
-        }
+        protected override void Enable() => car.engineForce *= multiplier;
 
-        protected override void Disable()
-        {
-            car.engineForce /= multiplier;
-        }
+        protected override void Disable() => car.engineForce /= multiplier;
 
         public override object[] CustomParameters() => new object[] { multiplier };
 
@@ -25,7 +17,8 @@ namespace Chaos
         public class Fast : Speed
         {
             protected override float multiplier => _multiplier;
-            float _multiplier;
+
+            private float _multiplier;
             protected override void Awake()
             {
                 base.Awake();
@@ -49,7 +42,7 @@ namespace Chaos
                 var localAngularVelocity = car.transform.InverseTransformDirection(car.rb.angularVelocity);
                 if (Mathf.Abs(localAngularVelocity.z) > 0.25f)
                 {
-                   car.rb.angularVelocity = car.transform.TransformDirection(new Vector3(localAngularVelocity.x, localAngularVelocity.y, localAngularVelocity.z * 0.75f));
+                    car.rb.angularVelocity = car.transform.TransformDirection(new Vector3(localAngularVelocity.x, localAngularVelocity.y, localAngularVelocity.z * 0.75f));
                 }
             }
         }
@@ -59,7 +52,8 @@ namespace Chaos
         public class Slow : Speed
         {
             protected override float multiplier => _multiplier;
-            float _multiplier;
+
+            private float _multiplier;
             protected override void Awake()
             {
                 base.Awake();

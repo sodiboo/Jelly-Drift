@@ -1,13 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class ChaosEffect : MonoBehaviour
 {
-    protected virtual void Awake()
-    {
-        enabled = false;
-    }
+    protected virtual void Awake() => enabled = false;
     public static bool HasEnemy;
     public static Car car => ShakeController.Instance.car;
     public static CarAI enemy;

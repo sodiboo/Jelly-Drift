@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 // using Steamworks;
 
 // i couldn't fucking figure out how to make this work, but i'm not gonna delete it because i'm pretty sure i got most of the way there, so if anyone wants to continue on this please do, just add the Facepunch Steamworks library

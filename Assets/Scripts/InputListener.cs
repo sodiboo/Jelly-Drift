@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InputListener : MonoBehaviour
 {
@@ -20,16 +18,9 @@ public class InputListener : MonoBehaviour
         InputManager.Instance.breaking -= Breaking;
     }
 
-    void Throttle(float value)
-    {
-        car.throttle = value;
-    }
-    void Steering(float value)
-    {
-        car.steering = value;
-    }
-    void Breaking(bool value)
-    {
-        car.breaking = value;
-    }
+    private void Throttle(float value) => car.throttle = value;
+
+    private void Steering(float value) => car.steering = value;
+
+    private void Breaking(bool value) => car.breaking = value;
 }

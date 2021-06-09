@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Chaos
+﻿namespace Chaos
 {
     [Effect("chaos.sliproad", "Offroad = Road", EffectInfo.Alignment.Neutral), ConflictsWith(typeof(Speed))] // Thanks to Akuma73 for the name
     [Description("Inverts the check for being on/off road and makes your car a bit stronger so it's advantageous to go offroad")]

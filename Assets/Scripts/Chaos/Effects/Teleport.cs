@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Chaos
+﻿namespace Chaos
 {
     // fuck you these don't share an implementation but they're basically the same thing so group in one file
     public sealed class Teleport
@@ -25,10 +21,7 @@ namespace Chaos
         {
             public static bool Valid() => HasEnemy;
 
-            protected override void Enable()
-            {
-                car.transform.SetPositionAndRotation(enemy.car.rb.position, enemy.car.rb.rotation);
-            }
+            protected override void Enable() => car.transform.SetPositionAndRotation(enemy.car.rb.position, enemy.car.rb.rotation);
         }
     }
 }

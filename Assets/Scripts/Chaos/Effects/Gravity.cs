@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -8,15 +6,9 @@ namespace Chaos
     public abstract class Gravity : ChaosEffect
     {
         protected abstract float multiplier { get; }
-        protected override void Enable()
-        {
-            Physics.gravity *= multiplier;
-        }
+        protected override void Enable() => Physics.gravity *= multiplier;
 
-        protected override void Disable()
-        {
-            Physics.gravity /= multiplier;
-        }
+        protected override void Disable() => Physics.gravity /= multiplier;
 
         [Effect("chaos.gravity.low", "Moon Gravity", EffectInfo.Alignment.Bad)]
         [Description("Gives you 0.166x gravity, roughly equal to the moon")]

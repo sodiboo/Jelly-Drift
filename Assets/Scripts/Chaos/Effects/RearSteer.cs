@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
     [Effect("chaos.rearsteer", "Rear Wheel Steering", EffectInfo.Alignment.Bad)]
     [Description("Makes your rear wheels front wheels, and your front wheels rear wheels")]
-    class RearSteer : ChaosEffect
+    internal class RearSteer : ChaosEffect
     {
         private void Toggle()
         {

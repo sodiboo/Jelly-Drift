@@ -3,8 +3,8 @@
 [AttributeUsage(AttributeTargets.Class, Inherited = false)]
 public class EffectGroupAttribute : Attribute
 {
-    private string id;
-    private string name;
+    private readonly string id;
+    private readonly string name;
     public EffectGroupAttribute(string id, string name)
     {
         this.id = id;

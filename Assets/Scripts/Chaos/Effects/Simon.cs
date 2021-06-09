@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Chaos
@@ -8,16 +7,13 @@ namespace Chaos
     [Description("Forces you to do what Dani says, or not do what he doesn't say")]
     public class Simon : ChaosEffect
     {
-        protected override void Enable()
-        {
-            StartCoroutine(StartSimon());
-        }
+        protected override void Enable() => StartCoroutine(StartSimon());
 
-        bool invertSimon;
-        SimonAction simon;
-        bool enforceSimon;
+        private bool invertSimon;
+        private SimonAction simon;
+        private bool enforceSimon;
 
-        enum SimonAction
+        private enum SimonAction
         {
             Accelerate,
             Decelerate,
@@ -25,7 +21,7 @@ namespace Chaos
             Right,
         }
 
-        IEnumerator StartSimon()
+        private IEnumerator StartSimon()
         {
             simon = (SimonAction)Random.Range(0, System.Enum.GetValues(typeof(SimonAction)).Length);
             invertSimon = Random.value > 0.5f;
@@ -33,7 +29,7 @@ namespace Chaos
             var split = Instantiate(PrefabManager.Instance.splitUi).GetComponent<SplitUi>();
             split.transform.SetParent(UIManager.Instance.splitPos);
             split.transform.localPosition = Vector3.zero;
-            string name = "";
+            var name = "";
             switch (simon)
             {
                 case SimonAction.Accelerate: name = "forwards"; break;
@@ -48,7 +44,7 @@ namespace Chaos
             Time.timeScale *= 5f;
         }
 
-        void Update()
+        private void Update()
         {
             if (enforceSimon && invertSimon == FollowsSimon())
             {
@@ -58,7 +54,7 @@ namespace Chaos
             }
         }
 
-        bool FollowsSimon()
+        private bool FollowsSimon()
         {
             switch (simon)
             {
@@ -75,10 +71,7 @@ namespace Chaos
         public class Punishment : ChaosEffect
         {
             public static bool Valid() => false;
-            protected override void Disable()
-            {
-                car.rb.constraints = RigidbodyConstraints.None;
-            }
+            protected override void Disable() => car.rb.constraints = RigidbodyConstraints.None;
         }
     }
 }

@@ -19,7 +19,7 @@ public class InitializeAds : MonoBehaviour
             return;
         }
         InitializeAds.Instance = this;
-        Advertisement.Initialize(this.gameId, this.testMode);
+        Advertisement.Initialize(gameId, testMode);
     }
 
     // Token: 0x060000B0 RID: 176 RVA: 0x000057DE File Offset: 0x000039DE
@@ -35,22 +35,19 @@ public class InitializeAds : MonoBehaviour
     public void MenuCount()
     {
         MonoBehaviour.print("adding count");
-        this.menuCount++;
-        if (this.menuCount > 5)
+        menuCount++;
+        if (menuCount > 5)
         {
-            this.ShowAd();
-            this.menuCount = 0;
+            ShowAd();
+            menuCount = 0;
         }
     }
 
     // Token: 0x060000B2 RID: 178 RVA: 0x00005828 File Offset: 0x00003A28
-    public void ShowRewardedVideo()
+    public void ShowRewardedVideo() => Advertisement.Show("rewardedVideo", new ShowOptions
     {
-        Advertisement.Show("rewardedVideo", new ShowOptions
-        {
-            resultCallback = new Action<ShowResult>(this.HandleShowResult)
-        });
-    }
+        resultCallback = new Action<ShowResult>(HandleShowResult)
+    });
 
     // Token: 0x060000B3 RID: 179 RVA: 0x00005858 File Offset: 0x00003A58
     private void HandleShowResult(ShowResult result)
@@ -58,7 +55,7 @@ public class InitializeAds : MonoBehaviour
         if (result == ShowResult.Finished)
         {
             UnityEngine.Debug.Log("Video completed - Offer a reward to the player");
-            this.RewardPlayer();
+            RewardPlayer();
             return;
         }
         if (result == ShowResult.Skipped)
@@ -75,7 +72,7 @@ public class InitializeAds : MonoBehaviour
     // Token: 0x060000B4 RID: 180 RVA: 0x0000588C File Offset: 0x00003A8C
     private void RewardPlayer()
     {
-        int num = 500;
+        var num = 500;
         SaveManager.Instance.state.money += num;
         SaveManager.Instance.Save();
         SoundManager.Instance.PlayMoney();
@@ -84,16 +81,16 @@ public class InitializeAds : MonoBehaviour
     }
 
     // Token: 0x040000D7 RID: 215
-    private string gameId = "4035567";
+    private readonly string gameId = "4035567";
 
     // Token: 0x040000D8 RID: 216
-    private string videoAd = "video";
+    private readonly string videoAd = "video";
 
     // Token: 0x040000D9 RID: 217
-    private string rewardAd = "rewardedVideo";
+    private readonly string rewardAd = "rewardedVideo";
 
     // Token: 0x040000DA RID: 218
-    private bool testMode;
+    private readonly bool testMode;
 
     // Token: 0x040000DB RID: 219
     public int menuCount;

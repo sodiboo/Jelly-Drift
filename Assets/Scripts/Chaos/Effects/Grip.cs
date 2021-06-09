@@ -1,24 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Chaos
+﻿namespace Chaos
 {
     [EffectGroup("chaos.grip", "Grip")]
     public abstract class Grip : ChaosEffect
     {
         protected abstract float multiplier { get; }
-        float og;
+
+        private float og;
         protected override void Enable()
         {
             og = car.driftThreshold;
             car.driftThreshold *= multiplier;
         }
 
-        protected override void Disable()
-        {
-            car.driftThreshold = og;
-        }
+        protected override void Disable() => car.driftThreshold = og;
 
         [Effect("chaos.grip.high", "No drifting", EffectInfo.Alignment.Good)]
         [Description("Gives you 10x drift threshold, enough to prevent you from drifting on road")]

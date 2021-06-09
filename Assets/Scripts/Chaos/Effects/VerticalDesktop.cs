@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -9,10 +7,10 @@ namespace Chaos
 #endif
     [Effect("chaos.view.mobile", "Mobile Experience", EffectInfo.Alignment.Neutral)]
     [Description("Attempts (but fails) to make your view 9:16")]
-    class VerticalDesktop : ChaosEffect
+    internal class VerticalDesktop : ChaosEffect
     {
-        Camera cam;
-        Camera clearCam;
+        private Camera cam;
+        private Camera clearCam;
         protected override void Awake()
         {
             base.Awake();
@@ -40,10 +38,7 @@ namespace Chaos
             clearCam.enabled = false;
         }
 
-        private void OnDestroy()
-        {
-            Destroy(clearCam);
-        }
+        private void OnDestroy() => Destroy(clearCam);
 
 #if MOBILE
         public static bool Valid() => false;

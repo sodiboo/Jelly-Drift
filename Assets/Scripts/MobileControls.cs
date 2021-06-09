@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MobileControls : MonoBehaviour
@@ -8,14 +7,13 @@ public class MobileControls : MonoBehaviour
     public static MobileControls Instance;
     public GameObject pause;
 
-    private void Awake()
-    {
+    private void Awake() =>
 #if MOBILE
         Instance = this;
 #else
         Destroy(gameObject);
 #endif
-    }
+
 
     public void ChangeLayout(InputManager.Layout disable, InputManager.Layout enable)
     {

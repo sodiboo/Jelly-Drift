@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -8,9 +6,9 @@ namespace Chaos
     [Description("Stretches your car in a random direction")]
     public class FuckyWuckyRenderUwU : ChaosEffect
     {
-        Vector3 og;
-        Vector3 target;
-        Transform victim;
+        private Vector3 og;
+        private Vector3 target;
+        private Transform victim;
 
         protected override void Enable()
         {
@@ -18,12 +16,9 @@ namespace Chaos
             og = victim.localScale;
         }
 
-        protected override void Disable()
-        {
-            victim.localScale = og;
-        }
+        protected override void Disable() => victim.localScale = og;
 
-        float time;
+        private float time;
 
         private void Update()
         {

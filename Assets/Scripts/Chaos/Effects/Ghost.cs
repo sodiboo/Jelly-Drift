@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -8,7 +6,7 @@ namespace Chaos
     [Description("Prevents you from colliding with most objects in a level")]
     public class Ghost : ChaosEffect
     {
-        global::Ghost ghost;
+        private global::Ghost ghost;
         protected override void Enable()
         {
             ghost = car.gameObject.AddComponent<global::Ghost>();

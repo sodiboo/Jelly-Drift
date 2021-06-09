@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace Chaos
         {
             public static bool Valid() => HasEnemy;
 
-            List<Rigidbody> rbs;
+            private List<Rigidbody> rbs;
 
             protected override void Awake()
             {
@@ -53,7 +52,7 @@ namespace Chaos
         [Description("Turns your gravitational pull towards the next checkpoint")]
         public class CheckpointMagnet : CustomGravity
         {
-            CheckpointUser user;
+            private CheckpointUser user;
 
             protected override void Enable()
             {
@@ -61,10 +60,7 @@ namespace Chaos
                 car.rb.useGravity = false;
             }
 
-            protected override void Disable()
-            {
-                car.rb.useGravity = true;
-            }
+            protected override void Disable() => car.rb.useGravity = true;
 
             private void FixedUpdate()
             {

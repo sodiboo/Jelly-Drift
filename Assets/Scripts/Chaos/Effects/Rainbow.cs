@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -33,7 +30,7 @@ namespace Chaos
         [Description("Hue shifts your car's material")]
         public class Car : Rainbow
         {
-            CarSkin skin;
+            private CarSkin skin;
             protected override void Enable()
             {
                 skin = car.GetComponent<CarSkin>();
@@ -44,7 +41,8 @@ namespace Chaos
             protected override void Update()
             {
                 base.Update();
-                for (var i = 0; i < skin.skinsToChange[0].myArray.Length; i++) {
+                for (var i = 0; i < skin.skinsToChange[0].myArray.Length; i++)
+                {
                     var renderer = skin.renderers[skin.skinsToChange[0].myArray[i++]];
                     var newMats = new Material[renderer.materials.Length];
                     renderer.materials.CopyTo(newMats, 0);
@@ -75,8 +73,8 @@ namespace Chaos
         [Description("Hue shifts the road texture")]
         public class Road : Rainbow
         {
-            Renderer rend;
-            Material ogMat;
+            private Renderer rend;
+            private Material ogMat;
             protected override void Enable()
             {
                 rend = WorldObjects.Instance.road.GetComponent<Renderer>();
@@ -85,10 +83,7 @@ namespace Chaos
                 base.Enable();
             }
 
-            protected override void Disable()
-            {
-                rend.material = ogMat;
-            }
+            protected override void Disable() => rend.material = ogMat;
 
             protected override void Update()
             {
@@ -101,15 +96,9 @@ namespace Chaos
         [Description("Hue shifts the sun color")]
         public class Sun : Rainbow
         {
-            Color ogColor;
-            protected override void Enable()
-            {
-                ogColor = WorldObjects.Instance.sun.color;
-            }
-            protected override void Disable()
-            {
-                WorldObjects.Instance.sun.color = ogColor;
-            }
+            private Color ogColor;
+            protected override void Enable() => ogColor = WorldObjects.Instance.sun.color;
+            protected override void Disable() => WorldObjects.Instance.sun.color = ogColor;
 
             protected override void Update()
             {

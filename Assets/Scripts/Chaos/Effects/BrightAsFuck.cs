@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -8,7 +6,7 @@ namespace Chaos
     [Description("Makes things very bright")]
     public abstract class BrightAsFuck : ChaosEffect
     {
-        Material sun;
+        private Material sun;
         protected override void Awake()
         {
             base.Awake();
@@ -19,8 +17,8 @@ namespace Chaos
         [Description("Makes the player blindingly bright, and it's even worse if you lose traction")]
         public class Player : BrightAsFuck
         {
-            Material[][] ogMats;
-            Renderer[] rends;
+            private Material[][] ogMats;
+            private Renderer[] rends;
             protected override void Enable()
             {
                 rends = car.GetComponentsInChildren<Renderer>();
@@ -45,8 +43,8 @@ namespace Chaos
         [Description("Makes the checkpoints very bright")]
         public class Checkpoint : BrightAsFuck
         {
-            Material ogMat;
-            Renderer[] rends;
+            private Material ogMat;
+            private Renderer[] rends;
             protected override void Enable()
             {
                 rends = GameObject.Find("/CheckpointArcs").GetComponentsInChildren<Renderer>();
@@ -70,8 +68,8 @@ namespace Chaos
         [Description("Makes the cones on Funky Forest glow")]
         public class Cones : BrightAsFuck
         {
-            Renderer[] rends;
-            Material[] ogMats;
+            private Renderer[] rends;
+            private Material[] ogMats;
             protected override void Enable()
             {
                 rends = GameObject.Find("/Cones").GetComponentsInChildren<Renderer>();

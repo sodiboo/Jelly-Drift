@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -8,8 +6,8 @@ namespace Chaos
     [Description("Offsets your collision mesh by 1 unit in a random direction")]
     public class FuckyWuckyCollisionUwU : ChaosEffect
     {
-        Vector3 offset;
-        Quaternion rot;
+        private Vector3 offset;
+        private Quaternion rot;
         protected override void Awake()
         {
             base.Awake();

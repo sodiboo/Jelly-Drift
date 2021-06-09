@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -115,10 +114,7 @@ namespace Chaos
         protected abstract bool CompletedTask();
         protected abstract string Completion();
 
-        private void LateUpdate()
-        {
-            ChaosController.Instance.text.text += $"\n\n<size=32>{Completion()}";
-        }
+        private void LateUpdate() => ChaosController.Instance.text.text += $"\n\n<size=32>{Completion()}";
 
         protected static string LinearColor(float progress)
         {
@@ -129,14 +125,14 @@ namespace Chaos
         [Effect("chaos.tasks.drift", "Drift for {0} seconds to get \"{1}\" or else \"{2}\"", default)]
         public class DriftTask : TaskEffect
         {
-            float target;
+            private float target;
             protected override void Awake()
             {
                 target = Random.Range(1f, 3f);
                 base.Awake();
             }
 
-            float completed;
+            private float completed;
 
             private void Update()
             {
@@ -154,15 +150,15 @@ namespace Chaos
         [Effect("chaos.tasks.speed", "Reach {0} to get \"{1}\" or else \"{2}\"", default)]
         public class SpeedTask : TaskEffect
         {
-            float target;
-            float unitMultiplier = SaveState.Instance.speedometer == 1 ? 1 : 3.6f;
+            private float target;
+            private readonly float unitMultiplier = SaveState.Instance.speedometer == 1 ? 1 : 3.6f;
             protected override void Awake()
             {
                 target = Random.Range(10f, 30f);
                 base.Awake();
             }
 
-            float completed = 0f;
+            private float completed = 0f;
 
             private void FixedUpdate()
             {
@@ -173,7 +169,7 @@ namespace Chaos
             protected override bool CompletedTask() => completed >= target;
             protected override string Completion() => $"{LinearColor(completed / target)}{completed * unitMultiplier:0.0}/{target * unitMultiplier:0.0}";
 
-            static Func<float, string>[] displays => new Func<float, string>[] {
+            private static Func<float, string>[] displays => new Func<float, string>[] {
                 (amount) => $"{amount * 3.6f:0.0} speed",
                 (amount) => $"{amount:0.0} u/s",
                 (amount) => $"{amount * 3.6f:0.0} ku/h",

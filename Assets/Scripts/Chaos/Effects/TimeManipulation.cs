@@ -1,20 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
     [EffectGroup("chaos.time", "Time Manipulation")]
-    class TimeManipulation : ChaosEffect
+    internal class TimeManipulation : ChaosEffect
     {
-        protected override void Disable()
-        {
-            Time.timeScale = 1f;
-        }
+        protected override void Disable() => Time.timeScale = 1f;
 
         [Effect("chaos.time.tas", "TAS", EffectInfo.Alignment.Neutral)]
         [Description("Makes your car always appear to go at 50 ku/h")]
-        class TAS : TimeManipulation
+        private class TAS : TimeManipulation
         {
             private void FixedUpdate()
             {

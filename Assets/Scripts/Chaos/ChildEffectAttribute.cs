@@ -3,8 +3,8 @@
 [AttributeUsage(AttributeTargets.Class)]
 public class ChildEffectAttribute : Attribute
 {
-    private string id;
-    private string name;
+    private readonly string id;
+    private readonly string name;
     public ChildEffectAttribute(string id, string name)
     {
         this.id = id;

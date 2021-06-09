@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Chaos
 {
@@ -46,7 +44,8 @@ namespace Chaos
         public class Big : Scale
         {
             protected override float multiplier => _multiplier;
-            float _multiplier;
+
+            private float _multiplier;
             protected override void Awake()
             {
                 base.Awake();
@@ -59,7 +58,8 @@ namespace Chaos
         public class Tiny : Scale
         {
             protected override float multiplier => _multiplier;
-            float _multiplier;
+
+            private float _multiplier;
             protected override void Awake()
             {
                 base.Awake();

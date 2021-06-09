@@ -4,18 +4,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
-using TMPro;
-using Random = UnityEngine.Random;
 using RapidGUI;
+using TMPro;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ChaosController : MonoBehaviour
 {
     #region Reflection
 
-    static Dictionary<Assembly, IEnumerable<EffectInfo>> _effects = new Dictionary<Assembly, IEnumerable<EffectInfo>>();
-
-    static EffectInfo[] _allEffects;
+    private static readonly Dictionary<Assembly, IEnumerable<EffectInfo>> _effects = new Dictionary<Assembly, IEnumerable<EffectInfo>>();
+    private static EffectInfo[] _allEffects;
 
     public static EffectInfo[] effects => _allEffects = _allEffects ?? _effects.Values.Aggregate((a, b) => a.Concat(b)).ToArray();
     public static Dictionary<Type, EffectInfo> effectMap = new Dictionary<Type, EffectInfo>();
@@ -26,7 +25,8 @@ public class ChaosController : MonoBehaviour
         if (_effects.ContainsKey(assembly)) return;
         _effects[assembly] = GetEffects(assembly);
     }
-    static IEnumerable<EffectInfo> GetEffects(Assembly assembly)
+
+    private static IEnumerable<EffectInfo> GetEffects(Assembly assembly)
     {
         foreach (var type in assembly.GetTypes())
         {
@@ -64,7 +64,7 @@ public class ChaosController : MonoBehaviour
     public static ChaosController Instance;
     public TextMeshProUGUI text;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != this && Instance != null) Destroy(this);
         Instance = this;
@@ -197,9 +197,9 @@ public class ChaosController : MonoBehaviour
 
     #region Chaos
 
-    EffectInfo currentEffect;
-    List<ChaosEffect> activeChildren;
-    ChaosEffect activeEffect;
+    private EffectInfo currentEffect;
+    private List<ChaosEffect> activeChildren;
+    private ChaosEffect activeEffect;
     public EffectInfo riggedEffect { get; set; }
     public bool runNextCycle;
 
@@ -310,7 +310,7 @@ public class ChaosController : MonoBehaviour
         if (effectSpecificParams != null) text.text = string.Format(text.text, effectSpecificParams);
     }
 
-    Coroutine chaosCoroutine;
+    private Coroutine chaosCoroutine;
 
     public void StartChaos()
     {
@@ -319,10 +319,7 @@ public class ChaosController : MonoBehaviour
         if (chaosCoroutine == null) chaosCoroutine = StartCoroutine(Chaos());
     }
 
-    public void StopChaos()
-    {
-        runNextCycle = false;
-    }
+    public void StopChaos() => runNextCycle = false;
 
     #endregion
 
@@ -331,7 +328,7 @@ public class ChaosController : MonoBehaviour
     public float cheatSpacing = 6f;
     public float cheatPadding = 6f;
 
-    void EnableCheats()
+    private void EnableCheats()
     {
         if (!cheatMode) InitCheats();
         if (chaosCoroutine != null)
@@ -346,11 +343,10 @@ public class ChaosController : MonoBehaviour
         }
     }
 
-    bool cheatMode;
-    bool useCheats;
-
-    List<EffectInfo> cheatEffectsList = new List<EffectInfo>();
-    Dictionary<EffectInfo, ChaosEffect> activeCheats;
+    private bool cheatMode;
+    private bool useCheats;
+    private readonly List<EffectInfo> cheatEffectsList = new List<EffectInfo>();
+    private Dictionary<EffectInfo, ChaosEffect> activeCheats;
 
     private void RemoveEffect(EffectInfo info)
     {
@@ -387,8 +383,8 @@ public class ChaosController : MonoBehaviour
         }
     }
 
-    float maxWidth = 0f;
-    float indent = 32f;
+    private float maxWidth = 0f;
+    private readonly float indent = 32f;
 
     private void InitCheats()
     {
@@ -420,8 +416,8 @@ public class ChaosController : MonoBehaviour
             });
     }
 
-    Rect windowRect;
-    Vector2 scrollPos;
+    private Rect windowRect;
+    private Vector2 scrollPos;
 
     private string DisplayName(EffectInfo effect)
     {

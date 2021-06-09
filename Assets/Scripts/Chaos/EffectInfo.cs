@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 public class EffectInfo
 {
-    private static EffectInfo[] EmptyEffects = new EffectInfo[] { };
+    private static readonly EffectInfo[] EmptyEffects = new EffectInfo[] { };
     public string name;
     public readonly string id;
     public readonly string description;
@@ -94,8 +93,8 @@ public class EffectInfo
     private EffectInfo[] _reloadEnable;
     private EffectInfo[] _reloadDisable;
 
-    private Type[] _reloadOnEnable;
-    private Type[] _reloadOnDisable;
+    private readonly Type[] _reloadOnEnable;
+    private readonly Type[] _reloadOnDisable;
 
     private EffectInfo[] _children;
 
@@ -160,16 +159,16 @@ public class EffectInfo
                 switch (effect.effectType)
                 {
                     case EffectType.Orphan:
-                        this.effectType = EffectType.MultiGroup;
+                        effectType = EffectType.MultiGroup;
                         multi = true;
                         effect.effectType = EffectType.Child;
-                        effect.alignment = this.alignment;
+                        effect.alignment = alignment;
                         effect.isChild = true;
                         effect.parent = this;
                         yield return effect;
                         break;
                     case EffectType.Independent:
-                        this.effectType = EffectType.ExclusiveGroup;
+                        effectType = EffectType.ExclusiveGroup;
                         exclusive = true;
                         effect.effectType = EffectType.LonelyChild;
                         effect.isChild = true;

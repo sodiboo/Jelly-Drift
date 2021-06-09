@@ -1,7 +1,6 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
@@ -9,8 +8,9 @@ public class InputManager : MonoBehaviour
     public Dictionary<Layout, InputActionMap> actionMaps = new Dictionary<Layout, InputActionMap>();
     public static InputManager Instance;
     public InputActionAsset inputs;
-    InputActionMap global;
-    void Awake()
+    private InputActionMap global;
+
+    private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(this);
         Instance = this;
@@ -44,13 +44,11 @@ public class InputManager : MonoBehaviour
         Car(Layout.Car);
         Car(Layout.Southpaw);
     }
-    Layout _layout = Layout.None;
+
+    private Layout _layout = Layout.None;
     public Layout layout { get => _layout; set => ChangeLayout(_layout, _layout = value); }
 
-    private void Start()
-    {
-        layout = Layout.Menu;
-    }
+    private void Start() => layout = Layout.Menu;
 
     public Action<float> steering { get; set; }
     public Action<float> throttle { get; set; }
@@ -70,7 +68,7 @@ public class InputManager : MonoBehaviour
         Southpaw,
     }
 
-    void Car(Layout layout)
+    private void Car(Layout layout)
     {
         Assign(actionMaps[layout].FindAction("Throttle"), ctx =>
         {
@@ -92,13 +90,13 @@ public class InputManager : MonoBehaviour
         });
     }
 
-    void Assign(InputAction action, Action<InputAction.CallbackContext> callback)
+    private void Assign(InputAction action, Action<InputAction.CallbackContext> callback)
     {
         action.performed += callback;
         action.canceled += callback;
     }
 
-    void ChangeLayout(Layout disable, Layout enable)
+    private void ChangeLayout(Layout disable, Layout enable)
     {
         actionMaps?[disable]?.Disable();
         actionMaps?[enable]?.Enable();

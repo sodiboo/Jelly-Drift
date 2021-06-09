@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Chaos
+﻿namespace Chaos
 {
     [Effect("chaos.controls.cursed", "Cursed Controls", EffectInfo.Alignment.Bad)] // Thanks to MY DUMBASS for the accidental invention of this effect.
     [Description("Makes your controls never reset to zero")]
@@ -10,10 +6,7 @@ namespace Chaos
     {
         public static bool value; // Implementation in InputManager.Car, look for references to this property
 
-        protected override void Enable()
-        {
-            value = true;
-        }
+        protected override void Enable() => value = true;
 
         protected override void Disable()
         {
