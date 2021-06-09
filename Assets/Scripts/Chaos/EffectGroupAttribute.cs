@@ -13,5 +13,6 @@ public class EffectGroupAttribute : Attribute
 
     public string Id => id;
     public string Name => name;
+    public EffectInfo.Alignment Alignment;
     public bool SeparateCheats = false;
 }

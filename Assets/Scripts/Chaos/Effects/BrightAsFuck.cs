@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [EffectGroup("chaos.bright", "Light Mode")]
+    [EffectGroup("chaos.bright", "Light Mode", Alignment = EffectInfo.Alignment.Neutral)]
     [Description("Makes things very bright")]
     public abstract class BrightAsFuck : ChaosEffect
     {
         Material sun;
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             sun = new Material(PrefabManager.Instance.sunMat);
         }
 
@@ -20,7 +21,7 @@ namespace Chaos
         {
             Material[][] ogMats;
             Renderer[] rends;
-            private void OnEnable()
+            protected override void Enable()
             {
                 rends = car.GetComponentsInChildren<Renderer>();
                 ogMats = new Material[rends.Length][];
@@ -31,7 +32,7 @@ namespace Chaos
                 }
             }
 
-            private void OnDisable()
+            protected override void Disable()
             {
                 for (var i = 0; i < rends.Length; i++)
                 {
@@ -46,7 +47,7 @@ namespace Chaos
         {
             Material ogMat;
             Renderer[] rends;
-            private void OnEnable()
+            protected override void Enable()
             {
                 rends = GameObject.Find("/CheckpointArcs").GetComponentsInChildren<Renderer>();
                 ogMat = rends[0].material;
@@ -56,7 +57,7 @@ namespace Chaos
                 }
             }
 
-            private void OnDisable()
+            protected override void Disable()
             {
                 foreach (var rend in rends)
                 {
@@ -71,7 +72,7 @@ namespace Chaos
         {
             Renderer[] rends;
             Material[] ogMats;
-            private void OnEnable()
+            protected override void Enable()
             {
                 rends = GameObject.Find("/Cones").GetComponentsInChildren<Renderer>();
                 ogMats = rends[0].materials;
@@ -80,7 +81,7 @@ namespace Chaos
                 for (var i = 0; i < rends.Length; i++) rends[i].materials = newMats;
             }
 
-            private void OnDisable()
+            protected override void Disable()
             {
                 for (var i = 0; i < rends.Length; i++) rends[i].materials = ogMats;
             }

@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [EffectGroup("chaos.gravity.custom", "Custom Gravity")]
+    [EffectGroup("chaos.gravity.custom", "Custom Gravity", SeparateCheats = true)]
     public abstract class CustomGravity : ChaosEffect
     {
-        [Effect("chaos.gravity.blackhole", "Black Hole")] // Thanks to Akuma73 for the idea
+        [Effect("chaos.gravity.blackhole", "Black Hole", EffectInfo.Alignment.Bad)] // Thanks to Akuma73 for the idea
         [Description("Makes you dense enough to attract all cones and AI")]
         public class Blackhole : CustomGravity
         {
@@ -16,12 +16,13 @@ namespace Chaos
 
             List<Rigidbody> rbs;
 
-            private void Awake()
+            protected override void Awake()
             {
+                base.Awake();
                 rbs = FindObjectsOfType<Rigidbody>().ToList();
                 rbs.Remove(car.rb);
             }
-            private void OnEnable()
+            protected override void Enable()
             {
                 foreach (var rb in rbs)
                 {
@@ -29,7 +30,7 @@ namespace Chaos
                 }
             }
 
-            private void OnDisable()
+            protected override void Disable()
             {
                 foreach (var rb in rbs)
                 {
@@ -48,19 +49,19 @@ namespace Chaos
             }
         }
 
-        [Effect("chaos.gravity.checkpoint", "Checkpoint Magnet")] // Thanks to Akuma73 for the idea
+        [Effect("chaos.gravity.checkpoint", "Checkpoint Magnet", EffectInfo.Alignment.Good)] // Thanks to Akuma73 for the idea
         [Description("Turns your gravitational pull towards the next checkpoint")]
         public class CheckpointMagnet : CustomGravity
         {
             CheckpointUser user;
 
-            private void OnEnable()
+            protected override void Enable()
             {
                 user = car.GetComponent<CheckpointUser>();
                 car.rb.useGravity = false;
             }
 
-            private void OnDisable()
+            protected override void Disable()
             {
                 car.rb.useGravity = true;
             }

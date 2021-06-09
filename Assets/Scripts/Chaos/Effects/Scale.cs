@@ -9,7 +9,7 @@ namespace Chaos
     {
         public static float value = 1f; // Car.Steering also scales in method body according to this value
         protected abstract float multiplier { get; }
-        private void OnEnable()
+        protected override void Enable()
         {
             car.transform.localScale *= multiplier;
             car.suspensionLength *= multiplier;
@@ -21,10 +21,10 @@ namespace Chaos
                 suspension.restLength *= multiplier;
                 suspension.springTravel *= multiplier;
             }
-            value = multiplier;
+            value *= multiplier;
         }
 
-        private void OnDisable()
+        protected override void Disable()
         {
             car.transform.localScale /= multiplier;
             car.suspensionLength /= multiplier;
@@ -36,25 +36,35 @@ namespace Chaos
                 suspension.restLength /= multiplier;
                 suspension.springTravel /= multiplier;
             }
-            value = 1f;
+            value /= multiplier;
         }
 
-        [Effect("chaos.scale.big", "Big")]
+        public override object[] CustomParameters() => new object[] { multiplier };
+
+        [Effect("chaos.scale.big", "Big", EffectInfo.Alignment.Good)]
         [Description("Makes your car 1.2x-3x bigger (and more powerful)")]
         public class Big : Scale
         {
-            float _multiplier;
-            private void Awake() => _multiplier = Random.Range(1.2f, 3f);
             protected override float multiplier => _multiplier;
+            float _multiplier;
+            protected override void Awake()
+            {
+                base.Awake();
+                _multiplier = Random.Range(1.2f, 3f);
+            }
         }
 
-        [Effect("chaos.scale.small", "Tiny")]
+        [Effect("chaos.scale.small", "Tiny", EffectInfo.Alignment.Bad)]
         [Description("Makes your car 0.4x-0.8x as big (and as powerful)")]
         public class Tiny : Scale
         {
-            float _multiplier;
-            private void Awake() => _multiplier = Random.Range(0.4f, 0.8f);
             protected override float multiplier => _multiplier;
+            float _multiplier;
+            protected override void Awake()
+            {
+                base.Awake();
+                _multiplier = Random.Range(0.4f, 0.8f);
+            }
         }
     }
 }

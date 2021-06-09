@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.simon", "Dani Says"), ConflictsWith(typeof(Punishment)), HideInCheatGUI]
+    [Effect("chaos.simon", "Dani Says", EffectInfo.Alignment.Bad), ConflictsWith(typeof(Punishment)), HideInCheatGUI]
     [Description("Forces you to do what Dani says, or not do what he doesn't say")]
     public class Simon : ChaosEffect
     {
-        private void OnEnable()
+        protected override void Enable()
         {
             StartCoroutine(StartSimon());
         }
@@ -70,12 +70,12 @@ namespace Chaos
             }
         }
 
-        [Effect("chaos.simon.punishment", "Punishment"), HideInCheatGUI]
+        [Effect("chaos.simon.punishment", "Punishment", default(EffectInfo.Alignment)), HideInCheatGUI]
         [Description("Punishes you for failing simon says, by locking your position and rotation")]
         public class Punishment : ChaosEffect
         {
             public static bool Valid() => false;
-            private void OnDisable()
+            protected override void Disable()
             {
                 car.rb.constraints = RigidbodyConstraints.None;
             }

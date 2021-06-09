@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.random.car", "Random Car"), Impulse]
+    [Effect("chaos.random.car", "Random Car", EffectInfo.Alignment.Neutral), Impulse]
     [Reload.OnEnable(typeof(FirstPerson), typeof(Speed), typeof(Scale), typeof(Grip),
         typeof(FuckyWuckyCollisionUwU), typeof(FuckyWuckyRenderUwU), typeof(DisableShit.Car),
         typeof(CustomGravity), typeof(Autopilot), typeof(RearSteer), typeof(Rainbow.Car), typeof(Ghost), typeof(BrightAsFuck))]
     [Description("Replaces your car with a random one in the game")]
     public class RandomCar : ChaosEffect
     {
-        private void Awake()
+        protected override void Enable()
         {
             var currentCar = GameState.Instance.car;
             var rand = Random.Range(0, PrefabManager.Instance.cars.Length - 1);

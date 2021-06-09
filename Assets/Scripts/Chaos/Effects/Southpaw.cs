@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.controls.southpaw", "Southpaw")] // Thanks to Dit0h for the name and idea
+    [Effect("chaos.controls.southpaw", "Southpaw", EffectInfo.Alignment.Bad)] // Thanks to Dit0h for the name and idea
     [Description("Makes your controls right handed (IJKL)")]
     class Southpaw : ChaosEffect
     {
-        private void OnEnable()
+        protected override void Enable()
         {
             InputManager.Instance.layout = InputManager.Layout.Southpaw;
         }
 
-        private void OnDisable()
+        protected override void Disable()
         {
             InputManager.Instance.layout = InputManager.Layout.Car;
         }

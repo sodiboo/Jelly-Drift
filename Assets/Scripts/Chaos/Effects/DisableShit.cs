@@ -9,7 +9,7 @@ namespace Chaos
     {
         protected abstract Object[] things { get; }
 
-        private void OnEnable()
+        protected override void Enable()
         {
             switch (things) {
                 case Renderer[] renderers:  foreach (var el in renderers) el.enabled = false; break;
@@ -18,7 +18,7 @@ namespace Chaos
             }
         }
 
-        private void OnDisable()
+        protected override void Disable()
         {
             switch (things)
             {
@@ -28,14 +28,14 @@ namespace Chaos
             }
         }
 
-        [Effect("chaos.disable.car", "Wait, where did it go?")]
+        [Effect("chaos.disable.car", "Wait, where did it go?", EffectInfo.Alignment.Neutral)]
         [Description("Makes your car invisible")]
         public class Car : DisableShit
         {
             protected override Object[] things => car.GetComponentsInChildren<Renderer>();
         }
 
-        [Effect("chaos.disable.world", "Where did everything go?")] // Thanks to WoodComet for the idea, thanks to ChaosModV for the name
+        [Effect("chaos.disable.world", "Where did everything go?", EffectInfo.Alignment.Neutral)] // Thanks to WoodComet for the idea, thanks to ChaosModV for the name
         [Description("Makes the road and terrain invisible")]
         public class World : DisableShit
         {
@@ -45,14 +45,14 @@ namespace Chaos
             };
         }
 
-        [Effect("chaos.disable.sun", "Dark Mode")] // Thanks to WoodComet for the idea
+        [Effect("chaos.disable.sun", "Dark Mode", EffectInfo.Alignment.Neutral)] // Thanks to WoodComet for the idea
         [Description("Turns off the sun")]
         public class Sun : DisableShit
         {
             protected override Object[] things => new Behaviour[] { WorldObjects.Instance.sun };
         }
 
-        [Effect("chaos.disable.road", "Nonexistent Road")] // Thanks to ProfessorEmu for the idea, i think
+        [Effect("chaos.disable.road", "Nonexistent Road", EffectInfo.Alignment.Neutral)] // Thanks to ProfessorEmu for the idea, i think
         [Description("Deletes the road")]
         public class Road : DisableShit
         {

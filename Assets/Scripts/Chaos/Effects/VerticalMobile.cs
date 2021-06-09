@@ -8,11 +8,11 @@ namespace Chaos
 #if !MOBILE
     [HideInCheatGUI]
 #endif
-    [Effect("chaos.view.portrait", "Portrait Mode")]
+    [Effect("chaos.view.portrait", "Portrait Mode", EffectInfo.Alignment.Neutral)]
     [Description("Turns your screen to portrait mode")]
     class VerticalMobile : ChaosEffect
     {
-        private void OnEnable()
+        protected override void Enable()
         {
             Screen.autorotateToPortrait = true;
             Screen.autorotateToPortraitUpsideDown = true;
@@ -21,7 +21,7 @@ namespace Chaos
             StartCoroutine(Wait3Seconds());
         }
 
-        private void OnDisable()
+        protected override void Disable()
         {
             Screen.autorotateToLandscapeLeft = true;
             Screen.autorotateToLandscapeRight = true;

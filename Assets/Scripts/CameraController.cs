@@ -23,6 +23,7 @@ public class CameraController : MonoBehaviour
 		this.target = target;
 		this.targetRb = target.GetComponent<Rigidbody>();
 		this.targetCar = target.GetComponent<Car>();
+		this.targetSkin = targetCar.GetComponent<CarSkin>();
 	}
 
 	// Token: 0x06000020 RID: 32 RVA: 0x000026C8 File Offset: 0x000008C8
@@ -63,6 +64,12 @@ public class CameraController : MonoBehaviour
     {
         if (speedometer != null)
         {
+			if (targetSkin.skinsToChange.Length > 2)
+			{
+				var data = targetSkin.skinsToChange[GameState.Instance.skin].myArray;
+				var materials = targetSkin.renderers[data[0]].materials;
+				speedometer.color = materials[Math.Min(data[1], materials.Length - 1)].color;
+			}
 			switch (SaveState.Instance.speedometer)
 			{
 				case 0:
@@ -115,6 +122,7 @@ public class CameraController : MonoBehaviour
 
 	// Token: 0x04000029 RID: 41
 	private Car targetCar;
+	private CarSkin targetSkin;
 
 	// Token: 0x0400002A RID: 42
 	private Vector3 desiredPosition;

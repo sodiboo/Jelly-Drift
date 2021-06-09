@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.fakeplayer", "Multiplayer")]
+    [Effect("chaos.fakeplayer", "Multiplayer", EffectInfo.Alignment.Neutral)]
     [Reload.OnDisable(typeof(FirstPerson), typeof(Speed), typeof(Scale), typeof(Grip),
         typeof(FuckyWuckyCollisionUwU), typeof(FuckyWuckyRenderUwU), typeof(DisableShit.Car),
         typeof(CustomGravity), typeof(Autopilot), typeof(RearSteer), typeof(Ghost))]
@@ -12,7 +12,7 @@ namespace Chaos
     public class Multiplayer : ChaosEffect
     {
         GameObject otherCar;
-        private void OnEnable()
+        protected override void Enable()
         {
             otherCar = Instantiate(PrefabManager.Instance.cars[Random.Range(0, PrefabManager.Instance.cars.Length)], car.transform.position + car.transform.forward * 5, car.transform.rotation);
             var currentUser = car.GetComponent<CheckpointUser>();
@@ -26,7 +26,7 @@ namespace Chaos
             otherCarCar.breaking = car.breaking;
         }
 
-        private void OnDisable()
+        protected override void Disable()
         {
             if (Random.value > 0.5)
             {

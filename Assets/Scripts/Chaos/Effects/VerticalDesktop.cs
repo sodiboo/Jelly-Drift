@@ -7,14 +7,15 @@ namespace Chaos
 #if MOBILE
     [HideInCheatGUI]
 #endif
-    [Effect("chaos.view.mobile", "Mobile Experience")]
+    [Effect("chaos.view.mobile", "Mobile Experience", EffectInfo.Alignment.Neutral)]
     [Description("Attempts (but fails) to make your view 9:16")]
     class VerticalDesktop : ChaosEffect
     {
         Camera cam;
         Camera clearCam;
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             cam = CameraController.Instance.GetComponentInChildren<Camera>();
             clearCam = gameObject.AddComponent<Camera>();
             clearCam.clearFlags = CameraClearFlags.SolidColor;
@@ -23,7 +24,8 @@ namespace Chaos
             clearCam.enabled = false;
             clearCam.depth = -2;
         }
-        private void OnEnable()
+
+        protected override void Enable()
         {
             cam.projectionMatrix = Matrix4x4.Perspective(cam.fieldOfView, 9f / 16f, cam.nearClipPlane, cam.farClipPlane);
             var wRatio = 9f / 16f / (Screen.width / Screen.height);
@@ -31,7 +33,7 @@ namespace Chaos
             clearCam.enabled = true;
         }
 
-        private void OnDisable()
+        protected override void Disable()
         {
             cam.ResetProjectionMatrix();
             cam.rect = new Rect(0, 0, 1, 1);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.rearsteer", "Rear Wheel Steering")]
+    [Effect("chaos.rearsteer", "Rear Wheel Steering", EffectInfo.Alignment.Bad)]
     [Description("Makes your rear wheels front wheels, and your front wheels rear wheels")]
     class RearSteer : ChaosEffect
     {
@@ -22,7 +22,15 @@ namespace Chaos
             }
         }
 
-        private void OnEnable() => Toggle();
-        private void OnDisable() => Toggle();
+        protected override void Enable()
+        {
+            Scale.value *= -1f;
+            Toggle();
+        }
+        protected override void Disable()
+        {
+            Scale.value *= -1f;
+            Toggle();
+        }
     }
 }

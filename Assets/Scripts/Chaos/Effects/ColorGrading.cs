@@ -17,8 +17,9 @@ namespace Chaos
         BoolParameter vignette;
 
         bool enableVolume;
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             volume = GameObject.Find("/PP").GetComponent<PostProcessVolume>();
             ao = volume.profile.GetSetting<AmbientOcclusion>().enabled;
             bloom = volume.profile.GetSetting<Bloom>().enabled;
@@ -27,7 +28,7 @@ namespace Chaos
             vignette = volume.profile.GetSetting<Vignette>().enabled;
         }
 
-        protected virtual void OnEnable()
+        protected override void Enable()
         {
             enableVolume = volume.enabled;
             volume.enabled = true;
@@ -41,7 +42,7 @@ namespace Chaos
             }
         }
 
-        protected virtual void OnDisable()
+        protected override void Disable()
         {
             volume.enabled = enableVolume;
             if (!enableVolume)
@@ -54,7 +55,7 @@ namespace Chaos
             }
         }
 
-        [Effect("chaos.nightvis", "Night Vision")]
+        [Effect("chaos.nightvis", "Night Vision", EffectInfo.Alignment.Neutral)]
         [Description("Deletes the blue and red color channels, doesn't require ")]
         public class NightVision : ColorGrading
         {
@@ -67,22 +68,22 @@ namespace Chaos
                 (red = grading.mixerRedOutRedIn).value = 0f;
                 (blue = grading.mixerBlueOutBlueIn).value = 0f;
             }
-            protected override void OnEnable()
+            protected override void Enable()
             {
                 red.overrideState = true;
                 red.overrideState = true;
-                base.OnEnable();
+                base.Enable();
             }
 
-            protected override void OnDisable()
+            protected override void Disable()
             {
                 red.overrideState = false;
                 blue.overrideState = false;
-                base.OnDisable();
+                base.Disable();
             }
         }
 
-        [Effect("chaos.lsd", "LSD")]
+        [Effect("chaos.lsd", "LSD", EffectInfo.Alignment.Neutral)]
         [Description("Hue shifts your entire view")]
         public class LSD : ColorGrading
         {
@@ -93,15 +94,15 @@ namespace Chaos
                 hue = volume.profile.GetSetting<CG>().hueShift;
             }
 
-            protected override void OnEnable()
+            protected override void Enable()
             {
                 hue.overrideState = true;
-                base.OnEnable();
+                base.Enable();
             }
-            protected override void OnDisable()
+            protected override void Disable()
             {
                 hue.overrideState = false;
-                base.OnDisable();
+                base.Disable();
             }
 
             private void Update()

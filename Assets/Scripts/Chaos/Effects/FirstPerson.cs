@@ -4,20 +4,20 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.firstperson", "First Person"), ConflictsWith(typeof(IsoView))]
+    [Effect("chaos.firstperson", "First Person", EffectInfo.Alignment.Neutral), ConflictsWith(typeof(IsoView))]
     [Description("Puts your camera on the hood of your car (or the stalk of the banana)")]
     public class FirstPerson : ChaosEffect
     {
         public static bool value; // checked in CameraController.Update to prevent regular camera motion
         Camera cam;
-        private void OnEnable()
+        protected override void Enable()
         {
             value = true;
             CameraController.Instance.transform.parent = car.transform;
             cam = CameraController.Instance.GetComponentInChildren<Camera>();
         }
 
-        private void OnDisable()
+        protected override void Disable()
         {
             value = false;
             CameraController.Instance.transform.parent = null;

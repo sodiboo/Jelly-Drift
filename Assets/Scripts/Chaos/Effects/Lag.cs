@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.lag", "Lag")] // Thanks to ChaosModV for the name and idea
+    [Effect("chaos.lag", "Lag", EffectInfo.Alignment.Bad)] // Thanks to ChaosModV for the name and idea
     [Description("Stores and loads your position and velocity every 0.5 seconds, effectively discarding half your progress")]
     class Lag : ChaosEffect
     {
-        private void OnEnable()
+        protected override void Enable()
         {
             StoreLag();
         }
 
-        private void OnDisable()
+        protected override void Disable()
         {
             CancelInvoke("StoreLag");
             CancelInvoke("LoadLag");

@@ -15,14 +15,14 @@ namespace Chaos
             car.rb.velocity = newer * (Quaternion.Inverse(current) * car.rb.velocity);
         }
 
-        [Effect("chaos.rotate.random", "Where are you going?"), Impulse]
+        [Effect("chaos.rotate.random", "Where are you going?", EffectInfo.Alignment.Bad), Impulse]
         [Description("Randomizes your car rotation")]
         public class Random : Rotate
         {
             protected override Quaternion rotation => UnityEngine.Random.rotationUniform;
         }
 
-        [Effect("chaos.rotate.flip", "Wrong way lol"), Impulse]
+        [Effect("chaos.rotate.flip", "Wrong way lol", EffectInfo.Alignment.Bad), Impulse]
         [Description("Turns your car the other way")]
         public class Flip : Rotate
         {

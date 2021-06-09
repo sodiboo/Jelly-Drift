@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.knightbus", "Mind your head"), ConflictsWith(typeof(DisableShit.Car))] // Thanks to Dit0h for the name
+    [Effect("chaos.knightbus", "Mind your head", EffectInfo.Alignment.Neutral), ConflictsWith(typeof(DisableShit.Car))] // Thanks to Dit0h for the name
     [Description("Stretches your car in a random direction")]
     public class FuckyWuckyRenderUwU : ChaosEffect
     {
@@ -12,10 +12,15 @@ namespace Chaos
         Vector3 target;
         Transform victim;
 
-        private void OnEnable()
+        protected override void Enable()
         {
             victim = car.transform.GetChild(0);
             og = victim.localScale;
+        }
+
+        protected override void Disable()
+        {
+            victim.localScale = og;
         }
 
         float time;
@@ -26,11 +31,6 @@ namespace Chaos
             time += Time.deltaTime;
             victim.localScale = Vector3.Lerp(og, target, Mathf.PingPong(time, 2.5f) / 2.5f);
             if (time > 5f) time = 0f;
-        }
-
-        private void OnDisable()
-        {
-            victim.localScale = og;
         }
     }
 }

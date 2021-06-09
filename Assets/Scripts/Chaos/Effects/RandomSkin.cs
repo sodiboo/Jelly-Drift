@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.random.skin", "Random Skin"), Impulse]
+    [Effect("chaos.random.skin", "Random Skin", EffectInfo.Alignment.Neutral), Impulse]
     [Description("Gives you a random skin you don't have active if the current car has multiple skins")]
     public class RandomSkin : ChaosEffect
     {
-        private void Awake()
+        protected override void Enable()
         {
             var skin = car.GetComponent<CarSkin>();
             var current = GameState.Instance.skin;

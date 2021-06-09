@@ -7,12 +7,15 @@ public class EffectAttribute : Attribute
 {
     private string name;
     private string id;
-    public EffectAttribute(string id, string name)
+    private EffectInfo.Alignment alignment;
+    public EffectAttribute(string id, string name, EffectInfo.Alignment alignment)
     {
         this.name = name;
         this.id = id;
+        this.alignment = alignment;
     }
     public string Name => name;
     public string Id => id;
+    public EffectInfo.Alignment Alignment => alignment;
 
 }

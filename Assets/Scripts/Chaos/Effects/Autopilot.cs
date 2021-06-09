@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.autopilot", "Autopilot"), ConflictsWith(typeof(FuckyWuckyControlsUwU), typeof(Southpaw), typeof(Multiplayer))]
+    [Effect("chaos.autopilot", "Autopilot", EffectInfo.Alignment.Bad), ConflictsWith(typeof(FuckyWuckyControlsUwU), typeof(Southpaw), typeof(Multiplayer))]
     [Description("Disables your controls and adds an AI to your car")]
     public class Autopilot : ChaosEffect
     {
-        private void OnEnable()
+        protected override void Enable()
         {
             var engine = (int)car.engineForce;
             var ai = car.gameObject.AddComponent<CarAI>();
@@ -21,7 +21,7 @@ namespace Chaos
             InputManager.Instance.layout = InputManager.Layout.None;
         }
 
-        private void OnDisable()
+        protected override void Disable()
         {
             Destroy(car.GetComponent<CarAI>());
             InputManager.Instance.layout = InputManager.Layout.Car;

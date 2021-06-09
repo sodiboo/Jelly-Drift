@@ -8,33 +8,39 @@ namespace Chaos
     public abstract class Speed : ChaosEffect
     {
         protected abstract float multiplier { get; }
-        protected virtual void OnEnable()
+        protected override void Enable()
         {
             car.engineForce *= multiplier;
         }
 
-        protected virtual void OnDisable()
+        protected override void Disable()
         {
             car.engineForce /= multiplier;
         }
 
-        [Effect("chaos.speed.fast", "Sanik"), ConflictsWith(typeof(Grip))]
+        public override object[] CustomParameters() => new object[] { multiplier };
+
+        [Effect("chaos.speed.fast", "Sanik", EffectInfo.Alignment.Good), ConflictsWith(typeof(Grip))]
         [Description("Makes your car 1.2x-5x faster (and prevents you from drifting or rolling as easily)")]
         public class Fast : Speed
         {
-            float _multiplier;
-            private void Awake() => _multiplier = Random.Range(1.2f, 5f);
             protected override float multiplier => _multiplier;
-
-            protected override void OnEnable()
+            float _multiplier;
+            protected override void Awake()
             {
-                base.OnEnable();
+                base.Awake();
+                _multiplier = Random.Range(1.2f, 5f);
+            }
+
+            protected override void Enable()
+            {
+                base.Enable();
                 car.driftThreshold *= 10f;
             }
 
-            protected override void OnDisable()
+            protected override void Disable()
             {
-                base.OnDisable();
+                base.Disable();
                 car.driftThreshold /= 10f;
             }
 
@@ -48,13 +54,17 @@ namespace Chaos
             }
         }
 
-        [Effect("chaos.speed.slow", "Slowpoke")]
+        [Effect("chaos.speed.slow", "Slowpoke", EffectInfo.Alignment.Bad)]
         [Description("Makes your car 0.5x-0.8x as fast")]
         public class Slow : Speed
         {
-            float _multiplier;
-            private void Awake() => _multiplier = Random.Range(0.5f, 0.8f);
             protected override float multiplier => _multiplier;
+            float _multiplier;
+            protected override void Awake()
+            {
+                base.Awake();
+                _multiplier = Random.Range(0.5f, 0.8f);
+            }
         }
     }
 }

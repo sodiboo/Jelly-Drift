@@ -102,6 +102,7 @@ public class Car : MonoBehaviour
 	// Token: 0x06000039 RID: 57 RVA: 0x00002E34 File Offset: 0x00001034
 	private void Movement()
 	{
+		drifting = false;
 		Vector3 vector = this.XZVector(this.rb.velocity);
 		Vector3 vector2 = base.transform.InverseTransformDirection(this.XZVector(this.rb.velocity));
 		this.acceleration = (this.lastVelocity - vector2) / Time.fixedDeltaTime;
@@ -132,13 +133,12 @@ public class Car : MonoBehaviour
 				{
 					num3 -= 0.2f;
 				}
-				bool flag = false;
 				if (Mathf.Abs(f) > num3)
 				{
 					float num4 = Mathf.Clamp(Mathf.Abs(f) * 2.4f - num3, 0f, 1f);
 					num2 = Mathf.Clamp(1f - num4, 0.05f, 1f);
 					float magnitude = this.rb.velocity.magnitude;
-					flag = true;
+					drifting = true;
 					if (magnitude < 8f)
 					{
 						num2 += (8f - magnitude) / 8f;
@@ -155,7 +155,7 @@ public class Car : MonoBehaviour
 					num2 = Mathf.Clamp(num2, 0f, 1f);
 				}
 				float d2 = 1f;
-				if (flag)
+				if (drifting)
 				{
 					d2 = this.driftMultiplier;
 				}
@@ -216,8 +216,8 @@ public class Car : MonoBehaviour
 		{
 			if (!suspension.rearWheel)
 			{
-				suspension.steeringAngle = this.steering * (37f - Mathf.Clamp(this.speed * 0.35f - 2f, 0f, 17f));
-				this.steerAngle = suspension.steeringAngle * Chaos.Scale.value;
+				suspension.steeringAngle = this.steering * (37f - Mathf.Clamp(this.speed * 0.35f - 2f, 0f, 17f)) * Chaos.Scale.value;
+				this.steerAngle = suspension.steeringAngle;
 			}
 		}
 	}
@@ -420,4 +420,5 @@ public class Car : MonoBehaviour
 	public float firstPersonDistance;
 	public float firstPersonHeight;
 	public int suspensionLayers = Physics.AllLayers;
+	public bool drifting;
 }

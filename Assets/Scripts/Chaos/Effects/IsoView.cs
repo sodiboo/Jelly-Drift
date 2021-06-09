@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.view.iso", "POV: You're a bird watching an intense race on @map"), ConflictsWith(typeof(FirstPerson))]
+    [Effect("chaos.view.iso", "POV: You're a bird watching an intense race on @map", EffectInfo.Alignment.Bad), ConflictsWith(typeof(FirstPerson))]
     [Description("Gives you a top-down (bird's eye) view of the map in isometric mode")]
     public class IsoView : ChaosEffect
     {
@@ -15,7 +15,7 @@ namespace Chaos
         float movSpeed;
         bool dof;
         int camMode;
-        private void OnEnable()
+        protected override void Enable()
         {
             cam = CameraController.Instance.GetComponentInChildren<Camera>();
             camHeight = CameraController.Instance.camHeight;
@@ -34,7 +34,7 @@ namespace Chaos
             PPController.Instance.dof.enabled.value = false;
         }
 
-        private void OnDisable()
+        protected override void Disable()
         {
             PPController.Instance.dof.enabled.value = dof;
             CameraController.Instance.camHeight = camHeight;

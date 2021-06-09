@@ -72,19 +72,22 @@ public class InputManager : MonoBehaviour
 
     void Car(Layout layout)
     {
-        Assign(actionMaps[layout].FindAction("Throttle"), ctx => {
+        Assign(actionMaps[layout].FindAction("Throttle"), ctx =>
+        {
             var value = ctx.ReadValue<float>();
-            if (Chaos.FuckyWuckyControlsUwU.Instance != null && value == 0f) return;
+            if (Chaos.FuckyWuckyControlsUwU.value && value == 0f) return;
             throttle?.Invoke(value);
         });
-        Assign(actionMaps[layout].FindAction("Steering"), ctx => {
+        Assign(actionMaps[layout].FindAction("Steering"), ctx =>
+        {
             var value = ctx.ReadValue<float>();
-            if (Chaos.FuckyWuckyControlsUwU.Instance != null && value == 0f) return;
+            if (Chaos.FuckyWuckyControlsUwU.value && value == 0f) return;
             steering?.Invoke(value);
         });
-        Assign(actionMaps[layout].FindAction("Break"), ctx => {
+        Assign(actionMaps[layout].FindAction("Break"), ctx =>
+        {
             var value = ctx.ReadValueAsButton();
-            if (Chaos.FuckyWuckyControlsUwU.Instance != null && !value) return;
+            if (Chaos.FuckyWuckyControlsUwU.value && !value) return;
             breaking?.Invoke(value);
         });
     }

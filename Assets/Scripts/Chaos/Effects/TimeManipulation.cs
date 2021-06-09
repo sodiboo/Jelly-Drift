@@ -7,16 +7,15 @@ namespace Chaos
     [EffectGroup("chaos.time", "Time Manipulation")]
     class TimeManipulation : ChaosEffect
     {
+        protected override void Disable()
+        {
+            Time.timeScale = 1f;
+        }
 
-        [Effect("chaos.time.tas", "TAS")]
+        [Effect("chaos.time.tas", "TAS", EffectInfo.Alignment.Neutral)]
         [Description("Makes your car always appear to go at 50 ku/h")]
         class TAS : TimeManipulation
         {
-            private void OnDisable()
-            {
-                Time.timeScale = 1f;
-            }
-
             private void FixedUpdate()
             {
                 if (car.rb.velocity.magnitude < 0.1f) Time.timeScale = 1f;
@@ -24,18 +23,13 @@ namespace Chaos
             }
         }
 
-        [Effect("chaos.time.superhot", "Superhot")]
+        [Effect("chaos.time.superhot", "Superhot", EffectInfo.Alignment.Neutral)]
         [Description("Time only moves as fast as you move")]
         public class Superhot : TimeManipulation
         {
             private void Update()
             {
                 if (GameController.Instance.playing && !Pause.Instance.paused) Time.timeScale = Mathf.Clamp(Mathf.Abs(car.rb.velocity.magnitude * 3.6f) / 100f, 0.1f, 1f);
-            }
-
-            private void OnDisable()
-            {
-                Time.timeScale = 1f;
             }
         }
     }

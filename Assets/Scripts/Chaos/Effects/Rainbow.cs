@@ -6,13 +6,13 @@ using UnityEngine;
 namespace Chaos
 {
     // Thanks to Akuma73 for the idea
-    [EffectGroup("chaos.gay", "Rainbow")]
+    [EffectGroup("chaos.gay", "Rainbow", Alignment = EffectInfo.Alignment.Neutral)]
     [Description("Hue shifts objects in the game")]
     public abstract class Rainbow : ChaosEffect
     {
         protected Material rainbowMat;
 
-        protected virtual void OnEnable()
+        protected override void Enable()
         {
             Color.RGBToHSV(rainbowMat.color, out var H, out var S, out var V);
             if (S < 0.5f) S = 0.5f;
@@ -33,19 +33,24 @@ namespace Chaos
         [Description("Hue shifts your car's material")]
         public class Car : Rainbow
         {
-            protected override void OnEnable()
+            CarSkin skin;
+            protected override void Enable()
             {
-                var skin = car.GetComponent<CarSkin>();
+                skin = car.GetComponent<CarSkin>();
                 rainbowMat = new Material(skin.materials[GameState.Instance.skin]);
-                for (var i = 0; i < skin.skinsToChange[0].myArray.Length; i++)
-                {
+                base.Enable();
+            }
+
+            protected override void Update()
+            {
+                base.Update();
+                for (var i = 0; i < skin.skinsToChange[0].myArray.Length; i++) {
                     var renderer = skin.renderers[skin.skinsToChange[0].myArray[i++]];
                     var newMats = new Material[renderer.materials.Length];
                     renderer.materials.CopyTo(newMats, 0);
                     newMats[skin.skinsToChange[0].myArray[i++]] = rainbowMat;
                     renderer.materials = newMats;
                 }
-                base.OnEnable();
             }
             public static bool Valid() => car.GetComponent<CarSkin>().skinsToChange.Length > 2;
         }
@@ -54,7 +59,7 @@ namespace Chaos
         [Description("Hue shifts checkpoint arcs")]
         public class Checkpoints : Rainbow
         {
-            protected override void OnEnable()
+            protected override void Enable()
             {
                 var arcs = GameObject.Find("/CheckpointArcs").transform;
                 rainbowMat = new Material(arcs.GetChild(0).GetComponent<Renderer>().material);
@@ -62,24 +67,25 @@ namespace Chaos
                 {
                     arcs.GetChild(i).GetComponent<Renderer>().material = rainbowMat;
                 }
-                base.OnEnable();
+                base.Enable();
             }
         }
 
         [ChildEffect("chaos.gay.road", "Rainbow Road")]
         [Description("Hue shifts the road texture")]
-        public class Road : Rainbow {
+        public class Road : Rainbow
+        {
             Renderer rend;
             Material ogMat;
-            protected override void OnEnable()
+            protected override void Enable()
             {
                 rend = WorldObjects.Instance.road.GetComponent<Renderer>();
                 ogMat = rend.material;
                 rainbowMat = new Material(ogMat);
-                base.OnEnable();
+                base.Enable();
             }
 
-            private void OnDisable()
+            protected override void Disable()
             {
                 rend.material = ogMat;
             }
@@ -96,9 +102,13 @@ namespace Chaos
         public class Sun : Rainbow
         {
             Color ogColor;
-            protected override void OnEnable()
+            protected override void Enable()
             {
                 ogColor = WorldObjects.Instance.sun.color;
+            }
+            protected override void Disable()
+            {
+                WorldObjects.Instance.sun.color = ogColor;
             }
 
             protected override void Update()
@@ -109,10 +119,6 @@ namespace Chaos
                 WorldObjects.Instance.sun.color = Color.HSVToRGB(H, S, V);
             }
 
-            private void OnDisable()
-            {
-                WorldObjects.Instance.sun.color = ogColor;
-            }
         }
     }
 }

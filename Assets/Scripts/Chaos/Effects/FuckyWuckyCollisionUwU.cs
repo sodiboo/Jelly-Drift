@@ -4,22 +4,28 @@ using UnityEngine;
 
 namespace Chaos
 {
-    [Effect("chaos.collision.offset", "Bad Collision")]
+    [Effect("chaos.collision.offset", "Bad Collision", EffectInfo.Alignment.Bad)]
     [Description("Offsets your collision mesh by 1 unit in a random direction")]
     public class FuckyWuckyCollisionUwU : ChaosEffect
     {
         Vector3 offset;
-        private void Awake()
+        Quaternion rot;
+        protected override void Awake()
         {
+            base.Awake();
             offset = Random.onUnitSphere;
+            rot = Random.rotationUniform;
+
         }
-        private void OnEnable()
+        protected override void Enable()
         {
             car.collider.transform.localPosition += offset;
+            car.collider.transform.localRotation = rot * car.collider.transform.localRotation;
         }
 
-        private void OnDisable()
+        protected override void Disable()
         {
+            car.collider.transform.localRotation = Quaternion.Inverse(rot) * car.collider.transform.localRotation;
             car.collider.transform.localPosition -= offset;
         }
     }

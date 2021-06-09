@@ -70,7 +70,7 @@ public class ChaosController : MonoBehaviour
         Instance = this;
         text = GetComponent<TextMeshProUGUI>();
         gameObject.AddComponent<WorldObjects>();
-        InputManager.Instance.debug += EnableCheats;
+        InputManager.Instance.debug += EnableCheats; // () => riggedEffect = effectMap[typeof(Chaos.TaskEffect)];
         globalFormatting.Add("map", () => MapManager.Instance.maps[GameState.Instance.map].name);
         globalFormatting.Add("car", () => PrefabManager.Instance.cars[GameState.Instance.car].name);
     }
@@ -87,21 +87,57 @@ public class ChaosController : MonoBehaviour
             effect.Setup();
         }
 
-        var serializedEffects = new List<ChaosConfig.SerializedEffect>();
         foreach (var effect in effects)
         {
-            if (effect.id == "null") continue;
-            serializedEffects.Add(new ChaosConfig.SerializedEffect(effect));
+            if (effect.effectType == EffectInfo.EffectType.MultiGroup && effect.alignment == default) print($"{effect.id} has no alignment");
         }
+#if !MOBILE
         var path = Path.Combine(Application.persistentDataPath, "effects.json");
-        using (var file = File.Open(path, FileMode.OpenOrCreate))
-        using (var writer = new StreamWriter(file))
-            writer.Write(JsonUtility.ToJson(new ChaosConfig { effects = serializedEffects.ToArray() }));
+        ChaosConfig config;
+        if (File.Exists(path))
+        {
+            var serializedEffects = new List<ChaosConfig.SerializedEffect>();
+            foreach (var effect in effects)
+            {
+                if (effect.id == "null") continue;
+                serializedEffects.Add(new ChaosConfig.SerializedEffect(effect));
+            }
+
+            try
+            {
+
+                using (var file = File.Open(path, FileMode.OpenOrCreate))
+                {
+                    using (var reader = new StreamReader(file)) config = JsonUtility.FromJson<ChaosConfig>(reader.ReadToEnd());
+                    if (config.config != null)
+                        foreach (var configured in config.config)
+                        {
+                            try
+                            {
+                                var effect = effects.First(e => e.id == configured.id);
+                                effect.name = configured.name;
+                                effect.duration = configured.duration;
+                            }
+                            catch (InvalidOperationException) { } // no effect has that id
+                        }
+                }
+            }
+            catch (Exception)
+            {
+                config = new ChaosConfig();
+            }
+            config.effects = serializedEffects.ToArray();
+
+            using (var file = File.Open(path, FileMode.Truncate))
+            using (var writer = new StreamWriter(file)) writer.Write(JsonUtility.ToJson(config));
+        }
     }
+
     [Serializable]
     private class ChaosConfig
     {
         public SerializedEffect[] effects;
+        public EffectConfig[] config;
 
         [Serializable]
         public class SerializedEffect
@@ -130,6 +166,15 @@ public class ChaosController : MonoBehaviour
             public bool noCheat;
             public bool impulse;
         }
+
+        [Serializable]
+        public class EffectConfig
+        {
+            public string id;
+            public string name;
+            public float duration;
+        }
+#endif
     }
 
     private void OnDestroy()
@@ -152,7 +197,7 @@ public class ChaosController : MonoBehaviour
 
     #region Chaos
 
-    public EffectInfo currentEffect { get; private set; }
+    EffectInfo currentEffect;
     List<ChaosEffect> activeChildren;
     ChaosEffect activeEffect;
     public EffectInfo riggedEffect { get; set; }
@@ -164,14 +209,20 @@ public class ChaosController : MonoBehaviour
     {
         while (runNextCycle)
         {
+            var alignment = default(EffectInfo.Alignment);
             if (riggedEffect == null)
             {
+                alignment = (EffectInfo.Alignment)Random.Range(1, 4);
                 var valid = new List<EffectInfo>();
                 foreach (var effect in effects)
                 {
                     if (effect.isChild) continue;
                     if (effect == currentEffect || effect == currentEffect?.parent) continue;
-                    if (effect.valid)
+                    if (effect.effectType == EffectInfo.EffectType.ExclusiveGroup)
+                    {
+                        if (!effect.children.Any(child => child.alignment == alignment && child.duration > 0f)) continue;
+                    }
+                    if (effect.valid && effect.duration > 0f)
                     {
                         valid.Add(effect);
                     }
@@ -186,28 +237,49 @@ public class ChaosController : MonoBehaviour
 
             if (currentEffect.effectType == EffectInfo.EffectType.ExclusiveGroup)
             {
-                currentEffect = currentEffect.children[Random.Range(0, currentEffect.children.Length)];
+                if (alignment == default)
+                {
+                    currentEffect = currentEffect.children[Random.Range(0, currentEffect.children.Length)];
+                }
+                else
+                {
+                    var correctAlignment = currentEffect.children.Where(child => child.alignment == alignment && child.duration > 0f).ToList();
+                    currentEffect = correctAlignment[Random.Range(0, correctAlignment.Count)];
+                }
             }
 
-            text.text = globalFormatting.Aggregate(currentEffect.name, (name, format) => name.Replace($"@{format.Key}", format.Value()));
 
             if (currentEffect.effectType == EffectInfo.EffectType.MultiGroup)
             {
                 activeChildren = new List<ChaosEffect>();
                 foreach (var child in currentEffect.children)
                 {
-                    if (child.valid) activeChildren.Add((ChaosEffect)gameObject.AddComponent(child.type));
+                    if (child.valid)
+                    {
+                        var effect = (ChaosEffect)gameObject.AddComponent(child.type);
+                        activeChildren.Add(effect);
+                        effect.enabled = true;
+                    }
                 }
             }
             else
             {
-                if (currentEffect.isChild || currentEffect.isGroup) Debug.LogWarning($"{currentEffect.id} is not independent but should be");
                 activeEffect = (ChaosEffect)gameObject.AddComponent(currentEffect.type);
+                activeEffect.enabled = true;
             }
-            var effectSpecificParams = activeEffect?.CustomParameters();
-            if (effectSpecificParams != null) text.text = string.Format(text.text, effectSpecificParams);
 
-            yield return new WaitForSeconds(5f);
+
+        wait:
+
+            yield return new WaitForSeconds(currentEffect.duration);
+
+            if (activeEffect is Chaos.TaskEffect)
+            {
+                var task = activeEffect as Chaos.TaskEffect;
+                text.text = task.CheckTask(out currentEffect, out activeEffect, out activeChildren);
+                Destroy(task);
+                goto wait;
+            }
 
             if (activeEffect != null)
             {
@@ -219,11 +291,23 @@ public class ChaosController : MonoBehaviour
                 foreach (var child in activeChildren) Destroy(child);
                 activeChildren = null;
             }
-            text.text = "";
         }
 
+        currentEffect = null;
         chaosCoroutine = null;
         if (cheatMode == true) useCheats = true;
+    }
+
+    private void Update()
+    {
+        if (currentEffect == null)
+        {
+            text.text = "";
+            return;
+        }
+        text.text = globalFormatting.Aggregate(currentEffect.name, (name, format) => name.Replace($"@{format.Key}", format.Value()));
+        var effectSpecificParams = activeEffect?.CustomParameters();
+        if (effectSpecificParams != null) text.text = string.Format(text.text, effectSpecificParams);
     }
 
     Coroutine chaosCoroutine;
@@ -265,9 +349,7 @@ public class ChaosController : MonoBehaviour
     bool cheatMode;
     bool useCheats;
 
-    Dictionary<EffectInfo, ChaosEffect> cheatEffects = new Dictionary<EffectInfo, ChaosEffect>();
     List<EffectInfo> cheatEffectsList = new List<EffectInfo>();
-
     Dictionary<EffectInfo, ChaosEffect> activeCheats;
 
     private void RemoveEffect(EffectInfo info)
@@ -297,6 +379,7 @@ public class ChaosController : MonoBehaviour
         }
 
         activeCheats[info] = (ChaosEffect)gameObject.AddComponent(info.type);
+        activeCheats[info].enabled = true;
 
         foreach (var toReload in info.reloadOnEnable)
         {
@@ -335,7 +418,6 @@ public class ChaosController : MonoBehaviour
                 }
                 return StringComparer.OrdinalIgnoreCase.Compare(a.name, b.name);
             });
-        text.alpha = 0f;
     }
 
     Rect windowRect;

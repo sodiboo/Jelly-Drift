@@ -7,7 +7,7 @@ using System.Reflection;
 public class EffectInfo
 {
     private static EffectInfo[] EmptyEffects = new EffectInfo[] { };
-    public readonly string name;
+    public string name;
     public readonly string id;
     public readonly string description;
     public readonly Type type;
@@ -20,12 +20,15 @@ public class EffectInfo
     public bool noCheat;
     public bool splitCheats;
     public EffectType effectType;
+    public Alignment alignment;
     public bool isGroup;
     public bool isChild;
     public EffectInfo parent;
+    public float duration = 5f;
     public EffectInfo(EffectAttribute attribute, Type type)
     {
         effectType = EffectType.Independent;
+        alignment = attribute.Alignment;
         _children = EmptyEffects;
         id = attribute.Id;
         this.type = type;
@@ -63,6 +66,7 @@ public class EffectInfo
     public EffectInfo(EffectGroupAttribute attribute, Type type)
     {
         effectType = EffectType.UnknownGroup;
+        alignment = attribute.Alignment;
         isGroup = true;
         id = attribute.Id;
         name = attribute.Name ?? type.FullName;
@@ -94,8 +98,6 @@ public class EffectInfo
     private Type[] _reloadOnDisable;
 
     private EffectInfo[] _children;
-
-    private Type _parent;
 
     public void Setup()
     {
@@ -161,6 +163,7 @@ public class EffectInfo
                         this.effectType = EffectType.MultiGroup;
                         multi = true;
                         effect.effectType = EffectType.Child;
+                        effect.alignment = this.alignment;
                         effect.isChild = true;
                         effect.parent = this;
                         yield return effect;
@@ -189,5 +192,13 @@ public class EffectInfo
 
         UnknownGroup, // group with unknown type
         Orphan, // Child with unknown parent
+    }
+
+    [Flags]
+    public enum Alignment
+    {
+        Good = 1, // the player might actively want this effect
+        Neutral = 2, // the player might not care if they get this effect
+        Bad = 4, // the player might be actively hoping not to get this effect
     }
 }
